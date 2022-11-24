@@ -1,0 +1,13 @@
+@import "src/variables";
+
+.farm {
+  height: 200px;
+  width: 200px;
+  background-color: silver;
+  border-radius: 30px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primaryGreen;
+  }
+}

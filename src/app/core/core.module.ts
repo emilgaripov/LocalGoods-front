@@ -8,6 +8,10 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     FooterComponent
   ],
+  exports: [
+    HeaderComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule
   ]

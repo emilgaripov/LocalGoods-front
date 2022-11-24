@@ -4,17 +4,13 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from "./core/core.module";
-import { HomeModule } from "./features/home/home.module";
-import { FarmerModule } from "./features/farmer/farmer.module";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
-    HomeModule,
-    FarmerModule
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
