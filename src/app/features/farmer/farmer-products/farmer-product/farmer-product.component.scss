@@ -1,0 +1,35 @@
+@import "src/variables";
+
+.product {
+  &-content {
+    display: flex;
+    gap: 30px;
+  }
+
+  &-image {
+    height: 100px;
+    width: 100px;
+    background-color: silver;
+    border-radius: 50%;
+  }
+
+  &-description {
+    flex: 1;
+  }
+
+  &-actions > button {
+    padding: 10px 20px;
+    background-color: $primaryGreen;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $darkGreen;
+    }
+  }
+}
+
+.edit-btn {
+  margin-right: 10px;
+}
