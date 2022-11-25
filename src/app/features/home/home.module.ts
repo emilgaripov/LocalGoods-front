@@ -5,13 +5,15 @@ import { HomeComponent } from './home.component';
 import { SlideComponent } from './slide/slide.component';
 import { ProductCategoriesComponent } from './product-categories/product-categories.component';
 import { ProductCategoryComponent } from './product-categories/product-category/product-category.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     SlideComponent,
     ProductCategoriesComponent,
-    ProductCategoryComponent
+    ProductCategoryComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
