@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterLinkWithHref } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterLinkWithHref,
+    RouterLink
   ]
 })
 export class CoreModule { }

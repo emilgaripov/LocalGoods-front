@@ -1,6 +1,8 @@
 <div class="header-container">
   <div class="logo-container">
-    <img src="../../../assets/images/logo.svg" alt="logo" width="100" height="50">
+    <a routerLink="/">
+      <img src="../../../assets/images/logo.svg" alt="logo" width="100" height="50">
+    </a>
   </div>
   <div class="nav-container">
     <div class="nav-burger">
@@ -14,10 +16,12 @@
       <ul><li><a href="#">item 3</a></li></ul>
     </nav>
   </div>
-  <div class="search-container">
-    <input class="form-control search" type="text" [(ngModel)]="term" name="search" autocomplete="off" placeholder="Start searching for a farm product">
+  <div class="search-container" *ngIf="currentPage === '/'">
+    <input class="form-control search" type="text" [(ngModel)]="term" name="search"
+           autocomplete="off" placeholder="Start searching for a farm product">
   </div>
-  <div class="redirect-container">
-    <button class="button submit login-redirect">farmer login</button>
+  <div class="redirect-container" *ngIf="currentPage === '/'">
+    <button class="button submit login-redirect" routerLink="farmer">Farmer login</button>
   </div>
+  <h2 class="welcome-user" *ngIf="currentPage === '/farmer'">Welcome, Farmer!</h2>
 </div>

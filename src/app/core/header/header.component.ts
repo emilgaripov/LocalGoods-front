@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -6,12 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  currentPage!: string;
   term = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe({
+      next: (event) => {
+        if (event instanceof NavigationStart) {
+          this.currentPage = event.url;
+          console.log(this.currentPage)
+        }
+      }
+    });
   }
 
 }
