@@ -1,8 +1,11 @@
 @import "src/variables";
 
 .farm {
+  display: flex;
   height: 200px;
   width: 200px;
+  justify-content: center;
+  align-items: center;
   background-color: silver;
   border-radius: 30px;
   cursor: pointer;

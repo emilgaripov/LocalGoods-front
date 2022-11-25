@@ -2,8 +2,8 @@
   <h2>My goods</h2>
 
   <div class="products">
-    <app-farmer-product></app-farmer-product>
-    <app-farmer-product></app-farmer-product>
-    <app-farmer-product></app-farmer-product>
+    <app-farmer-product *ngFor="let product of products$ | async"
+                        [product]="product">
+    </app-farmer-product>
   </div>
 </div>

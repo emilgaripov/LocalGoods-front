@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FarmerService } from "../farmer.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-farmer-farms',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./farmer-farms.component.scss']
 })
 export class FarmerFarmsComponent implements OnInit {
+  farms$!: Observable<any>;
 
-  constructor() { }
+  constructor(private farmerService: FarmerService) {}
 
   ngOnInit(): void {
+    this.farms$ = this.farmerService.getAllFarms();
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-farmer-farm',
@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./farmer-farm.component.scss']
 })
 export class FarmerFarmComponent implements OnInit {
+  @Input() farm!: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }
