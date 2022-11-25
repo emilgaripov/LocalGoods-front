@@ -2,8 +2,9 @@
   <h2>My farms</h2>
 
   <div class="farms">
-    <app-farmer-farm></app-farmer-farm>
-    <app-farmer-farm></app-farmer-farm>
-    <app-farmer-farm></app-farmer-farm>
+    <app-farmer-farm *ngFor="let farm of farms$ | async"
+                     [farm]="farm"
+                     [routerLink]="'/farmer/' + farm.id">
+    </app-farmer-farm>
   </div>
 </div>

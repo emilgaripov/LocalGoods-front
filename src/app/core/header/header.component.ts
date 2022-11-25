@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
       next: (event) => {
         if (event instanceof NavigationStart) {
           this.currentPage = event.url;
-          console.log(this.currentPage)
         }
       }
     });

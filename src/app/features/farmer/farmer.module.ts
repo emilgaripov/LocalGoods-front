@@ -18,7 +18,11 @@ import { FarmerProductComponent } from './farmer-products/farmer-product/farmer-
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: FarmerComponent }])
+    RouterModule.forChild([{
+      path: '',
+      component: FarmerComponent,
+      children: [{ path: ':id', component: FarmerProductsComponent }] }
+    ])
   ]
 })
 export class FarmerModule { }
