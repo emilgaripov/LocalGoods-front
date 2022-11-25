@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IFarm } from "../../../../shared/interfaces/farm.interface";
 
 @Component({
   selector: 'app-farmer-farm',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./farmer-farm.component.scss']
 })
 export class FarmerFarmComponent implements OnInit {
-  @Input() farm!: any;
+  @Input() farm!: IFarm;
 
   constructor() {}
 

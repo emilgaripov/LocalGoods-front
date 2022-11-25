@@ -1,6 +1,8 @@
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
+import { IFarm } from "../shared/interfaces/farm.interface";
+import { IProduct } from "../shared/interfaces/product.interface";
 
-export const farmers = of([
+export const farms: Observable<IFarm[]> = of([
   {
     id: 1,
     name: 'First farmer'
@@ -15,7 +17,7 @@ export const farmers = of([
   }
 ]);
 
-export const products = of([
+export const products: Observable<IProduct[]> = of([
   {
     id: 1,
     farmerId: 1,

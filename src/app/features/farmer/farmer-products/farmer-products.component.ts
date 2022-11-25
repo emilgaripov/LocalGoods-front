@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { FarmerService } from "../farmer.service";
+import { IProduct } from "../../../shared/interfaces/product.interface";
 
 @Component({
   selector: 'app-farmer-products',
@@ -9,8 +10,7 @@ import { FarmerService } from "../farmer.service";
   styleUrls: ['./farmer-products.component.scss']
 })
 export class FarmerProductsComponent implements OnInit {
-  products$!: Observable<any>;
-
+  products$!: Observable<IProduct[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +22,4 @@ export class FarmerProductsComponent implements OnInit {
       this.products$ = this.farmerService.getProductsByFarmId(+param['id']);
     });
   }
-
-
-
 }

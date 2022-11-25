@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IProduct } from "../../../../shared/interfaces/product.interface";
 
 @Component({
   selector: 'app-farmer-product',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./farmer-product.component.scss']
 })
 export class FarmerProductComponent implements OnInit {
-  @Input() product!: any;
+  @Input() product!: IProduct;
 
   constructor() {}
 

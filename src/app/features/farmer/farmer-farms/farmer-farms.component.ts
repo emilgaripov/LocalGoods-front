@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FarmerService } from "../farmer.service";
 import { Observable } from "rxjs";
+import { IFarm } from "../../../shared/interfaces/farm.interface";
 
 @Component({
   selector: 'app-farmer-farms',
@@ -8,7 +9,7 @@ import { Observable } from "rxjs";
   styleUrls: ['./farmer-farms.component.scss']
 })
 export class FarmerFarmsComponent implements OnInit {
-  farms$!: Observable<any>;
+  farms$!: Observable<IFarm[]>;
 
   constructor(private farmerService: FarmerService) {}
 
