@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './product-categories.component.html',
   styleUrls: ['./product-categories.component.scss']
 })
-export class ProductCategoriesComponent implements OnInit {
+export class ProductCategoriesComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  categories = ['milk', 'veggies', 'fruits', 'meat', 'cheese']
 
 }
