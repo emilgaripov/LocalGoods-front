@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-product-category',
   templateUrl: './product-category.component.html',
-  styleUrls: ['./product-category.component.scss']
+  styleUrls: ['./product-category.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
-export class ProductCategoryComponent implements OnInit {
+export class ProductCategoryComponent{
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() category!: string
 
 }
