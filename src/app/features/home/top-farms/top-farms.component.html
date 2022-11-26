@@ -1,0 +1,12 @@
+<h2>Top farms:</h2>
+<div class="scroll-container">
+  <div class="top-farms-container">
+    <div class="top-farms-item" *ngFor="let farm of topFarms">
+      <div class="farm-image">
+        <img [src]="farm.image" alt="farm-image"/>
+      </div>
+      <div  class="farm-name">{{ farm.name }}</div>    
+      <div class="farm-location">{{ farm.location }}</div>
+    </div>
+  </div>
+</div>

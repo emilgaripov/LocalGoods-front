@@ -6,6 +6,7 @@ import { SlideComponent } from './slide/slide.component';
 import { ProductCategoriesComponent } from './product-categories/product-categories.component';
 import { ProductCategoryComponent } from './product-categories/product-category/product-category.component';
 import { MapComponent } from './map/map.component';
+import { TopFarmsComponent } from './top-farms/top-farms.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MapComponent } from './map/map.component';
     SlideComponent,
     ProductCategoriesComponent,
     ProductCategoryComponent,
-    MapComponent
+    MapComponent,
+    TopFarmsComponent
   ],
   imports: [
     CommonModule,
