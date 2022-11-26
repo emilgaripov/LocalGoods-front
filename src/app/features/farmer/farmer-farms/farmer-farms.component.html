@@ -2,9 +2,13 @@
   <h2>My farms</h2>
 
   <div class="farms">
-    <app-farmer-farm *ngFor="let farm of farms$ | async"
-                     [farm]="farm"
-                     [routerLink]="'/farmer/' + farm.id">
+    <div class="farms-add">
+      <span class="plus">+</span>
+      <p class="farms-add-text">Add farm</p>
+    </div>
+
+    <app-farmer-farm *ngFor="let farm of farms$ | async; let i = index"
+                     [farm]="farm" [isFirstItem]="i === 0">
     </app-farmer-farm>
   </div>
 </div>

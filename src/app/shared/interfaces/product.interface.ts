@@ -1,6 +1,6 @@
 export interface IProduct {
   id: number,
-  farmerId: number,
+  farmId: number,
   name: string,
   description: string,
   image: string

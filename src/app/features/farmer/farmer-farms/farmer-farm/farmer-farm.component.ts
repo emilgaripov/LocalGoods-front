@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { IFarm } from "../../../../shared/interfaces/farm.interface";
+import { Router } from "@angular/router";
+import { FarmerFarmsService } from "../farmer-farms.service";
 
 @Component({
   selector: 'app-farmer-farm',
@@ -9,10 +11,21 @@ import { IFarm } from "../../../../shared/interfaces/farm.interface";
 })
 export class FarmerFarmComponent implements OnInit {
   @Input() farm!: IFarm;
+  @Input() isFirstItem!: boolean;
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private farmerFarmsService: FarmerFarmsService
+  ) {}
 
   ngOnInit(): void {
+    if (this.isFirstItem) {
+      this.router.navigateByUrl('/farmer/' + this.farm.id);
+    }
+  }
+
+  onDeleteFarm() {
+    this.farmerFarmsService.deleteFarm(this.farm.id);
   }
 
 }

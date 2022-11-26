@@ -5,57 +5,57 @@ import { IProduct } from "../shared/interfaces/product.interface";
 export const farms: Observable<IFarm[]> = of([
   {
     id: 1,
-    name: 'First farmer'
+    name: 'First farm'
   },
   {
     id: 2,
-    name: 'Second farmer'
+    name: 'Second farm'
   },
   {
     id: 3,
-    name: 'Third farmer'
+    name: 'Third farm'
   }
 ]);
 
 export const products: Observable<IProduct[]> = of([
   {
     id: 1,
-    farmerId: 1,
+    farmId: 1,
     name: 'First product',
     description: 'Description to first product',
     image: ''
   },
   {
     id: 2,
-    farmerId: 1,
+    farmId: 1,
     name: 'Second product',
     description: 'Description to second product',
     image: ''
   },
   {
     id: 3,
-    farmerId: 1,
+    farmId: 1,
     name: 'Third product',
     description: 'Description to third product',
     image: ''
   },
   {
     id: 4,
-    farmerId: 2,
+    farmId: 2,
     name: 'First product',
     description: 'Description to first product',
     image: ''
   },
   {
     id: 5,
-    farmerId: 3,
+    farmId: 3,
     name: 'First product',
     description: 'Description to first product',
     image: ''
   },
   {
     id: 6,
-    farmerId: 3,
+    farmId: 3,
     name: 'Second product',
     description: 'Description to second product',
     image: ''

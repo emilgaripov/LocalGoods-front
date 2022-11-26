@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { IProduct } from "../../../../shared/interfaces/product.interface";
+import { FarmerProductsService } from "../farmer-products.service";
 
 @Component({
   selector: 'app-farmer-product',
@@ -10,9 +11,11 @@ import { IProduct } from "../../../../shared/interfaces/product.interface";
 export class FarmerProductComponent implements OnInit {
   @Input() product!: IProduct;
 
-  constructor() {}
+  constructor(private farmerProductsService: FarmerProductsService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onDeleteProduct() {
+    this.farmerProductsService.deleteProduct(this.product.id);
   }
-
 }
