@@ -1,3 +1,7 @@
-<div class="farm">
+<div class="farm"
+     routerLinkActive="selected"
+     [routerLink]="'/farmer/' + farm.id">
+
   <p class="farm-name">{{ farm.name }}</p>
+  <button class="farm-delete" (click)="onDeleteFarm()">Delete</button>
 </div>

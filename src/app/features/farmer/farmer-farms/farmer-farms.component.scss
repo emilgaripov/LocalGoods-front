@@ -1,5 +1,33 @@
+@import "src/variables";
+
 .farms {
   display: flex;
   justify-content: center;
   gap: 50px;
+
+  &-add {
+    display: flex;
+    height: 200px;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &-text {
+      font-size: 20px;
+      margin: 0;
+    }
+  }
+}
+
+.plus {
+  font-size: 100px;
+  font-weight: bold;
+  line-height: 70px;
+  color: $primaryGreen;
+  cursor: pointer;
+
+  &:hover {
+    color: $darkGreen;
+  }
 }

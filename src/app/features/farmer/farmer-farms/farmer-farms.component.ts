@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FarmerService } from "../farmer.service";
 import { Observable } from "rxjs";
 import { IFarm } from "../../../shared/interfaces/farm.interface";
+import { FarmerFarmsService } from "./farmer-farms.service";
 
 @Component({
   selector: 'app-farmer-farms',
@@ -12,9 +12,9 @@ import { IFarm } from "../../../shared/interfaces/farm.interface";
 export class FarmerFarmsComponent implements OnInit {
   farms$!: Observable<IFarm[]>;
 
-  constructor(private farmerService: FarmerService) {}
+  constructor(private farmerFarmsService: FarmerFarmsService) {}
 
   ngOnInit(): void {
-    this.farms$ = this.farmerService.getAllFarms();
+    this.farms$ = this.farmerFarmsService.getAllFarms;
   }
 }

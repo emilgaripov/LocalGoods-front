@@ -6,11 +6,24 @@
   width: 200px;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: silver;
   border-radius: 30px;
   cursor: pointer;
 
+  &-delete {
+    display: none;
+  }
+
   &:hover {
     background-color: $primaryGreen;
+
+    .farm-delete {
+      display: block;
+    }
   }
+}
+
+.selected {
+  background-color: $primaryGreen;
 }

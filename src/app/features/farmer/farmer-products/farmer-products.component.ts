@@ -1,25 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
-import { FarmerService } from "../farmer.service";
+import { Observable, switchMap } from "rxjs";
 import { IProduct } from "../../../shared/interfaces/product.interface";
+import { FarmerProductsService } from "./farmer-products.service";
 
 @Component({
   selector: 'app-farmer-products',
   templateUrl: './farmer-products.component.html',
-  styleUrls: ['./farmer-products.component.scss']
+  styleUrls: ['./farmer-products.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FarmerProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;
 
   constructor(
     private route: ActivatedRoute,
-    private farmerService: FarmerService
+    private farmerProductsService: FarmerProductsService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((param) => {
-      this.products$ = this.farmerService.getProductsByFarmId(+param['id']);
-    });
+    this.products$ = this.route.params.pipe(
+      switchMap((param) => {
+        return this.farmerProductsService.getProductsByFarmId(+param['id']);
+      }
+    ));
   }
+
 }
