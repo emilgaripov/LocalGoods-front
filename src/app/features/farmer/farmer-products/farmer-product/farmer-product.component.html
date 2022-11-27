@@ -5,8 +5,29 @@
     <div class="product-image"></div>
     <div class="product-description">{{ product.description }}</div>
     <div class="product-actions">
-      <button class="edit-btn">Edit</button>
+      <button class="edit-btn" (click)="openModal()">Edit</button>
       <button class="delete-btn" (click)="onDeleteProduct()">Delete</button>
     </div>
   </div>
 </div>
+
+<app-modal *ngIf="isModalOpened" (isModalOpened)="isModalOpened = $event">
+  <div class="modal">
+    <p class="modal-title">Edit product</p>
+
+    <form class="modal-form" #editProductForm="ngForm"
+          (ngSubmit)="onEditProduct(editProductForm.value)">
+      <label for="productName">Product name</label>
+      <input type="text" id="productName" name="productName" [ngModel]="product.name">
+
+      <label for="productDescription">Product description</label>
+      <input type="text" id="productDescription" name="productDescription" [ngModel]="product.description">
+
+      <div class="modal-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+
+  </div>
+</app-modal>

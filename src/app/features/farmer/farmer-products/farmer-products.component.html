@@ -1,9 +1,32 @@
 <div class="products-container">
   <h2>My goods</h2>
 
+  <button class="add-product-btn" (click)="openModal()">Add product</button>
+
   <div class="products">
     <app-farmer-product *ngFor="let product of products$ | async"
                         [product]="product">
     </app-farmer-product>
   </div>
 </div>
+
+<app-modal *ngIf="isModalOpened" (isModalOpened)="isModalOpened = $event">
+  <div class="modal">
+    <p class="modal-title">Add product</p>
+
+    <form class="modal-form" #addProductForm="ngForm"
+          (ngSubmit)="onAddProduct(addProductForm.value)">
+      <label for="productName">Product name</label>
+      <input type="text" id="productName" name="productName" ngModel>
+
+      <label for="productDescription">Product description</label>
+      <input type="text" id="productDescription" name="productDescription" ngModel>
+
+      <div class="modal-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+
+  </div>
+</app-modal>
