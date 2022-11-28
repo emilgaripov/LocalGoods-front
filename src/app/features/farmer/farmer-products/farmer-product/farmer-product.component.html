@@ -1,11 +1,11 @@
 <div class="product">
-  <p class="product-name">{{ product.name }}</p>
+  <h3 class="product-name">{{ product.name }}</h3>
 
   <div class="product-content">
     <div class="product-image"></div>
     <div class="product-description">{{ product.description }}</div>
     <div class="product-actions">
-      <button class="edit-btn" (click)="openModal()">Edit</button>
+      <button class="edit-btn" (click)="openModal()" title="Edit">Edit</button>
       <button class="delete-btn" (click)="onDeleteProduct()">Delete</button>
     </div>
   </div>
