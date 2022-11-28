@@ -1,4 +1,8 @@
 .logo {
   width: 100px;
   height: 50px;
+
+  &.white{
+    filter: brightness(0) invert(1);
+  }
 }

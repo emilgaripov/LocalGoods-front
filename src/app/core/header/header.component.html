@@ -1,6 +1,6 @@
 <div class="header-container" [ngClass]="currentPage === '/' ? 'home' : null">
-  <app-logo class="logo-container"></app-logo>
-  <app-nav class="nav-container"></app-nav>
+  <app-logo class="logo-container" [ngStyle]="navOpen ? {'visibility': 'hidden'} : null"></app-logo>
+  <app-nav class="nav-container" (isNav)="setIsNav($event)"></app-nav>
   <app-search
     class="search-container"
     *ngIf="currentPage === '/products' || currentPage === '/farms'"

@@ -4,6 +4,7 @@
   <span class="nav-burger-line"></span>
 </button>
 <nav class="nav-header-menu" *ngIf="nav" #nav>
+  <app-logo [mode]="'nav'" (click)="toggleMenu($event)"></app-logo>
   <h2>Welcome, guest!</h2>
   <a href="#" class="nav-parent">Categories</a>
   <ul class="nav-list">

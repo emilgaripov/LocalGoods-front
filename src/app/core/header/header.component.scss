@@ -1,7 +1,6 @@
 @import "src/variables";
 
 .header-container {
-  width: calc(100% - 30px);
   padding: 15px;
   display: grid;
   position: relative;
@@ -23,9 +22,11 @@
   }
   .redirect-container {
     grid-area: redirect;
+    justify-self: flex-end;
   }
   .welcome-user {
     grid-area: welcome;
+    justify-self: flex-end;
   }
   .nav-container {
     grid-area: nav;
