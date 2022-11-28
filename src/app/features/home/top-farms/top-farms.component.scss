@@ -1,8 +1,15 @@
 @import "src/variables";
 
+
+
 .scroll-container {
   overflow-y: hidden;
   overflow-x: scroll;
+}
+
+h2{
+  margin: 0;
+  font-size: 5vw;
 }
 
 .top-farms-container {

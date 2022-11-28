@@ -1,14 +1,18 @@
 .home-container {
   display: flex;
   flex-direction: column;
-  padding: 1em 0;
+  gap: 1em;
 }
 .product-categories {
-  padding: 0 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 .top-farms {
-  padding: 0 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 .map {
-  margin: 2em 0;
+  margin: 0;
 }
