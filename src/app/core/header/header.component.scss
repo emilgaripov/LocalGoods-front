@@ -1,114 +1,39 @@
 @import "src/variables";
 
 .header-container {
-  padding-top: 1em;
+  width: calc(100% - 30px);
+  padding: 15px;
   display: grid;
   position: relative;
   justify-items: center;
   align-items: center;
   gap: 1em;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 2fr 1fr;
-  grid-template-areas:
-    "logo logo logo logo logo redirect"
-    "nav search search search search search ";
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas: "nav logo welcome";
+  box-sizing: border-box;
+
+  &.home {
+    grid-template-areas: "nav logo redirect";
+  }
 
   .logo-container {
     grid-area: logo;
-    justify-self: flex-start;
-    z-index: 9;
-    margin-left: 1em;
-
-    .logo {
-      width: 200px;
-      height: 80px;
-    }
+    justify-self: center;
   }
-  .redirect-container,
-  .welcome-user {
+  .redirect-container {
     grid-area: redirect;
-    padding: 0 1em;
+  }
+  .welcome-user {
+    grid-area: welcome;
   }
   .nav-container {
     grid-area: nav;
-    padding: 0 2em;
     justify-self: flex-start;
   }
   .search-container {
     grid-area: search;
     justify-self: stretch;
-    padding: 0 1em;
-  }
-}
-
-.search {
-  padding: 10px 14px;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 5px;
-
-  &:hover {
-    border-color: $primaryGreen;
-  }
-  &:focus {
-    border-color: $primaryGreen;
-  }
-}
-
-.nav-burger {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  position: relative;
-  cursor: pointer;
-  background: none;
-  border: none;
-
-  .nav-burger-line {
-    display: inline-block;
-    width: 30px;
-    border: 2px solid $primaryGreen;
-  }
-}
-.nav-header-menu {
-  padding: 3em;
-  width: 70%;
-  height: 100vh;
-  background-color: $limeGreenTransparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-
-  .nav-parent{
-    color: #fff;
-    text-decoration: none;
-    font-size: 5vh;
-  }
-
-  ul.nav-list {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-
-    li {
-      list-style: none;
-
-      a {
-        color: #000;
-        font-size: 4vh;
-        text-decoration: none;
-
-        &:hover{
-          text-decoration: underline;
-        }
-      }
-    }
   }
 }
 
@@ -132,5 +57,5 @@
 
 .welcome-user {
   color: $darkGreen;
-  font-size: 20px;
+  font-size: 1.2em;
 }

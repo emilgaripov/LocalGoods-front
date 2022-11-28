@@ -1,0 +1,62 @@
+@import "src/variables";
+
+h2 {
+  margin: 0;
+  text-align: left;
+}
+
+.nav-burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  cursor: pointer;
+  background: none;
+  border: none;
+
+  .nav-burger-line {
+    display: inline-block;
+    width: 30px;
+    border: 2px solid $primaryGreen;
+  }
+}
+.nav-header-menu {
+  padding: 2em;
+  width: 70%;
+  height: 100vh;
+  background-color: $limeGreenTransparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+
+  .nav-parent {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+  }
+
+  ul.nav-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    li {
+      list-style: none;
+
+      a {
+        color: #000;
+        font-size: 1em;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

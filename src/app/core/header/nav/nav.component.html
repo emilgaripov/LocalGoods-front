@@ -1,0 +1,19 @@
+<button class="nav-burger" #toggleButton (click)="toggleMenu($event)">
+  <span class="nav-burger-line"></span>
+  <span class="nav-burger-line"></span>
+  <span class="nav-burger-line"></span>
+</button>
+<nav class="nav-header-menu" *ngIf="nav" #nav>
+  <h2>Welcome, guest!</h2>
+  <a href="#" class="nav-parent">Categories</a>
+  <ul class="nav-list">
+    <li><a href="#">Milk and cream</a></li>
+    <li><a href="#">Vegitables</a></li>
+    <li><a href="#">Fruits</a></li>
+    <li><a href="#">Meat</a></li>
+    <li><a href="#">Poultry</a></li>
+    <li><a href="#">Fish</a></li>
+  </ul>
+  <a href="#" class="nav-parent">Contacts</a>
+  <a href="#" class="nav-parent">Info</a>
+</nav>
