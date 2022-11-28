@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NavigationStart, Router } from "@angular/router";
 
 @Component({
@@ -7,6 +7,8 @@ import { NavigationStart, Router } from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @Input() navOpen?: boolean
 
   currentPage!: string;
 
@@ -24,6 +26,10 @@ export class HeaderComponent implements OnInit {
       }
     });
 
+  }
+
+  setIsNav(event:any){
+    this.navOpen = event
   }
 
 }

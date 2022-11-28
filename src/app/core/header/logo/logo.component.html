@@ -1,3 +1,8 @@
 <a routerLink="/">
-  <img src="../../../assets/images/logo.svg" alt="logo" class="logo" />
+  <img
+    src="../../../assets/images/logo.svg"
+    alt="logo"
+    class="logo"
+    [ngClass]="mode === 'nav' ? 'white' : null"
+  />
 </a>

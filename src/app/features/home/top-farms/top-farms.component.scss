@@ -1,7 +1,5 @@
 @import "src/variables";
 
-
-
 .scroll-container {
   overflow-y: hidden;
   overflow-x: scroll;
@@ -14,7 +12,7 @@ h2{
 
 .top-farms-container {
   margin: 0 auto;
-  width: 200%;
+  width: 125%;
   display: grid;
   gap: 1em;
   grid-template-columns: repeat(3, 1fr);
@@ -24,28 +22,30 @@ h2{
   position: relative;
   display: flex;
   overflow: hidden;
+  border-radius: 10px;
 
   .farm-image {
     overflow: hidden;
-    border-radius: 50%;
-    background-color: $darkGreen;
+    background-color: $primaryGreen;
 
     img {
       width: 100%;
       height: -webkit-fill-available;
       opacity: 0.5;
+      transition: all 0.3s;
     }
   }
   .farm-name {
     display: block;
     position: absolute;
+    width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
     font-family: "OpenSansBold";
     text-align: center;
-    font-size: 6vw;
+    font-size: 4vw;
   }
   .farm-location {
     display: none;

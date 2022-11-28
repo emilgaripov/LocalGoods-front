@@ -1,9 +1,10 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
+
 })
 export class NavComponent {
   @ViewChild('toggleButton') toggleButton!: ElementRef;
@@ -20,9 +21,11 @@ export class NavComponent {
       if (!this.nav) return
       if (e.target !== this.toggleButton.nativeElement && !this.menu.nativeElement.contains(e.target)) {
         this.nav = false;
+        this.isNav.emit(this.nav)
       }
     });
   }
+
   toggleMenu(event: Event) {
     event.stopImmediatePropagation();
     this.nav = !this.nav
