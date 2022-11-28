@@ -1,13 +1,42 @@
-.slide-container{
+@import "src/variables";
+
+.slide-container {
   overflow: hidden;
 }
 
-.slide-item{
+.slide-item {
   width: 100%;
-  
+  position: relative;
+
   img {
     max-width: 100%;
     width: 100%;
     justify-self: stretch;
+  }
+}
+
+.hero-text {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+
+  .hero-heading {
+    color: #fff;
+    font-family: "Pacifico";
+    text-shadow: 0 0 5px #000;
+    font-size: 7vw;
+  }
+  .hero-button{
+    border: none;
+    background-color: $limeGreen;
+    color: #fff;
+    padding: 14px 18px;
+    align-self: center;
+    border-radius: 5px;
   }
 }
