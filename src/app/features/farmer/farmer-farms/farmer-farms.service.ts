@@ -30,6 +30,16 @@ export class FarmerFarmsService {
     );
   }
 
+  createFarm(farmName: string) {
+    this.farms$.pipe(take(1)).subscribe({
+      next: (data) => {
+        const newFarm: IFarm = { id: data.length + 1, name: farmName };
+        data.push(newFarm);
+        this.farms$.next([...data]);
+      }
+    });
+  }
+
   deleteFarm(id: number): void {
     this.farms$.pipe(take(1)).subscribe({
       next: (data) => {

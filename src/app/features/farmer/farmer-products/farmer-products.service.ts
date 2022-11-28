@@ -38,6 +38,26 @@ export class FarmerProductsService {
     );
   }
 
+  createProduct(newProduct: IProduct) {
+    this.products$.pipe(take(1)).subscribe({
+      next: (data) => {
+        newProduct.id = data.length + 1;
+        data.push(newProduct);
+        this.products$.next([...data]);
+      }
+    });
+  }
+
+  editProduct(editedProduct: IProduct) {
+    this.products$.pipe(take(1)).subscribe({
+      next: (data) => {
+        const indexOfProductToBeEdited = data.findIndex((prod) => prod.id === editedProduct.id);
+        data[indexOfProductToBeEdited] = editedProduct;
+        this.products$.next([...data]);
+      }
+    });
+  }
+
   deleteProduct(id: number): void {
     this.products$.pipe(take(1)).subscribe({
       next: (data) => {

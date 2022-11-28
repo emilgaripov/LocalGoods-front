@@ -12,6 +12,8 @@ import { FarmerProductsService } from "./farmer-products.service";
 })
 export class FarmerProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;
+  isModalOpened = false;
+  farmId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,9 +23,31 @@ export class FarmerProductsComponent implements OnInit {
   ngOnInit(): void {
     this.products$ = this.route.params.pipe(
       switchMap((param) => {
-        return this.farmerProductsService.getProductsByFarmId(+param['id']);
+        this.farmId = +param['id'];
+        return this.farmerProductsService.getProductsByFarmId(this.farmId);
       }
     ));
   }
 
+  openModal() {
+    this.isModalOpened = true;
+  }
+
+  closeModal() {
+    this.isModalOpened = false;
+  }
+
+  onAddProduct(value: { productName: string, productDescription: string }) {
+    if (!value.productName || !value.productDescription) return;
+
+    const newProduct: IProduct = {
+      id: 0,
+      farmId: this.farmId,
+      name: value.productName,
+      description: value.productDescription,
+      image: ''
+    };
+    this.farmerProductsService.createProduct(newProduct);
+    this.closeModal();
+  }
 }

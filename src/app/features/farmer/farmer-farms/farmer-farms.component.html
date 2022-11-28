@@ -2,7 +2,7 @@
   <h2>My farms</h2>
 
   <div class="farms">
-    <div class="farms-add">
+    <div class="farms-add" (click)="openModal()">
       <span class="plus">+</span>
       <p class="farms-add-text">Add farm</p>
     </div>
@@ -12,3 +12,21 @@
     </app-farmer-farm>
   </div>
 </div>
+
+<app-modal *ngIf="isModalOpened" (isModalOpened)="isModalOpened = $event">
+  <div class="modal">
+    <p class="modal-title">Add new farm</p>
+
+    <form class="modal-form" #addFarmForm="ngForm"
+          (ngSubmit)="onAddFarm(addFarmForm.value)">
+      <label for="farmName">Farm name</label>
+      <input type="text" id="farmName" name="farmName" ngModel>
+
+      <div class="modal-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+
+  </div>
+</app-modal>
