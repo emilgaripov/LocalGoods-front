@@ -1,27 +1,45 @@
 <div class="header-container">
-  <div class="logo-container">
+  <div class="logo-container" [ngStyle]="nav ? {'visibility':'hidden'} : null">
     <a routerLink="/">
-      <img src="../../../assets/images/logo.svg" alt="logo" width="100" height="50">
+      <img src="../../../assets/images/logo.svg" alt="logo" class="logo" />
     </a>
   </div>
   <div class="nav-container">
-    <div class="nav-burger">
+    <button class="nav-burger" #toggleButton (click)="toggleMenu($event)">
       <span class="nav-burger-line"></span>
       <span class="nav-burger-line"></span>
       <span class="nav-burger-line"></span>
-    </div>
-    <nav class="nav-header">
-      <ul><li><a href="#">item 1</a></li></ul>
-      <ul><li><a href="#">item 2</a></li></ul>
-      <ul><li><a href="#">item 3</a></li></ul>
+    </button>
+    <nav class="nav-header-menu" *ngIf="nav" #nav>
+      <a href="#" class="nav-parent">Categories</a>
+      <ul class="nav-list">
+        <li><a href="#">Milk and cream</a></li>
+        <li><a href="#">Vegitables</a></li>
+        <li><a href="#">Fruits</a></li>
+        <li><a href="#">Meat</a></li>
+        <li><a href="#">Poultry</a></li>
+        <li><a href="#">Fish</a></li>
+      </ul>
+      <a href="#" class="nav-parent">Contacts</a>
+      <a href="#" class="nav-parent">Info</a>
     </nav>
   </div>
   <div class="search-container" *ngIf="currentPage === '/'">
-    <input class="form-control search" type="text" [(ngModel)]="term" name="search"
-           autocomplete="off" placeholder="Start searching for a farm product">
+    <input
+      class="form-control search"
+      type="text"
+      [(ngModel)]="term"
+      name="search"
+      autocomplete="off"
+      placeholder="Start searching for a farm product"
+    />
   </div>
   <div class="redirect-container" *ngIf="currentPage === '/'">
-    <button class="button submit login-redirect" routerLink="farmer">Farmer login</button>
+    <button class="button submit login-redirect" routerLink="farmer">
+      Farmer login
+    </button>
   </div>
-  <h2 class="welcome-user" *ngIf="currentPage === '/farmer'">Welcome, Farmer!</h2>
+  <h2 class="welcome-user" *ngIf="currentPage === '/farmer'">
+    Welcome, Farmer!
+  </h2>
 </div>

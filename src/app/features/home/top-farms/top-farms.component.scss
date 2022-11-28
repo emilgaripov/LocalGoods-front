@@ -1,0 +1,74 @@
+@import "src/variables";
+
+.scroll-container {
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.top-farms-container {
+  margin: 0 auto;
+  width: 200%;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.top-farms-item {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+
+  .farm-image {
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: $darkGreen;
+
+    img {
+      width: 100%;
+      height: -webkit-fill-available;
+      opacity: 0.5;
+    }
+  }
+  .farm-name {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-family: "OpenSansBold";
+    text-align: center;
+    font-size: 6vw;
+  }
+  .farm-location {
+    display: none;
+    justify-self: center;
+    align-self: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    transform: translate(-50%, -50%);
+    font-family: "OpenSansBold";
+    text-align: center;
+    font-size: 6vw;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  &:hover {
+    .farm-image img {
+      opacity: 1;
+    }
+    .farm-name {
+      display: none;
+    }
+    .farm-location {
+      display: block;
+    }
+  }
+}
