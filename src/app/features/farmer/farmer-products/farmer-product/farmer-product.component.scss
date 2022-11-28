@@ -1,37 +1,74 @@
 @import "src/variables";
 
 .product {
+  &-name {
+    text-align: left;
+  }
+
   &-content {
     display: flex;
-    gap: 30px;
+    gap: 1em;
   }
 
   &-image {
     height: 100px;
     width: 100px;
-    background-color: silver;
+    background-color: #eee;
     border-radius: 50%;
   }
 
   &-description {
-    flex: 1;
+    flex: 4;
   }
 
-  &-actions > button {
-    padding: 10px 20px;
-    background-color: $primaryGreen;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+  &-actions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 
-    &:hover {
-      background-color: $darkGreen;
+    button {
+      overflow: hidden;
+      text-indent: -9999px;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $darkGreen;
+      }
+      &::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        position: absolute;
+        background-size: contain;
+        filter: invert(1);
+        background-repeat: no-repeat;
+        top: 5px;
+        left: 5px;
+      }
     }
   }
 }
 
 .edit-btn {
-  margin-right: 10px;
+  background-color: $primaryGreen;
+
+  &::after {
+    background-image: url(../../../../../assets/images/icons/pencil.svg);
+  }
+}
+.delete-btn {
+  background-color: $darkGreen;
+
+  &::after {
+    background-image: url(../../../../../assets/images/icons/trash.svg);
+  }
 }
 
 .modal {
@@ -66,10 +103,9 @@
     justify-content: space-evenly;
 
     & > button {
-      padding: 10px 20px;
       background-color: $primaryGreen;
       border: none;
-      border-radius: 10px;
+      border-radius: 5px;
       cursor: pointer;
 
       &:hover {

@@ -1,35 +1,57 @@
 @import "src/variables";
 
+.farms-scroll{
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
 .farms {
+  width: max-content;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 50px;
+  gap: 1em;
 
   &-add {
     display: flex;
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
+    margin-left: 1em;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: $limeGreen;
+    border-radius: 10px;
 
     &-text {
-      font-size: 20px;
       margin: 0;
+      color: #fff;
     }
   }
 }
 
 .plus {
-  font-size: 100px;
-  font-weight: bold;
-  line-height: 70px;
-  color: $primaryGreen;
+  color: #fff;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+  text-indent: -9999px;
 
   &:hover {
     color: $darkGreen;
+  }
+  &::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    position: absolute;
+    background-size: contain;
+    filter: invert(1);
+    background-repeat: no-repeat;
+    top: 5px;
+    left: 5px;
+    background-image: url(../../../../assets/images/icons/add.svg);
   }
 }
 

@@ -1,13 +1,30 @@
 @import "src/variables";
 
+.products-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin: 0 1em;
+}
+
 .add-product-btn {
   display: block;
   padding: 10px 20px;
   background-color: $primaryGreen;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  margin: 0 auto;
+  color: #fff;
 
   &:hover {
     background-color: $darkGreen;

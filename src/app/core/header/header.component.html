@@ -1,4 +1,4 @@
-<div class="header-container" [ngClass]="currentPage === '/' ? 'home' : null">
+<div class="header-container" [ngClass]="currentPage === '/' ? 'home' : currentPage === '/farmer/1' ? 'farm' : null ">
   <app-logo class="logo-container" [ngStyle]="navOpen ? {'visibility': 'hidden'} : null"></app-logo>
   <app-nav class="nav-container" (isNav)="setIsNav($event)"></app-nav>
   <app-search
