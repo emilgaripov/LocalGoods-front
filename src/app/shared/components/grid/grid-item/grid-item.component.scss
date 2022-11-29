@@ -1,0 +1,23 @@
+@import "src/variables";
+
+h3 {
+  margin-top: 0;
+  text-align: start;
+}
+
+.item {
+  display: flex;
+  column-gap: 50px;
+  margin-bottom: 50px;
+
+  &-image {
+    height: 200px;
+    width: 200px;
+    flex-shrink: 0;
+    background-color: $primaryGreen;
+  }
+}
+
+.item-location {
+  color: $primaryGreen;
+}

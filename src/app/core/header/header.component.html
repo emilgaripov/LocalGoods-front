@@ -1,17 +1,17 @@
-<div class="header-container" [ngClass]="currentPage === '/' ? 'home' : currentPage === '/farmer/1' ? 'farm' : null ">
+<div class="header-container" [ngClass]="currentPage === '' ? 'home' : currentPage === 'farmer' ? 'farm' : null ">
   <app-logo class="logo-container" [ngStyle]="navOpen ? {'visibility': 'hidden'} : null"></app-logo>
   <app-nav class="nav-container" (isNav)="setIsNav($event)"></app-nav>
   <app-search
     class="search-container"
-    *ngIf="currentPage === '/products' || currentPage === '/farms'"
+    *ngIf="currentPage === 'products' || currentPage === 'farms'"
   ></app-search>
-  <div class="redirect-container" *ngIf="currentPage === '/'">
+  <div class="redirect-container" *ngIf="currentPage === ''">
     <button class="button submit login-redirect" routerLink="farmer">
       Farmer login
     </button>
   </div>
   <app-greeting
     class="welcome-user"
-    *ngIf="currentPage === '/farmer/1'"
+    *ngIf="currentPage === 'farmer'"
   ></app-greeting>
 </div>

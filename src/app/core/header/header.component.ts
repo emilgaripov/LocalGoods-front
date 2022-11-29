@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavigationStart, Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -20,8 +20,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe({
       next: (event) => {
-        if (event instanceof NavigationStart) {
-          this.currentPage = event.url;
+        if (event instanceof NavigationEnd) {
+          this.currentPage = event.url.split('/')[1];
         }
       }
     });

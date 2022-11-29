@@ -1,0 +1,22 @@
+@import "src/variables";
+
+.grid-title {
+  text-align: start;
+}
+
+.grid-toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.grid-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sort {
+  padding: 10px 10px;
+  border: 2px solid $primaryGreen;
+  border-radius: 10px;
+}
