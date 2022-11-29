@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { IFarm } from "../../../shared/interfaces/farm.interface";
-import { FarmerFarmsService } from "./farmer-farms.service";
+import { FarmsService } from "../../../shared/services/farms.service";
 
 @Component({
   selector: 'app-farmer-farms',
@@ -13,7 +13,7 @@ export class FarmerFarmsComponent implements OnInit {
   farms$!: Observable<IFarm[]>;
   isModalOpened = false;
 
-  constructor(private farmerFarmsService: FarmerFarmsService) {}
+  constructor(private farmerFarmsService: FarmsService) {}
 
   ngOnInit(): void {
     this.farms$ = this.farmerFarmsService.getAllFarms;

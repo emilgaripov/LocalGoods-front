@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Observable, switchMap } from "rxjs";
 import { IProduct } from "../../../shared/interfaces/product.interface";
-import { FarmerProductsService } from "./farmer-products.service";
+import { ProductsService } from "../../../shared/services/products.service";
 
 @Component({
   selector: 'app-farmer-products',
@@ -17,7 +17,7 @@ export class FarmerProductsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private farmerProductsService: FarmerProductsService
+    private farmerProductsService: ProductsService
   ) {}
 
   ngOnInit(): void {

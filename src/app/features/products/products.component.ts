@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from "rxjs";
+import { IProduct } from "../../shared/interfaces/product.interface";
+import { ProductsService } from "../../shared/services/products.service";
 
 @Component({
   selector: 'app-products',
@@ -9,10 +12,12 @@ import { Component, OnInit } from '@angular/core';
   }
 })
 export class ProductsComponent implements OnInit {
+  products$!: Observable<IProduct[]>;
 
-  constructor() { }
+  constructor(private farmerProductsService: ProductsService) {}
 
   ngOnInit(): void {
+    this.products$ = this.farmerProductsService.getAllProducts;
   }
 
 }

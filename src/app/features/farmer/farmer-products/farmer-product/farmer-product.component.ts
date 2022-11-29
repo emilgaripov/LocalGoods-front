@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { IProduct } from "../../../../shared/interfaces/product.interface";
-import { FarmerProductsService } from "../farmer-products.service";
+import { ProductsService } from "../../../../shared/services/products.service";
 
 @Component({
   selector: 'app-farmer-product',
@@ -12,7 +12,7 @@ export class FarmerProductComponent implements OnInit {
   @Input() product!: IProduct;
   isModalOpened = false;
 
-  constructor(private farmerProductsService: FarmerProductsService) {}
+  constructor(private farmerProductsService: ProductsService) {}
 
   ngOnInit(): void {}
 

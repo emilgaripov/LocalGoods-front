@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, take } from "rxjs";
-import { IFarm } from "../../../shared/interfaces/farm.interface";
-import { farms } from "../../../mocks/farmer.mock";
+import { IFarm } from "../interfaces/farm.interface";
+import { farms } from "../../mocks/farms.mock";
 
 @Injectable({
   providedIn: 'root'
 })
-export class FarmerFarmsService {
+export class FarmsService {
   private farms$ = new BehaviorSubject<IFarm[]>(this.initFarms());
 
   private initFarms(): IFarm[] {
@@ -33,7 +33,7 @@ export class FarmerFarmsService {
   createFarm(farmName: string) {
     this.farms$.pipe(take(1)).subscribe({
       next: (data) => {
-        const newFarm: IFarm = { id: data.length + 1, name: farmName };
+        const newFarm: IFarm = { id: data.length + 1, farmerId: 0, name: farmName };
         data.push(newFarm);
         this.farms$.next([...data]);
       }
