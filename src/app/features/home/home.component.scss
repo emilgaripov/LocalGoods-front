@@ -1,3 +1,5 @@
+@import "src/variables";
+
 .home-container {
   display: flex;
   flex-direction: column;
@@ -15,4 +17,17 @@
 }
 .map {
   margin: 0;
+}
+
+.app-description-text{
+  padding: 0 2em;
+  line-height: 2em;
+  text-indent: 1.5em;
+  text-align: justify;
+  
+  .redirect-link{
+    font-weight: 700;
+    color: $limeGreen;
+    font-size: 1.2em;
+  }
 }
