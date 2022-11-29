@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, take } from "rxjs";
-import { IProduct } from "../../../shared/interfaces/product.interface";
-import { products } from "../../../mocks/farmer.mock";
+import { IProduct } from "../interfaces/product.interface";
+import { products } from "../../mocks/products.mock";
 
 @Injectable({
   providedIn: 'root'
 })
-export class FarmerProductsService {
+export class ProductsService {
   private products$ = new BehaviorSubject<IProduct[]>(this.initProducts());
 
   private initProducts(): IProduct[] {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { IFarm } from "../../../../shared/interfaces/farm.interface";
 import { Router } from "@angular/router";
-import { FarmerFarmsService } from "../farmer-farms.service";
+import { FarmsService } from "../../../../shared/services/farms.service";
 
 @Component({
   selector: 'app-farmer-farm',
@@ -15,7 +15,7 @@ export class FarmerFarmComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private farmerFarmsService: FarmerFarmsService
+    private farmerFarmsService: FarmsService
   ) {}
 
   ngOnInit(): void {
