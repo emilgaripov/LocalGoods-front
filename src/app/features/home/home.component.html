@@ -2,13 +2,31 @@
   <section class="slide">
     <app-slide></app-slide>
   </section>
-  <section>
-    <app-product-categories class="product-categories" id="product-categories"></app-product-categories>
+  <section class="app-description">
+    <div class="app-description-text">
+      <p>
+        Looking for the best local food in the region? Try our FarmsFoods
+        application to find the best fresh and organic products near you. If
+        you're visiting Europe, be sure to dive into the world of original
+        tastes and flavors. Browse farms. Search for food. Locate and reserve.
+        Subscribe to be updated on new offers. 
+        <span>
+          <a href="#" routerLink="/farmer/1" class="redirect-link">Join as a Farmer</a>
+          and find new customers over the Globe
+        </span>
+      </p>
+    </div>
   </section>
-  <section >
+  <section>
+    <app-product-categories
+      class="product-categories"
+      id="product-categories"
+    ></app-product-categories>
+  </section>
+  <section>
     <app-map class="map" id="farm-map"></app-map>
   </section>
-  <section >
+  <section>
     <app-top-farms class="top-farms" id="top-farms"></app-top-farms>
   </section>
 </div>
