@@ -6,23 +6,23 @@ export const products: Observable<IProduct[]> = of([
   {
     id: 1,
     farmId: 1,
-    name: 'First product',
+    name: 'Gold Apples',
     description: 'Description to first product',
-    image: ''
+    image: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/apples-at-farmers-market-royalty-free-image-1627321463.jpg'
   },
   {
     id: 2,
     farmId: 1,
-    name: 'Second product',
+    name: 'Green Apples',
     description: 'Description to second product',
-    image: ''
+    image: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/types-of-apples-granny-smith-1658525750.jpeg'
   },
   {
     id: 3,
     farmId: 1,
-    name: 'Third product',
+    name: 'Yellow Pears',
     description: 'Description to third product',
-    image: ''
+    image: 'https://cdn.tasteatlas.com/images/ingredients/60eea3493ed944f7a4e6db7ff9b4765f.jpg'
   },
 
   // Products of farmer 1 farm 2
