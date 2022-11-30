@@ -1,10 +1,18 @@
 <div class="farm-page-container">
-  <div class="farm-page-image"></div>
+  <div class="farm-page-image">
+    <img
+      *ngIf="farm; else loading"
+      [src]="farm ? farm.image : null"
+      alt="farm image"
+      #image
+    />
+    <ng-template class="loading" #loading>Loading ... </ng-template>
+  </div>
   <div class="farm-page-description">
-    <h1>Farm Name</h1>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos sapiente esse iusto deleniti harum nisi alias repellat laborum eligendi sed id perspiciatis fuga repellendus, nulla reiciendis repudiandae nemo magni tempora?</p>
+    <h1>{{ farm?.name }}</h1>
+    <p>{{ farm?.description }}</p>
   </div>
   <div class="farm-page-products">
-    <app-grid></app-grid>
+    <app-grid [items$]="products$"></app-grid>
   </div>
 </div>

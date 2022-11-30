@@ -1,23 +1,56 @@
 @import "src/variables";
 
-h3 {
-  margin-top: 0;
-  text-align: start;
-}
-
 .item {
   display: flex;
-  column-gap: 50px;
-  margin-bottom: 50px;
+  gap: 2em;
+
+  &-name {
+    margin: 0;
+    text-align: start;
+  }
+
+  &-farm-name {
+    margin: 0;
+    text-align: start;
+    font-family: "OpenSansBold";
+  }
 
   &-image {
-    height: 200px;
     width: 200px;
+    height: 200px;
     flex-shrink: 0;
     background-color: $primaryGreen;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+
+    .object-fit_cover {
+      object-fit: cover;
+      width: 200px;
+      height: 200px;
+    }
   }
 }
 
 .item-location {
   color: $primaryGreen;
+  position: relative;
+  padding-left: 25px;
+
+  &::before {
+    content: "";
+    background-image: url("../../../../../assets/images/icons/map-pin.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    filter: invert(64%) sepia(77%) saturate(367%) hue-rotate(43deg)
+      brightness(96%) contrast(87%);
+  }
 }
