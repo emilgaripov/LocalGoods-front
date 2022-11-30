@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.horizontal-switcher {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+}
+
+.vertical-switcher {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+}
