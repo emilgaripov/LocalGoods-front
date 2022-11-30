@@ -12,7 +12,7 @@
 
   <div class="item-content">
     <h3 class="item-name">{{ item.name }}</h3>
-    <h4 class="item-farm-name" *ngIf="productFarm">{{ productFarm.name}}</h4>
+    <h4 class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id" >{{ productFarm.name}}</a></h4>
     <p class="item-description">{{ item.description }}</p>
     <p class="item-location" *ngIf="productFarm">{{ productFarm.location ? productFarm.location.adress : 'somewhere'}}</p>
   </div>

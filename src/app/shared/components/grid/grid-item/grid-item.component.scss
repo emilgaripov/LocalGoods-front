@@ -13,6 +13,14 @@
     margin: 0;
     text-align: start;
     font-family: "OpenSansBold";
+
+    a{
+      color: $limeGreen;
+
+      &:hover{
+        color: $darkGreen;
+      }
+    }
   }
 
   &-image {
