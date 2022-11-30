@@ -1,0 +1,6 @@
+<div class="container">
+  <app-auth-user (switchTo)="onSwitchAuth($event)"></app-auth-user>
+  <app-auth-farmer (switchTo)="onSwitchAuth($event)"></app-auth-farmer>
+
+  <div class="horizontal-switcher" [class.vertical-switcher]="smallScreen" [@switcher]="whoAuth"></div>
+</div>

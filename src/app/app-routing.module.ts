@@ -5,7 +5,8 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule) },
   { path: 'farmer', loadChildren: () => import('./features/farmer/farmer.module').then(m => m.FarmerModule) },
   { path: 'products', loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule) },
-  { path: 'farm', loadChildren: () => import('./features/farm/farm.module').then(m => m.FarmModule) }
+  { path: 'farm', loadChildren: () => import('./features/farm/farm.module').then(m => m.FarmModule) },
+  { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) }
 ];
 
 @NgModule({
