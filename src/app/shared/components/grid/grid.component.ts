@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
+import { IFarm } from '../../interfaces/farm.interface';
 import { IProduct } from "../../interfaces/product.interface";
 import { SortData } from "../../types/types";
 
@@ -10,6 +11,7 @@ import { SortData } from "../../types/types";
 })
 export class GridComponent implements OnInit {
   @Input() items$!: Observable<IProduct[]>;
+
   filterOpened = false;
   sortData: SortData = null;
 

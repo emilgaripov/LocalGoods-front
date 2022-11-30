@@ -1,10 +1,19 @@
 <div class="item">
-  <div class="item-image"></div>
+  <div class="item-image">
+    <img
+      *ngIf="item.image; else noImage"
+      [src]="item.image"
+      alt="pruduct image"
+      #image
+      class="object-fit_cover"
+    />
+    <ng-template #noImage>No image yet ... </ng-template>
+  </div>
 
   <div class="item-content">
-    <h3>{{ item.name }}</h3>
-    <h3>Farm: This farm</h3>
-    <p class="item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, reiciendis?</p>
-    <p class="item-location">Location</p>
+    <h3 class="item-name">{{ item.name }}</h3>
+    <h4 class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id" >{{ productFarm.name}}</a></h4>
+    <p class="item-description">{{ item.description }}</p>
+    <p class="item-location" *ngIf="productFarm">{{ productFarm.location ? productFarm.location.adress : 'somewhere'}}</p>
   </div>
 </div>
