@@ -1,10 +1,6 @@
-<div class="header-container" [ngClass]="currentPage === '' ? 'home' : currentPage === 'farmer' ? 'farm' : null ">
-  <app-logo class="logo-container" [ngStyle]="navOpen ? {'visibility': 'hidden'} : null"></app-logo>
+<div class="header-container" [ngClass]="currentPage === '' ? 'home' : currentPage === 'farmer' ? 'farm' : null">
+  <app-logo class="logo-container" [ngStyle]="{visibility: navOpen ? 'hidden' : 'visible'}"></app-logo>
   <app-nav class="nav-container" (isNav)="setIsNav($event)"></app-nav>
-  <app-search
-    class="search-container"
-    *ngIf="currentPage === 'products' || currentPage === 'farms'"
-  ></app-search>
   <div class="redirect-container" *ngIf="currentPage === ''">
     <button class="button submit login-redirect" routerLink="farmer">
       Farmer login

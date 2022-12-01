@@ -13,6 +13,7 @@ import { ProductsService } from "../../shared/services/products.service";
 })
 export class ProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;
+  searchValue!: string;
 
   constructor(private farmerProductsService: ProductsService) {}
 

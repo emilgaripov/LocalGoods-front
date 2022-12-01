@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from "rxjs";
-import { IFarm } from '../../interfaces/farm.interface';
 import { IProduct } from "../../interfaces/product.interface";
 import { SortData } from "../../types/types";
 
@@ -10,7 +8,7 @@ import { SortData } from "../../types/types";
   styleUrls: ['./grid.component.scss']
 })
 export class GridComponent implements OnInit {
-  @Input() items$!: Observable<IProduct[]>;
+  @Input() items: IProduct[] = [];
 
   filterOpened = false;
   sortData: SortData = null;
@@ -18,7 +16,7 @@ export class GridComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
   onSort(sort: HTMLSelectElement) {

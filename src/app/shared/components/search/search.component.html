@@ -1,0 +1,8 @@
+<input
+  class="form-control search"
+  type="text"
+  autocomplete="off"
+  placeholder="Search {{ searchBy }}"
+  #search
+  (input)="term.emit(search.value)"
+/>
