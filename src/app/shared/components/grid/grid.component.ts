@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IProduct } from "../../interfaces/product.interface";
-import { SortData } from "../../types/types";
+import { Categories, SortData } from "../../types/types";
 
 @Component({
   selector: 'app-grid',
@@ -12,6 +12,7 @@ export class GridComponent implements OnInit {
 
   filterOpened = false;
   sortData: SortData = null;
+  filtersData: Categories[] = [];
 
   constructor() { }
 
