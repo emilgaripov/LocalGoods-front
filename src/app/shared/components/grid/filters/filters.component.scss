@@ -4,7 +4,7 @@
   padding: 2em;
   width: 70%;
   height: 100vh;
-  background-color: $limeGreenTransparent;
+  background-color: $darkGreen;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,9 +12,26 @@
   flex-direction: column;
   gap: 2em;
   z-index: 10;
+  color: #fff;
 
+  .filters-close{
+    align-self: flex-end;
+  }
+  .filters-heading{
+    margin: 0;
+  }
+  .filters-group-heading{
+    margin: 0;
+    text-align: left;
+    color: #000;
+  }
   .filter-group-parent{
-    text-transform: uppercase;
+    font-weight: bold;
+
+    .show-child-toggle{
+      font-size: 1.2em;
+      font-weight: bold;
+    }
   }
   .filter-group-child{
     display: flex;

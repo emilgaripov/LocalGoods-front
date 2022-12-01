@@ -19,4 +19,5 @@
     <app-grid-item *ngFor="let item of items | sort: sortData" [item]="item"></app-grid-item>
   </div>
 </div>
-<app-filters *ngIf="filterOpened"></app-filters>
+
+<app-filters *ngIf="filterOpened" (isFilter)="filterOpen($event)"></app-filters>
