@@ -6,15 +6,20 @@
 <nav class="nav-header-menu" *ngIf="nav" #nav>
   <app-logo [mode]="'nav'" (click)="toggleMenu($event)"></app-logo>
   <h2>Welcome, guest!</h2>
-  <a href="#" class="nav-parent">Categories</a>
-  <ul class="nav-list">
-    <li><a href="#">Milk and cream</a></li>
-    <li><a href="#">Vegitables</a></li>
-    <li><a href="#">Fruits</a></li>
-    <li><a href="#">Meat</a></li>
-    <li><a href="#">Poultry</a></li>
-    <li><a href="#">Fish</a></li>
-  </ul>
-  <a href="#" class="nav-parent">Contacts</a>
-  <a href="#" class="nav-parent">Info</a>
+  <div class="nav-goup"> 
+    <h3 class="nav-parent">Products</h3>
+    <ul class="nav-list" >
+      <li *ngFor=" let category of categories">
+        <a [routerLink]="['/products']" [queryParams]="{category: category}" (click)="toggleMenu($event)">{{category}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="nav-goup"> 
+    <h3 class="nav-parent">Account</h3>
+    <ul class="nav-list">
+      <li><a href="#" class="nav-parent">personal info</a></li>
+      <li><a href="#" class="nav-parent">shopping list</a></li>
+      <li><a href="#" class="nav-parent">favorites</a></li>
+    </ul>
+  </div>
 </nav>
