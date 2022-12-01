@@ -1,3 +1,5 @@
+import { Categories } from "../types/types";
+
 export interface IProduct {
   id: number,
   farmId: number,
@@ -5,6 +7,6 @@ export interface IProduct {
   description: string,
   image: string,
   price?: number,
-  category?: string,
+  category?: Categories,
   createdAt?: Date
 }
