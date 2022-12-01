@@ -18,6 +18,7 @@ export class GridComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   onSort(sort: HTMLSelectElement) {
@@ -31,5 +32,9 @@ export class GridComponent implements OnInit {
       default:
       this.sortData = null;
     }
+  }
+
+  filterOpen(event: any){
+    this.filterOpened = event
   }
 }

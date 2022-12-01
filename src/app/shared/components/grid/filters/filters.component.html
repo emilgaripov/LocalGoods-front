@@ -1,9 +1,11 @@
-<div class="filters-container">
+<div class="filters-container" >
+  <button class="filters-close" (click)="closeFilters()">x</button>
   <h2 class="filters-heading">Filter by</h2>
   <div class="filter-category">
     <h3 class="filters-group-heading">Category</h3>
     <div>
-      <label href="#" (click)="showChild = !showChild"  class="filter-group-parent">category 1</label>
+      <label href="#" (click)="showChild = !showChild"  class="filter-group-parent">category 1 <span class="show-child-toggle">{{ !showChild ? '+' : '-'}}</span>
+      </label>
       <div *ngIf="showChild" class="filter-group-child">
         <div><input type="checkbox" /> All </div>
         <div><input type="checkbox" /> Child 1 </div>
