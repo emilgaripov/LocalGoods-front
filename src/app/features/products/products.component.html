@@ -1,3 +1,5 @@
 <div class="all-products-container">
-  <app-grid [items$]="products$"></app-grid>
+  <app-search [searchBy]="'product'" (term)="searchValue = $event"></app-search>
+
+  <app-grid [items]="((products$ | async) ?? []) | search: searchValue"></app-grid>
 </div>

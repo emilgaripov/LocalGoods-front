@@ -8,7 +8,7 @@ export class SortPipe implements PipeTransform {
 
   transform<T>(initialArray: T[], sortData: SortData): T[] {
     if (!initialArray.length) return [];
-    if (!sortData) return [...initialArray];
+    if (!sortData) return initialArray;
 
     const compare = (a: any, b: any) => {
       if (sortData.sortDirection === 'asc') {

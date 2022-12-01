@@ -11,11 +11,7 @@
     </select>
   </div>
 
-  <div class="filter-options" *ngIf="filterOpened">
-
-  </div>
-
-  <div class="grid-items" *ngIf="items$ | async as items">
+  <div class="grid-items">
     <app-grid-item *ngFor="let item of items | sort: sortData" [item]="item"></app-grid-item>
   </div>
 </div>

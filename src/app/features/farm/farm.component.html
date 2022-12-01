@@ -13,6 +13,6 @@
     <p>{{ farm?.description }}</p>
   </div>
   <div class="farm-page-products">
-    <app-grid [items$]="products$"></app-grid>
+    <app-grid [items]="(products$ | async) ?? []"></app-grid>
   </div>
 </div>
