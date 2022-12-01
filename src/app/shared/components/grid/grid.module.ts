@@ -4,12 +4,14 @@ import { GridComponent } from './grid.component';
 import { GridItemComponent } from './grid-item/grid-item.component';
 import { SortPipe } from "../../pipes/sort.pipe";
 import { RouterModule } from '@angular/router';
+import { FiltersComponent } from './filters/filters.component';
 
 @NgModule({
   declarations: [
     GridComponent,
     GridItemComponent,
-    SortPipe
+    SortPipe,
+    FiltersComponent
   ],
   imports: [
     CommonModule,

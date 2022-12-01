@@ -1,0 +1,15 @@
+<div class="filters-container">
+  <h2 class="filters-heading">Filter by</h2>
+  <div class="filter-category">
+    <h3 class="filters-group-heading">Category</h3>
+    <div>
+      <label href="#" (click)="showChild = !showChild"  class="filter-group-parent">category 1</label>
+      <div *ngIf="showChild" class="filter-group-child">
+        <div><input type="checkbox" /> All </div>
+        <div><input type="checkbox" /> Child 1 </div>
+        <div><input type="checkbox" /> Child 2</div>
+        <div><input type="checkbox" /> Child 3</div>
+      </div>
+    </div>
+  </div>
+</div>
