@@ -4,7 +4,7 @@
   <div class="grid-toolbar">
     <button (click)="filterOpened = !filterOpened">Filters</button>
 
-    <select class="sort" #sort (change)="onSort(sort)">
+    <select class="sort" #sort (change)="onSort(sort.value)">
       <option>Sort by</option>
       <option value="nameAsc">Name A-Z</option>
       <option value="nameDesc">Name Z-A</option>

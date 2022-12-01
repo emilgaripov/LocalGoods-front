@@ -19,8 +19,8 @@ export class GridComponent implements OnInit {
 
   }
 
-  onSort(sort: HTMLSelectElement) {
-    switch (sort.value) {
+  onSort(value: string) {
+    switch (value) {
       case 'nameAsc':
         this.sortData = { sortBy: 'name', sortDirection: 'asc' };
         break;
