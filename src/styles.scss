@@ -93,3 +93,17 @@ button {
 .grow-container{
   flex-grow: 1;
 }
+
+input[type="checkbox"]{
+  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+
+  &:checked{
+    outline: none;
+    background-color: $primaryGreen;
+  border-radius: 2px;
+  filter:hue-rotate(250deg);
+
+  }
+}
