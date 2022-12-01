@@ -15,15 +15,23 @@
 
   &.home {
     grid-template-areas: "nav logo redirect";
+
+    .logo-container {
+      justify-self: center;
+    }
   }
   &.farm {
     grid-template-areas: "nav logo welcome";
     grid-template-columns: 10% auto 20%;
+
+    .logo-container {
+      justify-self: center;
+    }
   }
 
   .logo-container {
     grid-area: logo;
-    justify-self: center;
+    justify-self: flex-end;
   }
   .redirect-container {
     grid-area: redirect;

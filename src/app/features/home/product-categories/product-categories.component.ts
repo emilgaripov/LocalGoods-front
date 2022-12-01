@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Categories, categories } from 'src/app/shared/types/types';
 
 @Component({
   selector: 'app-product-categories',
@@ -7,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class ProductCategoriesComponent {
 
-  categories = ['milk', 'veggies', 'fruits', 'meat', 'cheese']
+  categories: Categories[] = categories
 
 }
