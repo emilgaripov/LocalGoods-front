@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Output, Renderer2, ViewChild } from '@angular/core';
+import { Categories, categories } from 'src/app/shared/types/types';
 
 @Component({
   selector: 'app-nav',
@@ -12,6 +13,7 @@ export class NavComponent {
 
   @Output() isNav = new EventEmitter<boolean>()
 
+  categories: Categories[] = categories
   nav = false;
 
   constructor(

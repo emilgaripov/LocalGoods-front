@@ -7,7 +7,7 @@
 
 h2{
   margin: 0;
-  font-size: 5vw;
+  font-size: 30px;
 }
 
 .top-farms-container {
@@ -23,6 +23,7 @@ h2{
   display: flex;
   overflow: hidden;
   border-radius: 10px;
+  background-size: contain;
 
   .farm-image {
     overflow: hidden;
