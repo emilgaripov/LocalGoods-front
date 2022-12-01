@@ -10,11 +10,18 @@ export const farms: Observable<IFarm[]> = of([
     image: 'https://www.fao.org/typo3temp/pics/654cc0c6f7.jpg',
     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
     location:{
-      adress: 'London',
-      coordinates: {
-        lat: 51.509865,
-        lon: -0.118092
-      }
+      adress: 'Street One, 12',
+      city: 'London',
+      country: 'Great Britain'
+    },
+    rating: 4,
+    social:{
+      fb:'https://www.facebook.com/firstfarmpage',
+      instagram: 'https://www.instagram.com/123456'
+    },
+    contacts: {
+      tel: '+123456789',
+      email:'firstfarm@email.com'
     }
   },
   {

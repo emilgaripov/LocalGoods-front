@@ -3,5 +3,8 @@ export interface IProduct {
   farmId: number,
   name: string,
   description: string,
-  image: string
+  image: string,
+  price?: number,
+  categoryId?: number,
+  createdAt?: Date
 }
