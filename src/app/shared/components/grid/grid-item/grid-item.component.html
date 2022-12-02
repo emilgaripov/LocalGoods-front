@@ -14,7 +14,7 @@
     <h3 class="item-name">{{ item.name }}</h3>
     <h4 class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id" >{{ productFarm.name}}</a></h4>
     <p class="item-description">{{ item.description | slice:0:100 }}...</p>
-    <p class="item-location">{{ item.location ? item.location.adress + ', ' + item.location.city : productFarm?.location ? productFarm?.location?.adress + ', ' + productFarm?.location?.city: 'somewhere'}}</p>
+    <p class="item-location">{{ item.location ? item.location.address + ', ' + item.location.city : productFarm?.location ? productFarm?.location?.address + ', ' + productFarm?.location?.city: 'somewhere'}}</p>
     <div class="item-social">
       <a class="item-social-icon fb" [href]="item.social.fb">Facebook</a>
       <a class="item-social-icon insta" [href]="item.social.instagram">Instagram</a>
