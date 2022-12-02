@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { IProduct } from "../../shared/interfaces/product.interface";
 import { ProductsService } from "../../shared/services/products.service";
@@ -7,6 +7,7 @@ import { ProductsService } from "../../shared/services/products.service";
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'grow-container'
   }

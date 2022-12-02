@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { SearchPipe } from './search.pipe';
 import { SortPipe } from './sort.pipe';
-
+import { FilterPipe } from "./filter.pipe";
 
 @NgModule({
   declarations: [
     SearchPipe,
-    SortPipe
+    SortPipe,
+    FilterPipe
   ],
   imports: [
     CommonModule,
   ],
   exports: [
     SearchPipe,
-    SortPipe
+    SortPipe,
+    FilterPipe
   ]
 })
 export class PipesModule { }

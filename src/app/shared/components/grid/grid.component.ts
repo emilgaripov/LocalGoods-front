@@ -1,25 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IFarm } from '../../interfaces/farm.interface';
-import { IProduct } from "../../interfaces/product.interface";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Categories, SortData } from "../../types/types";
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss']
+  styleUrls: ['./grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridComponent implements OnInit {
+export class GridComponent {
   @Input() items: any[]  = [];
 
   filterOpened = false;
   sortData: SortData = null;
   filtersData: Categories[] = [];
-
-  constructor() { }
-
-  ngOnInit(): void {
-
-  }
 
   onSort(value: string) {
     switch (value) {

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-top-farms',
   templateUrl: './top-farms.component.html',
   styleUrls: ['./top-farms.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class TopFarmsComponent {
