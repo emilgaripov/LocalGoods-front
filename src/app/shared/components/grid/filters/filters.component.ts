@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { fakeAsync } from '@angular/core/testing';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { categories, Categories } from "../../../types/types";
 
 @Component({
   selector: 'app-filters',
@@ -7,18 +7,37 @@ import { fakeAsync } from '@angular/core/testing';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit {
+  @Input() filterOpened = false;
+  @Output() isFilter = new EventEmitter<boolean>();
+  @Output() filters = new EventEmitter<Categories[]>();
 
-  showChild: boolean = false;
-  @Input() filterOpened!: boolean
+  showChild = false;
+  categoriesList = [...categories];
+  checkedCategories: Categories[] = [];
 
-  @Output() isFilter = new EventEmitter<boolean>()
+  ngOnInit(): void {}
 
-  
-  ngOnInit(): void {
-  }
-  
-  closeFilters(){
+  closeFilters() {
     this.filterOpened = false;
-    this.isFilter.emit(this.filterOpened)
+    this.isFilter.emit(this.filterOpened);
+  }
+
+  onCheck(category: Categories) {
+    if (this.checkedCategories.includes(category)) {
+      const i = this.checkedCategories.indexOf(category);
+      this.checkedCategories.splice(i, 1);
+
+    } else {
+      this.checkedCategories.push(category);
+    }
+  }
+
+  onCheckAll(isChecked: boolean) {
+    this.checkedCategories = isChecked ? [...this.categoriesList] : [];
+  }
+
+  applyFilter() {
+    console.log(this.checkedCategories);
+    this.filters.emit(this.checkedCategories);
   }
 }

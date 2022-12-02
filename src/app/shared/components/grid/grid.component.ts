@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IFarm } from '../../interfaces/farm.interface';
 import { IProduct } from "../../interfaces/product.interface";
-import { SortData } from "../../types/types";
+import { Categories, SortData } from "../../types/types";
 
 @Component({
   selector: 'app-grid',
@@ -13,6 +13,7 @@ export class GridComponent implements OnInit {
 
   filterOpened = false;
   sortData: SortData = null;
+  filtersData: Categories[] = [];
 
   constructor() { }
 
@@ -20,8 +21,8 @@ export class GridComponent implements OnInit {
 
   }
 
-  onSort(sort: HTMLSelectElement) {
-    switch (sort.value) {
+  onSort(value: string) {
+    switch (value) {
       case 'nameAsc':
         this.sortData = { sortBy: 'name', sortDirection: 'asc' };
         break;

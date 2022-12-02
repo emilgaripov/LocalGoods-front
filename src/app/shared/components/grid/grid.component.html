@@ -4,7 +4,7 @@
   <div class="grid-toolbar">
     <button (click)="filterOpened = !filterOpened">Filters</button>
 
-    <select class="sort" #sort (change)="onSort(sort)">
+    <select class="sort" #sort (change)="onSort(sort.value)">
       <option>Sort by</option>
       <option value="nameAsc">Name A-Z</option>
       <option value="nameDesc">Name Z-A</option>
@@ -12,8 +12,12 @@
   </div>
 
   <div class="grid-items">
-    <app-grid-item *ngFor="let item of items | sort: sortData" [item]="item"></app-grid-item>
+    <app-grid-item *ngFor="let item of items | filter: filtersData | sort: sortData"
+                   [item]="item"></app-grid-item>
   </div>
 </div>
 
-<app-filters *ngIf="filterOpened" (isFilter)="filterOpen($event)"></app-filters>
+<app-filters *ngIf="filterOpened"
+             (isFilter)="filterOpen($event)"
+             (filters)="filtersData = $event"
+></app-filters>
