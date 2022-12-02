@@ -1,12 +1,9 @@
 <div class="farm-page-container">
   <div class="farm-page-image">
-    <img
-      *ngIf="farm; else loading"
-      [src]="farm ? farm.image : null"
-      alt="farm image"
-      #image
-    />
-    <ng-template class="loading" #loading>Loading ... </ng-template>
+    <img *ngIf="farm; else loading"
+         [src]="farm ? farm.image : null"
+         alt="farm image">
+    <ng-template class="loading" #loading>Loading ...</ng-template>
   </div>
   <div class="farm-page-description">
     <h1>{{ farm?.name }}</h1>

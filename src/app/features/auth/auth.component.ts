@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { WhoAuth } from "../../shared/types/types";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
@@ -6,6 +6,7 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('switcher', [
       state('user', style({

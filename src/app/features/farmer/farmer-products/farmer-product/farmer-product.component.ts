@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IProduct } from "../../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../../shared/services/products.service";
 import { categories } from "../../../../shared/types/types";
@@ -9,14 +9,12 @@ import { categories } from "../../../../shared/types/types";
   styleUrls: ['./farmer-product.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FarmerProductComponent implements OnInit {
+export class FarmerProductComponent {
   @Input() product!: IProduct;
   isModalOpened = false;
   categoriesList = [...categories];
 
   constructor(private farmerProductsService: ProductsService) {}
-
-  ngOnInit(): void {}
 
   onDeleteProduct() {
     this.farmerProductsService.deleteProduct(this.product.id);
