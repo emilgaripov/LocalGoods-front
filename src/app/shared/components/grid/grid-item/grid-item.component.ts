@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ɵɵvalidateIframeAttribute } from '@angular/core';
 
 import { IFarm } from 'src/app/shared/interfaces/farm.interface';
 import { IProduct } from "../../../interfaces/product.interface";
@@ -12,7 +12,7 @@ import { first } from 'rxjs';
   styleUrls: ['./grid-item.component.scss']
 })
 export class GridItemComponent implements OnInit {
-  @Input() item!: IProduct;
+  @Input() item!: any;
 
   productFarm?: IFarm;
 
@@ -25,10 +25,10 @@ export class GridItemComponent implements OnInit {
   }
 
   getProductFarmInfo() {
-    if (this.item.farmId) {
+    if ('farmId' in this.item) {
       this.farmsService.getFarmById(this.item.farmId)
         .pipe(first())
         .subscribe((farm) => this.productFarm = farm)
-    }
+    } 
   }
 }

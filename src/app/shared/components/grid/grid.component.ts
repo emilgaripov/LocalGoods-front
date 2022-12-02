@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IFarm } from '../../interfaces/farm.interface';
 import { IProduct } from "../../interfaces/product.interface";
 import { SortData } from "../../types/types";
 
@@ -8,7 +9,7 @@ import { SortData } from "../../types/types";
   styleUrls: ['./grid.component.scss']
 })
 export class GridComponent implements OnInit {
-  @Input() items: IProduct[] = [];
+  @Input() items: any[]  = [];
 
   filterOpened = false;
   sortData: SortData = null;
