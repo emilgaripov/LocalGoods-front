@@ -5,13 +5,13 @@ export interface IFarm {
   name: string,
   image?: string,
   description?: string,
-  location?:{
-    adress: string,
+  location?: {
+    address: string,
     city: string,
     country: string
   },
   rating?:number,
-  social?:{
+  social?: {
     fb:string,
     instagram: string
   },

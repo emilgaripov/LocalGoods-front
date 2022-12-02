@@ -27,7 +27,7 @@ export class FarmerFarmsComponent implements OnInit {
     this.isModalOpened = false;
   }
 
-  onAddFarm(value: { farmName: string }) {
+  onAddFarm(value: any) {
     if (!value.farmName) return;
 
     this.farmerFarmsService.createFarm(value.farmName);

@@ -10,8 +10,7 @@
       <app-farmer-farm
         *ngFor="let farm of farms$ | async; let i = index"
         [farm]="farm"
-        [isFirstItem]="i === 0"
-      >
+        [isFirstItem]="i === 0">
       </app-farmer-farm>
     </div>
   </div>
@@ -24,15 +23,34 @@
     <form
       class="modal-form"
       #addFarmForm="ngForm"
-      (ngSubmit)="onAddFarm(addFarmForm.value)"
-    >
+      (ngSubmit)="onAddFarm(addFarmForm.value)">
+
       <label for="farmName">Farm name</label>
-      <input type="text" id="farmName" name="farmName" ngModel />
+      <input type="text" id="farmName" name="farmName" ngModel required>
+      <label for="farmDesc">Farm description</label>
+      <input type="text" id="farmDesc" name="farmDesc" ngModel required>
+      <label for="farmImg">Farm image</label>
+      <input type="text" id="farmImg" name="farmImg" ngModel>
+      <label for="farmCounty">County</label>
+      <input type="text" id="farmCounty" name="farmCounty" ngModel>
+      <label for="farmCity">City</label>
+      <input type="text" id="farmCity" name="farmCity" ngModel>
+      <label for="farmAddress">Address</label>
+      <input type="text" id="farmAddress" name="farmAddress" ngModel>
+      <label for="farmFacebook">Facebook link</label>
+      <input type="text" id="farmFacebook" name="farmFacebook" ngModel>
+      <label for="farmInstagram">Instagram link</label>
+      <input type="text" id="farmInstagram" name="farmInstagram" ngModel>
+      <label for="farmTel">Phone number</label>
+      <input type="text" id="farmTel" name="farmTel" ngModel>
+      <label for="farmEmail">Farm email address</label>
+      <input type="text" id="farmEmail" name="farmEmail" ngModel>
 
       <div class="modal-buttons">
         <button type="submit">Save</button>
         <button type="button" (click)="closeModal()">Cancel</button>
       </div>
+
     </form>
   </div>
 </app-modal>

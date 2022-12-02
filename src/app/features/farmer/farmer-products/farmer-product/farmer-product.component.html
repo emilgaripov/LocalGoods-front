@@ -17,11 +17,21 @@
 
     <form class="modal-form" #editProductForm="ngForm"
           (ngSubmit)="onEditProduct(editProductForm.value)">
-      <label for="productName">Product name</label>
-      <input type="text" id="productName" name="productName" [ngModel]="product.name">
 
-      <label for="productDescription">Product description</label>
-      <input type="text" id="productDescription" name="productDescription" [ngModel]="product.description">
+      <label for="productName">Product name</label>
+      <input type="text" id="productName" name="productName" required [ngModel]="product.name">
+      <label for="productDesc">Product description</label>
+      <input type="text" id="productDesc" name="productDesc" required [ngModel]="product.description">
+      <label for="productImg">Product image</label>
+      <input type="text" id="productImg" name="productImg" [ngModel]="product.image">
+      <label for="productPrice">Product price</label>
+      <input type="text" id="productPrice" name="productPrice" [ngModel]="product.price">
+      <label for="productCategory">Product category</label>
+      <select id="productCategory" name="productCategory" [ngModel]="product.category">
+        <option *ngFor="let category of categoriesList" [value]="category">
+          {{ category | titlecase }}
+        </option>
+      </select>
 
       <div class="modal-buttons">
         <button type="submit">Save</button>
