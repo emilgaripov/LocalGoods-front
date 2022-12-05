@@ -1,6 +1,27 @@
-<div class="container">
-  <app-auth-user (switchTo)="onSwitchAuth($event)"></app-auth-user>
-  <app-auth-farmer (switchTo)="onSwitchAuth($event)"></app-auth-farmer>
+<h2>{{ loginMode ? 'Login' : 'Registration' }}</h2>
 
-  <div class="horizontal-switcher" [class.vertical-switcher]="smallScreen" [@switcher]="whoAuth"></div>
-</div>
+<form #form=ngForm (ngSubmit)="loginMode ? onLogin(form.value) : onRegister(form.value)">
+  <div *ngIf="!loginMode">
+    <label for="username">Username</label><br>
+    <input type="text" id="username" name="username" ngModel required>
+  </div>
+
+  <div>
+    <label for="email">Email</label><br>
+    <input type="email" id="email" name="email" ngModel required>
+  </div>
+
+  <div>
+    <label for="password">Password</label><br>
+    <input type="password" id="password" name="password" ngModel required>
+  </div>
+
+  <div *ngIf="!loginMode">
+    <label for="role">Are you farmer?</label>
+    <input type="checkbox" id="role" name="isFarmer" ngModel>
+  </div>
+
+  <button type="submit">Sign {{ loginMode ? 'in' : 'up' }}</button>
+  <p class="switch-mode" (click)="switchMode()">{{ loginMode ? 'Registration' : 'Login' }}</p>
+</form>
+
