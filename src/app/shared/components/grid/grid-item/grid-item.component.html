@@ -9,9 +9,10 @@
 
   <div class="item-content">
     <h3 class="item-name">{{ item.name }}</h3>
-    <h4 class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id">{{ productFarm.name }}</a></h4>
-    <p class="item-description">{{ item.description | slice:0:100 }}...</p>
-    <p class="item-location">{{ item.location ? item.location.address + ', ' + item.location.city : productFarm?.location ? productFarm?.location?.address + ', ' + productFarm?.location?.city: 'somewhere' }}</p>
+    <div class="item-description">{{ item.description | slice:0:100 }}...</div>
+    <div class="item-price"  *ngIf="item.price">{{ item.price | currency: 'UAH' }}</div>
+    <div class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id">{{ productFarm.name }}</a></div>
+    <div class="item-location">{{ item.location ? item.location.address + ', ' + item.location.city : productFarm?.location ? productFarm?.location?.address + ', ' + productFarm?.location?.city: 'somewhere' }}</div>
     <div class="item-social" *ngIf="item.social">
       <a class="item-social-icon fb" [href]="item.social.fb">Facebook</a>
       <a class="item-social-icon insta" [href]="item.social.instagram">Instagram</a>
