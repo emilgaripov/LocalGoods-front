@@ -16,8 +16,33 @@
 
   .filters-close{
     align-self: flex-end;
+    background: none;
+    width: 30px;
+    display: block;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+
+    span{
+      display: block;
+      background-color: $limeGreen;
+      width: 31px;
+      height: 1px;
+
+      &.filters-close-left{
+        transform: rotate(45deg);
+      }
+      &.filters-close-right{
+        transform: rotate(-45deg);
+      }
+    }
+
   }
   .filters-heading{
+    text-align: left;
     margin: 0;
   }
   .filters-group-heading{
@@ -36,5 +61,22 @@
   .filter-group-child{
     display: flex;
     flex-direction: column;
+  }
+}
+.filter-button{
+  background-color: $limeGreen;
+
+  &:hover{
+    background-color: #fff;
+    color: $darkGreen;
+  }
+
+  &:disabled{
+    opacity: 0.5;
+
+    &:hover{
+       background-color: $limeGreen;
+      color: #fff;
+    }
   }
 }

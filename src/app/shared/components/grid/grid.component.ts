@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Categories, SortData } from "../../types/types";
 
 @Component({
@@ -7,12 +8,22 @@ import { Categories, SortData } from "../../types/types";
   styleUrls: ['./grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridComponent {
+export class GridComponent implements OnInit {
   @Input() items: any[]  = [];
 
   filterOpened = false;
   sortData: SortData = null;
   filtersData: Categories[] = [];
+
+  constructor(
+    private route: ActivatedRoute
+  ){}
+
+  ngOnInit(){
+    if(!this.route.snapshot.queryParams['category']) return
+    this.filtersData.push(this.route.snapshot.queryParams['category'])
+    console.log(this.filtersData);
+  }
 
   onSort(value: string) {
     switch (value) {

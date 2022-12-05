@@ -20,4 +20,5 @@
 <app-filters *ngIf="filterOpened"
              (isFilter)="filterOpen($event)"
              (filters)="filtersData = $event"
+             [filtersData]="filtersData"
 ></app-filters>
