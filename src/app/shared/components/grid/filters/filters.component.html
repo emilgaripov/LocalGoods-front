@@ -1,17 +1,17 @@
 <div class="filters-container" >
-  <button class="filters-close" (click)="closeFilters()">x</button>
+  <button class="filters-close" (click)="closeFilters()">
+    <span class="filters-close-left"></span>
+    <span class="filters-close-right"></span>
+  </button>
   <h2 class="filters-heading">Filter by</h2>
 
   <div class="filter-category">
-    <h3 class="filters-group-heading">Categories</h3>
     <div>
-
-      <label (click)="showChild = !showChild" class="filter-group-parent">
+      <label class="filter-group-parent">
         Categories
-        <span class="show-child-toggle">{{ showChild ? '-' : '+'}}</span>
       </label>
 
-      <div *ngIf="showChild" class="filter-group-child">
+      <div class="filter-group-child">
         <div>
           <input type="checkbox" #allCategories
                  (change)="onCheckAll(allCategories.checked)">
@@ -20,7 +20,7 @@
 
         <div *ngFor="let category of categoriesList">
           <input type="checkbox" [value]="category"
-                 [checked]="allCategories.checked"
+                 [checked]="allCategories.checked || filtersData.includes(category)"
                  (change)="onCheck(category)">
           {{ category | titlecase }}
         </div>
@@ -29,5 +29,6 @@
     </div>
   </div>
 
-  <button (click)="applyFilter()">Apply filter</button>
+  <button (click)="applyFilter()" class="filter-button" >Apply filter</button>
+  <button (click)="clearFilters()" class="filter-button" >Clear all filters</button>
 </div>
