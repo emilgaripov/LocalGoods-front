@@ -41,6 +41,52 @@
       height: 200px;
     }
   }
+  &-social{
+    display: flex;
+    gap: 0.5em;
+
+    .item-social-icon{
+      display: block;
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+      border-radius: 3px;
+      text-indent: -9999px;
+      position: relative;
+      transform: all 0.3s;
+
+      &:hover{
+        transform: scale(1.2);
+      }
+
+      &::after{
+        content: ' ';
+        background-position: center;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      &.fb{
+
+        &::after{
+          background-image: url('../../../../../assets/images/icons/social/facebook.png');
+        }
+      }
+      &.insta{
+
+        &::after{
+          background-image: url('../../../../../assets/images/icons/social/instagram.png');
+        }
+
+      }
+    }
+
+  }
 }
 
 .item-location {

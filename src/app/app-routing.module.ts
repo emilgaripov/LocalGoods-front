@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'farmer', loadChildren: () => import('./features/farmer/farmer.module').then(m => m.FarmerModule) },
   { path: 'products', loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule) },
   { path: 'farm', loadChildren: () => import('./features/farm/farm.module').then(m => m.FarmModule) },
+  { path: 'farms', loadChildren: () => import('./features/farms/farms.module').then(m => m.FarmsModule) },
   { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) }
 ];
 

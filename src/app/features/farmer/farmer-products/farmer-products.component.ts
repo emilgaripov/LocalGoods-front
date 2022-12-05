@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable, switchMap } from "rxjs";
 import { IProduct } from "../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../shared/services/products.service";
+import { categories } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-farmer-products',
@@ -14,6 +15,7 @@ export class FarmerProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;
   isModalOpened = false;
   farmId!: number;
+  categoriesList = [...categories];
 
   constructor(
     private route: ActivatedRoute,

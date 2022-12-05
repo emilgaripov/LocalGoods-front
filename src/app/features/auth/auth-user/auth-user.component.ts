@@ -1,18 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { WhoAuth } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-auth-user',
   templateUrl: './auth-user.component.html',
-  styleUrls: ['./auth-user.component.scss']
+  styleUrls: ['./auth-user.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthUserComponent implements OnInit {
+export class AuthUserComponent {
   @Output() switchTo = new EventEmitter<WhoAuth>();
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   goToFarmer() {
     this.switchTo.emit('farmer');

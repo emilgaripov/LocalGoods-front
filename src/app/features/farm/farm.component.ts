@@ -25,7 +25,7 @@ export class FarmComponent implements OnInit {
     private route: ActivatedRoute,
     private farmerProductsService: ProductsService,
     public farmsService: FarmsService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.products$ = this.route.params.pipe(
@@ -33,9 +33,8 @@ export class FarmComponent implements OnInit {
         this.farmId = +param['id'];
         this.getFarm(this.farmId);
         return this.farmerProductsService.getProductsByFarmId(this.farmId);
-      }
-      ));
-
+      })
+    );
   }
 
   getFarm(id: number) {

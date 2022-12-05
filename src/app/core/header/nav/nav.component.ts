@@ -1,11 +1,19 @@
-import { Component, ElementRef, EventEmitter, Output, Renderer2, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import { Categories, categories } from 'src/app/shared/types/types';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
-
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavComponent {
   @ViewChild('toggleButton') toggleButton!: ElementRef;
@@ -16,9 +24,7 @@ export class NavComponent {
   categories: Categories[] = categories
   nav = false;
 
-  constructor(
-    private renderer: Renderer2
-  ) {
+  constructor(private renderer: Renderer2) {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (!this.nav) return
       if (e.target !== this.toggleButton.nativeElement && !this.menu.nativeElement.contains(e.target)) {

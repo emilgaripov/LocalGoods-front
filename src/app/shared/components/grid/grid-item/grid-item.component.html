@@ -1,19 +1,20 @@
 <div class="item">
   <div class="item-image">
-    <img
-      *ngIf="item.image; else noImage"
+    <img *ngIf="item.image; else noImage"
       [src]="item.image"
-      alt="pruduct image"
-      #image
-      class="object-fit_cover"
-    />
-    <ng-template #noImage>No image yet ... </ng-template>
+      alt="product image"
+      class="object-fit_cover">
+    <ng-template #noImage>No image yet ...</ng-template>
   </div>
 
   <div class="item-content">
     <h3 class="item-name">{{ item.name }}</h3>
-    <h4 class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id" >{{ productFarm.name}}</a></h4>
-    <p class="item-description">{{ item.description }}</p>
-    <p class="item-location" *ngIf="productFarm">{{ productFarm.location ? productFarm.location.adress : 'somewhere'}}</p>
+    <h4 class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id">{{ productFarm.name }}</a></h4>
+    <p class="item-description">{{ item.description | slice:0:100 }}...</p>
+    <p class="item-location">{{ item.location ? item.location.address + ', ' + item.location.city : productFarm?.location ? productFarm?.location?.address + ', ' + productFarm?.location?.city: 'somewhere' }}</p>
+    <div class="item-social">
+      <a class="item-social-icon fb" [href]="item.social.fb">Facebook</a>
+      <a class="item-social-icon insta" [href]="item.social.instagram">Instagram</a>
+    </div>
   </div>
 </div>

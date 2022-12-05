@@ -9,13 +9,13 @@ export const farms: Observable<IFarm[]> = of([
     name: 'First farm',
     image: 'https://www.fao.org/typo3temp/pics/654cc0c6f7.jpg',
     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
-    location:{
-      adress: 'Street One, 12',
+    location: {
+      address: 'Street One, 12',
       city: 'London',
       country: 'Great Britain'
     },
     rating: 4,
-    social:{
+    social: {
       fb:'https://www.facebook.com/firstfarmpage',
       instagram: 'https://www.instagram.com/123456'
     },
@@ -31,7 +31,7 @@ export const farms: Observable<IFarm[]> = of([
     image: 'https://www.arc2020.eu/wp-content/uploads/2018/05/farm-2613993_1920.jpg',
     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
     location:{
-      adress: 'Street One, 12',
+      address: 'Street One, 12',
       city: 'Glasgow',
       country: 'Great Britain'
     },
@@ -52,7 +52,7 @@ export const farms: Observable<IFarm[]> = of([
     image: 'https://i0.wp.com/epthinktank.eu/wp-content/uploads/2014/02/future-of-small-farms.jpg?fit=800%2C536&ssl=1',
     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ',
     location:{
-      adress: 'Street Somertre, 12',
+      address: 'Street Somertre, 12',
       city: 'Bristol',
       country: 'Great Britain'
     },
@@ -75,7 +75,7 @@ export const farms: Observable<IFarm[]> = of([
     image: 'https://hygeia-analytics.com/wp-content/uploads/2018/03/Organic-farm-europe.jpg',
     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ',
     location:{
-      adress: 'No street, 132',
+      address: 'No street, 132',
       city: 'Paris',
       country: 'France'
     },
@@ -98,7 +98,7 @@ export const farms: Observable<IFarm[]> = of([
     image: 'https://i0.wp.com/www.terratechmsc.eu/wp-content/uploads/2022/01/smart-agricalture-in-europe-1.png?resize=800%2C533',
     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ',
     location:{
-      adress: 'Sezam Street, 10',
+      address: 'Sezam Street, 10',
       city: 'Berlin',
       country: 'Germany'
     },
@@ -111,7 +111,7 @@ export const farms: Observable<IFarm[]> = of([
       tel: '+645532121654',
       email:'berlin@email.com'
     }
-  
+
   },
   {
     id: 6,
@@ -120,7 +120,7 @@ export const farms: Observable<IFarm[]> = of([
     image: 'https://preview.redd.it/55c17i2dm9i91.jpg?width=640&crop=smart&auto=webp&s=de528997ddad404d186e23dbfb1d8e6553fa79b6',
     description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ',
     location:{
-      adress: 'Other Street, 342',
+      address: 'Other Street, 342',
       city: 'Gamburg',
       country: 'Germany'
     },
