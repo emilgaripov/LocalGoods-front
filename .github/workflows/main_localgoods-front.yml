@@ -53,4 +53,4 @@ jobs:
           app-name: 'localgoods-front'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_532EAB91A7E343CBB165D378A32DD548 }}
-          package: .
+          package: ./dist/local-goods
