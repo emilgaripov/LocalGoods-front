@@ -33,6 +33,12 @@ export class GridComponent implements OnInit {
       case 'nameDesc':
         this.sortData = { sortBy: 'name', sortDirection: 'desc' };
         break;
+      case 'priceAsc':
+        this.sortData = { sortBy: 'price', sortDirection: 'asc' };
+        break;
+      case 'priceDesc':
+        this.sortData = { sortBy: 'price', sortDirection: 'desc' };
+        break;
       default:
       this.sortData = null;
     }
