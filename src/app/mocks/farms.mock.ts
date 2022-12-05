@@ -122,7 +122,7 @@ export const farms: Observable<IFarm[]> = of([
     location:{
       address: 'Other Street, 342',
       city: 'Gamburg',
-      country: 'Germany'
+      country: 'Germany',
     },
     rating: 3,
     social:{
