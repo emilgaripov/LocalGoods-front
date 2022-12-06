@@ -7,6 +7,8 @@ import { ProductCategoriesComponent } from './product-categories/product-categor
 import { ProductCategoryComponent } from './product-categories/product-category/product-category.component';
 import { MapComponent } from './map/map.component';
 import { TopFarmsComponent } from './top-farms/top-farms.component';
+import { AgmCoreModule } from '@agm/core';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,15 @@ import { TopFarmsComponent } from './top-farms/top-farms.component';
     ProductCategoriesComponent,
     ProductCategoryComponent,
     MapComponent,
-    TopFarmsComponent
+    TopFarmsComponent,
+
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: HomeComponent }])
+    RouterModule.forChild([{ path: '', component: HomeComponent }]),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB69y9kTzIpVJalAsXsQoz8p4ZT682oo6k'
+    })
   ]
 })
 export class HomeModule { }

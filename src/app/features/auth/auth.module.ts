@@ -1,19 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
-import { AuthUserComponent } from './auth-user/auth-user.component';
-import { AuthFarmerComponent } from './auth-farmer/auth-farmer.component';
 import { RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [
-    AuthComponent,
-    AuthUserComponent,
-    AuthFarmerComponent
-  ],
+  declarations: [AuthComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: AuthComponent }])
+    RouterModule.forChild([{ path: '', component: AuthComponent }]),
+    FormsModule
   ]
 })
 export class AuthModule { }

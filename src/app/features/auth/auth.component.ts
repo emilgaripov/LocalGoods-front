@@ -1,39 +1,26 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { WhoAuth } from "../../shared/types/types";
-import { animate, state, style, transition, trigger } from "@angular/animations";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+type LoginFormValues = { email: string, password: string };
+type RegistrationFormValues = { email: string, password: string, username: string, isFarmer: boolean };
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('switcher', [
-      state('user', style({
-        left: window.innerWidth < 400 ? 0 : '50%',
-        top: window.innerWidth < 400 ? '50%' : 0,
-        backgroundColor: '#D0DB15'
-      })),
-      state('farmer', style({
-        left: 0,
-        top: 0,
-        backgroundColor: '#527F0B'
-      })),
-      transition('user <=> farmer', animate(500)),
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthComponent implements OnInit {
-  whoAuth: WhoAuth = 'user';
-  smallScreen = false;
+export class AuthComponent {
+  loginMode = true;
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.smallScreen = window.innerWidth < 400;
+  switchMode() {
+    this.loginMode = !this.loginMode;
   }
 
-  onSwitchAuth($event: WhoAuth) {
-    this.whoAuth = $event;
+  onLogin(formValues: LoginFormValues) {
+    console.log(formValues)
+  }
+
+  onRegister(formValues: RegistrationFormValues) {
+    console.log(formValues)
   }
 }
