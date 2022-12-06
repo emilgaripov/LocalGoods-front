@@ -33,12 +33,27 @@
     text-shadow: 0 0 5px #000;
     font-size: 7vw;
   }
-  .hero-button{
+  .hero-button {
     border: none;
     background-color: $limeGreen;
     color: #fff;
     padding: 14px 18px;
     align-self: center;
     border-radius: 5px;
+  }
+}
+@media (min-width: 769px) {
+  .slide-item {
+
+    img {
+      max-height: 600px;
+    }
+  }
+  .hero-text {
+
+    .hero-heading{
+      font-size: 5vw;
+      margin: 0;
+    }
   }
 }

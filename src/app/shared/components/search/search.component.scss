@@ -1,5 +1,7 @@
 @import "../../../../variables";
-
+.search-form{
+  position: relative;
+}
 .search {
   padding: 10px 14px;
   border: 1px solid #ddd;
@@ -12,5 +14,30 @@
   }
   &:focus {
     border-color: $primaryGreen;
+  }
+}
+.search-button{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 2px;
+  right: 2px;
+  overflow: hidden;
+  text-indent: -9999px;
+  background-color: transparent;
+  background-image: url('../../../../assets/images/icons/search.svg');
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(0.5);
+
+  &:hover{
+    filter: invert(0);
+  }
+}
+
+@media (min-width: 769px){
+  .search-container{
+    margin: 1em 0;
   }
 }

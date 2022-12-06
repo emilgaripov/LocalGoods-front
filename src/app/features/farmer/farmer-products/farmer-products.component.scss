@@ -30,3 +30,10 @@
     background-color: $darkGreen;
   }
 }
+@media (min-width: 769px){
+  .products{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}

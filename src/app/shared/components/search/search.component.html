@@ -1,8 +1,13 @@
-<input
-  class="form-control search"
-  type="text"
-  autocomplete="off"
-  placeholder="Search {{ searchBy }}"
-  #search
-  (input)="term.emit(search.value)"
-/>
+<div class="search-container">
+  <form class="search-form">
+    <input
+      class="form-control search"
+      type="text"
+      autocomplete="off"
+      placeholder="Search {{ searchBy }}"
+      #search
+      (input)="term.emit(search.value)"
+    />
+    <button class="search-button" type="submit">Search</button>
+  </form>
+</div>

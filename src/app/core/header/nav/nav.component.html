@@ -3,9 +3,9 @@
   <span class="nav-burger-line"></span>
   <span class="nav-burger-line"></span>
 </button>
-<nav class="nav-header-menu" *ngIf="nav" #nav>
+<nav class="nav-header-menu" [ngStyle]="nav ? {'display':'flex'} : null " #navmenu>
   <app-logo [mode]="'nav'" (click)="toggleMenu($event)"></app-logo>
-  <h2>Welcome, guest!</h2>
+  <h2 class="nav-header-greeting">Welcome, guest!</h2>
   <div class="nav-goup"> 
     <h3 class="nav-parent">Products</h3>
     <ul class="nav-list" >

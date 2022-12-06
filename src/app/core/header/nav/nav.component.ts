@@ -17,7 +17,7 @@ import { Categories, categories } from 'src/app/shared/types/types';
 })
 export class NavComponent {
   @ViewChild('toggleButton') toggleButton!: ElementRef;
-  @ViewChild('nav') menu!: ElementRef;
+  @ViewChild('navmenu') menu!: ElementRef;
 
   @Output() isNav = new EventEmitter<boolean>()
 
