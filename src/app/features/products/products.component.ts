@@ -16,10 +16,10 @@ export class ProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;
   searchValue!: string;
 
-  constructor(private farmerProductsService: ProductsService) {}
+  constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.products$ = this.farmerProductsService.getAllProducts;
+    this.products$ = this.productsService.getAllProducts();
   }
 
 }

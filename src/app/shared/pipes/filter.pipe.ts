@@ -11,7 +11,7 @@ export class FilterPipe implements PipeTransform {
     if (!query.length) return initialArray;
 
     return initialArray.filter((product) => {
-      return query.includes(product.category!);
+      // return query.includes(product.category!);
     });
   }
 

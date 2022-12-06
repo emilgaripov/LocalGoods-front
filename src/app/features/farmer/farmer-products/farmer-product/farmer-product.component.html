@@ -1,5 +1,5 @@
 <div class="product">
-  
+
   <div class="product-content">
     <div class="product-image">
       <img *ngIf="product.image; else noImage"
@@ -8,7 +8,7 @@
       class="object-fit_cover">
     <ng-template #noImage>No image yet ...</ng-template>
     </div>
-    
+
     <div class="product-description">
       <h3 class="product-name">{{ product.name }}</h3>
       <div>{{ product.description }}</div>
@@ -36,12 +36,12 @@
       <input type="text" id="productImg" name="productImg" [ngModel]="product.image">
       <label for="productPrice">Product price</label>
       <input type="text" id="productPrice" name="productPrice" [ngModel]="product.price">
-      <label for="productCategory">Product category</label>
-      <select id="productCategory" name="productCategory" [ngModel]="product.category">
-        <option *ngFor="let category of categoriesList" [value]="category">
-          {{ category | titlecase }}
-        </option>
-      </select>
+<!--      <label for="productCategory">Product category</label>-->
+<!--      <select id="productCategory" name="productCategory" [ngModel]="product.category">-->
+<!--        <option *ngFor="let category of categoriesList" [value]="category">-->
+<!--          {{ category | titlecase }}-->
+<!--        </option>-->
+<!--      </select>-->
 
       <div class="modal-buttons">
         <button type="submit">Save</button>

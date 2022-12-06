@@ -15,7 +15,8 @@
 
   <div class="grid-items">
     <app-grid-item *ngFor="let item of items | filter: filtersData | sort: sortData"
-                   [item]="item"></app-grid-item>
+                   [item]="item">
+    </app-grid-item>
   </div>
 </div>
 
