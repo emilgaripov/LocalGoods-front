@@ -28,7 +28,7 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 2em;
   z-index: 10;
@@ -60,5 +60,77 @@ h2 {
         }
       }
     }
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-burger {
+    display: none;
+  }
+
+  .nav-header-menu {
+    display: flex;
+    padding: 0;
+    width: auto;
+    height: auto;
+    background-color: $limeGreen;
+    position: static;
+    // top: 0;
+    // left: 0;
+    flex-direction: row;
+    gap: 2em;
+    z-index: 10;
+
+    .nav-goup {
+      position: relative;
+      &:hover {
+        .nav-parent{
+          color: $darkGreen;
+          cursor: pointer;
+        }
+        .nav-list {
+          display: flex;
+        }
+      }
+    }
+    .nav-parent {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em;
+      text-align: left;
+    }
+
+    .nav-list {
+      margin: 0;
+      padding: 0;
+      top: 50px;
+      background-color: $limeGreen;
+      padding: 2em;
+      min-width: 300px;
+      left: -1em;
+      display: none;
+      position: absolute;
+      flex-direction: column;
+      gap: 1em;
+      z-index: 2;
+      border-radius: 0 0 10px 10px ;
+
+      li {
+        list-style: none;
+
+        a {
+          color: #000;
+          font-size: 1em;
+          text-decoration: none;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .nav-header-greeting {
+    display: none;
   }
 }
