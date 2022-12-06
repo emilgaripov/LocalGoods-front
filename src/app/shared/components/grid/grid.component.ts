@@ -9,18 +9,16 @@ import { Categories, SortData } from "../../types/types";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridComponent implements OnInit {
-  @Input() items: any[]  = [];
+  @Input() items: any  = [];
 
   filterOpened = false;
   sortData: SortData = null;
   filtersData: Categories[] = [];
 
-  constructor(
-    private route: ActivatedRoute
-  ){}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(){
-    if(!this.route.snapshot.queryParams['category']) return
+    if (!this.route.snapshot.queryParams['category']) return;
     this.filtersData.push(this.route.snapshot.queryParams['category'])
     console.log(this.filtersData);
   }

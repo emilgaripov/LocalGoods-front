@@ -10,12 +10,12 @@
   <div class="item-content">
     <h3 class="item-name">{{ item.name }}</h3>
     <div class="item-description">{{ item.description | slice:0:100 }}...</div>
-    <div class="item-price"  *ngIf="item.price">{{ item.price | currency: 'UAH' }}</div>
+    <div class="item-price"  *ngIf="item.price">{{ item.price | currency: 'EUR' }}</div>
     <div class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id">{{ productFarm.name }}</a></div>
-    <div class="item-location">{{ item.location ? item.location.address + ', ' + item.location.city : productFarm?.location ? productFarm?.location?.address + ', ' + productFarm?.location?.city: 'somewhere' }}</div>
-    <div class="item-social" *ngIf="item.social">
-      <a class="item-social-icon fb" [href]="item.social.fb">Facebook</a>
-      <a class="item-social-icon insta" [href]="item.social.instagram">Instagram</a>
+<!--    <div class="item-location">{{ item.location ? item.location.address + ', ' + item.location.city : productFarm?.location ? productFarm?.location?.address + ', ' + productFarm?.location?.city: 'somewhere' }}</div>-->
+    <div class="item-social">
+      <a class="item-social-icon fb" [href]="item.faceBook">Facebook</a>
+      <a class="item-social-icon insta" [href]="item.instagram">Instagram</a>
     </div>
   </div>
 </div>
