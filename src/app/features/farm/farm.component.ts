@@ -20,6 +20,7 @@ export class FarmComponent implements OnInit {
   products$!: Observable<IProduct[]>;
   farmId!: number;
   farm?: IFarm;
+  isLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +41,10 @@ export class FarmComponent implements OnInit {
   getFarm(id: number) {
     return this.farmsService.getFarmById(id)
       .pipe(first())
-      .subscribe((farm) => this.farm = farm)
+      .subscribe((farm) => {
+        this.farm = farm
+        this.isLoading = false
+      })
   }
 
 }
