@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  webApiUrl: 'https://localgoodsback.azurewebsites.net/api/'
 };

@@ -1,12 +1,11 @@
-import { Categories } from "../types/types";
-
 export interface IProduct {
   id: number,
-  farmId: number,
   name: string,
   description: string,
+  price: number,
+  surplus: number,
   image: string,
-  price?: number,
-  category?: Categories,
-  createdAt?: Date
+  categoryId: number,
+  farmId: number,
+  quantityTypeId: number
 }
