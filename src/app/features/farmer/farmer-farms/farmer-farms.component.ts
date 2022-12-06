@@ -13,6 +13,10 @@ export class FarmerFarmsComponent implements OnInit {
   farms$!: Observable<IFarm[]>;
   isModalOpened = false;
 
+  //for map default cords of Zurich
+  latitude = 47.373878;
+  longitude = 8.545094;
+
   constructor(private farmerService: FarmerService) {}
 
   ngOnInit(): void {
@@ -32,5 +36,11 @@ export class FarmerFarmsComponent implements OnInit {
 
     // this.farmerFarmsService.createFarm(value.farmName);
     this.closeModal();
+  }
+
+  onChoseLocation(event:any){
+    console.log(event);
+    this.latitude = event.coords.lat;
+    this.longitude = event.coords.lng;
   }
 }

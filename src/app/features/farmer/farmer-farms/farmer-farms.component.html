@@ -37,6 +37,10 @@
       <input type="text" id="farmCity" name="farmCity" ngModel>
       <label for="farmAddress">Address</label>
       <input type="text" id="farmAddress" name="farmAddress" ngModel>
+      <label for="farmAddress">Location</label>
+      <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChoseLocation($event)" class="form-map">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      </agm-map>
       <label for="farmFacebook">Facebook link</label>
       <input type="text" id="farmFacebook" name="farmFacebook" ngModel>
       <label for="farmInstagram">Instagram link</label>
