@@ -7,6 +7,8 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ICategory } from "../../../shared/interfaces/category.interface";
 import { CategoriesService } from "../../../shared/services/categories.service";
 
@@ -22,11 +24,13 @@ export class NavComponent implements OnInit {
 
   @Output() isNav = new EventEmitter<boolean>()
 
-  categories: ICategory[] = [];
+  categories$!: Observable<ICategory[]>;
+
   nav = false;
 
   constructor(
     private renderer: Renderer2,
+    private route: Router,
     private categoriesService: CategoriesService
   ) {
     this.renderer.listen('window', 'click', (e: Event) => {
@@ -39,12 +43,18 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categories = this.categoriesService.categories;
+    this.categories$ = this.categoriesService.getHomeCategories();
   }
 
-  toggleMenu(event: Event) {
-    event.stopImmediatePropagation();
+  toggleMenu(event?: Event) {
+    event?.stopImmediatePropagation();
     this.nav = !this.nav
     this.isNav.emit(this.nav)
+  }
+
+  signOut(){
+    this.route.navigate(['/'])
+    localStorage.clear()
+    this.toggleMenu()
   }
 }

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CategoriesService } from "../../../shared/services/categories.service";
 import { ICategory } from "../../../shared/interfaces/category.interface";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-categories',
@@ -9,11 +10,11 @@ import { ICategory } from "../../../shared/interfaces/category.interface";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductCategoriesComponent implements OnInit {
-  categories: ICategory[] = [];
+  categories$!: Observable<ICategory[]>;
 
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.categories = this.categoriesService.categories;
+    this.categories$ = this.categoriesService.getHomeCategories();
   }
 }

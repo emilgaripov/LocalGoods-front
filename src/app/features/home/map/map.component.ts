@@ -32,7 +32,5 @@ export class MapComponent {
 
   clickedMarker(name: string, index: number){
     console.log('marker name', name, 'index', index);
-    
-
   }
 }

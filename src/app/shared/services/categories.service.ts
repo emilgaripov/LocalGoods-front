@@ -22,4 +22,7 @@ export class CategoriesService {
       next: (data) => this.allCategories = data
     });
   }
+  public getHomeCategories() {
+    return this.http.get<ICategory[]>(environment.webApiUrl + 'Categories')
+  }
 }
