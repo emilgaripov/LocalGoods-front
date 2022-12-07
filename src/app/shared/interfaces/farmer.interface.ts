@@ -1,7 +1,7 @@
-export interface IFarmer {
-  id: number,
-  name: string,
-  email?: string,
-  password?: string,
-  role?: string
-}
+// export interface IFarmer {
+//   id: number,
+//   name: string,
+//   email?: string,
+//   password?: string,
+//   role?: string
+// }

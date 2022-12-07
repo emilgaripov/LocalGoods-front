@@ -15,7 +15,7 @@ export class FarmerFarmComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private farmerFarmsService: FarmsService
+    private farmsService: FarmsService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class FarmerFarmComponent implements OnInit {
   }
 
   onDeleteFarm() {
-    this.farmerFarmsService.deleteFarm(this.farm.id);
+    // this.farmerFarmsService.deleteFarm(this.farm.id);
   }
 
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { first, Observable, switchMap } from 'rxjs';
+import { Observable, Subscription, switchMap } from 'rxjs';
 
 import { IFarm } from 'src/app/shared/interfaces/farm.interface';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
@@ -16,31 +16,36 @@ import { ProductsService } from 'src/app/shared/services/products.service';
     class: 'grow-container'
   }
 })
-export class FarmComponent implements OnInit {
+export class FarmComponent implements OnInit, OnDestroy {
   products$!: Observable<IProduct[]>;
-  farmId!: number;
-  farm?: IFarm;
+  farm!: IFarm;
+  isLoading = true;
+  subscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
-    private farmerProductsService: ProductsService,
-    public farmsService: FarmsService,
+    private productsService: ProductsService,
+    private farmsService: FarmsService,
   ) {}
 
   ngOnInit(): void {
     this.products$ = this.route.params.pipe(
       switchMap((param) => {
-        this.farmId = +param['id'];
-        this.getFarm(this.farmId);
-        return this.farmerProductsService.getProductsByFarmId(this.farmId);
+        const farmId = +param['id'];
+        this.getFarm(farmId);
+        return this.productsService.getProductsByFarmId(farmId);
       })
     );
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   getFarm(id: number) {
-    return this.farmsService.getFarmById(id)
-      .pipe(first())
-      .subscribe((farm) => this.farm = farm)
+    this.subscription = this.farmsService.getFarmById(id).subscribe({
+      next: (farm) => this.farm = farm
+    });
   }
 
 }

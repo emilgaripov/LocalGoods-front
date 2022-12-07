@@ -6,3 +6,10 @@ h2{
 .map-box{
   height: 400px;
 }
+
+
+@media (min-width: 769px){
+  .map-box{
+    height: 600px;
+  }
+}

@@ -60,6 +60,7 @@ button {
 
 .modal {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   max-height: 80%;
@@ -72,6 +73,7 @@ button {
 
   &-form {
     display: flex;
+    width: 100%;
     flex-direction: column;
     gap: 10px;
 
@@ -89,7 +91,7 @@ button {
 
   &-buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
   }
 }
 .grow-container{

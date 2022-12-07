@@ -14,10 +14,10 @@ export class FarmerProductComponent {
   isModalOpened = false;
   categoriesList = [...categories];
 
-  constructor(private farmerProductsService: ProductsService) {}
+  constructor(private productsService: ProductsService) {}
 
   onDeleteProduct() {
-    this.farmerProductsService.deleteProduct(this.product.id);
+    // this.farmerProductsService.deleteProduct(this.product.id);
   }
 
   openModal() {
@@ -31,14 +31,14 @@ export class FarmerProductComponent {
   onEditProduct(value: { productName: string, productDescription: string }) {
     if (!value.productName || !value.productDescription) return;
 
-    const newProduct: IProduct = {
-      id: this.product.id,
-      farmId: this.product.farmId,
-      name: value.productName,
-      description: value.productDescription,
-      image: ''
-    };
-    this.farmerProductsService.editProduct(newProduct);
+    // const newProduct: IProduct = {
+    //   id: this.product.id,
+    //   farmId: this.product.farmId,
+    //   name: value.productName,
+    //   description: value.productDescription,
+    //   image: ''
+    // };
+    // this.farmerProductsService.editProduct(newProduct);
     this.closeModal();
   }
 }

@@ -8,4 +8,11 @@ h2{
   gap: 1em;
   overflow-y: hidden;
   overflow-x: scroll;
+  justify-content: flex-start;
+}
+
+@media (min-width: 1120px){
+  .product-categories-list{
+    justify-content: center;
+  }
 }

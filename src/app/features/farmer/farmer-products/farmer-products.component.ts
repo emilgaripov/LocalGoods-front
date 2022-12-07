@@ -19,16 +19,16 @@ export class FarmerProductsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private farmerProductsService: ProductsService
+    private productsService: ProductsService
   ) {}
 
   ngOnInit(): void {
     this.products$ = this.route.params.pipe(
       switchMap((param) => {
         this.farmId = +param['id'];
-        return this.farmerProductsService.getProductsByFarmId(this.farmId);
-      }
-    ));
+        return this.productsService.getProductsByFarmId(this.farmId);
+      })
+    );
   }
 
   openModal() {
@@ -42,14 +42,14 @@ export class FarmerProductsComponent implements OnInit {
   onAddProduct(value: { productName: string, productDescription: string }) {
     if (!value.productName || !value.productDescription) return;
 
-    const newProduct: IProduct = {
-      id: 0,
-      farmId: this.farmId,
-      name: value.productName,
-      description: value.productDescription,
-      image: ''
-    };
-    this.farmerProductsService.createProduct(newProduct);
+    // const newProduct: IProduct = {
+    //   id: 0,
+    //   farmId: this.farmId,
+    //   name: value.productName,
+    //   description: value.productDescription,
+    //   image: ''
+    // };
+    // this.farmerProductsService.createProduct(newProduct);
     this.closeModal();
   }
 }

@@ -3,8 +3,12 @@
 .farms-scroll{
   overflow-y: hidden;
   overflow-x: scroll;
-}
+  justify-content: flex-start;
 
+}
+.form-map{
+  height: 300px;
+}
 .farms {
   width: max-content;
   display: flex;
@@ -53,4 +57,15 @@
     left: 5px;
     background-image: url(../../../../assets/images/icons/add.svg);
   }
+}
+
+@media (min-width: 1120px){
+ 
+.farms-scroll{
+  justify-content: center;
+  .farms{
+    width: 100%;
+    justify-content: center;
+  }
+}
 }

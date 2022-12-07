@@ -9,6 +9,7 @@ import { FarmerProductsComponent } from './farmer-products/farmer-products.compo
 import { FarmerFarmsComponent } from './farmer-farms/farmer-farms.component';
 import { FarmerFarmComponent } from './farmer-farms/farmer-farm/farmer-farm.component';
 import { FarmerProductComponent } from './farmer-products/farmer-product/farmer-product.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,10 @@ import { FarmerProductComponent } from './farmer-products/farmer-product/farmer-
     }
     ]),
     FormsModule,
-    ModalModule
+    ModalModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB69y9kTzIpVJalAsXsQoz8p4ZT682oo6k'
+    })
   ]
 })
 export class FarmerModule { }

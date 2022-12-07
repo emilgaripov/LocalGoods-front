@@ -1,14 +1,14 @@
 <div class="farm-page-container">
-  <div class="farm-page-image">
-    <img *ngIf="farm; else loading"
-         [src]="farm ? farm.image : null"
-         alt="farm image">
-    <ng-template class="loading" #loading>Loading ...</ng-template>
-  </div>
-  <div class="farm-page-description">
-    <h1>{{ farm?.name }}</h1>
-    <p>{{ farm?.description }}</p>
-  </div>
+<!--  <div class="farm-page-image">-->
+<!--    <img *ngIf="!isLoading; else loading"-->
+<!--         [src]="farm.image || null"-->
+<!--         alt="farm image">-->
+<!--    <ng-template class="loading" #loading>Loading ...</ng-template>-->
+<!--  </div>-->
+<!--  <div class="farm-page-description" *ngIf="!isLoading">-->
+<!--    <h1>{{ farm.name }}</h1>-->
+<!--    <p>{{ farm.description }}</p>-->
+<!--  </div>-->
   <div class="farm-page-products">
     <app-grid [items]="(products$ | async) ?? []"></app-grid>
   </div>

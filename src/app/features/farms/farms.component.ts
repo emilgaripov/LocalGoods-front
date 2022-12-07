@@ -19,7 +19,7 @@ export class FarmsComponent implements OnInit {
   constructor(private farmsService: FarmsService) {}
 
   ngOnInit(): void {
-    this.farms$ = this.farmsService.getAllFarms;
+    this.farms$ = this.farmsService.getAllFarms();
   }
 
 }

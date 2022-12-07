@@ -1,6 +1,7 @@
 @import "src/variables";
 
 .product {
+  
   &-name {
     text-align: left;
   }
@@ -11,14 +12,29 @@
   }
 
   &-image {
-    height: 100px;
-    width: 100px;
-    background-color: #eee;
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    background-color: $primaryGreen;
+    overflow: hidden;
     border-radius: 50%;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
 
+
+    .object-fit_cover {
+      object-fit: cover;
+      width: 150px;
+      height: 150px;
+    }
+  }
   &-description {
     flex: 4;
+  }
+  &-price {
+    color: red;
   }
 
   &-actions {
@@ -36,6 +52,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      padding: 0;
 
       &:hover {
         background-color: $darkGreen;
