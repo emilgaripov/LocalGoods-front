@@ -17,23 +17,55 @@
     <form class="modal-form" #addProductForm="ngForm"
           (ngSubmit)="onAddProduct(addProductForm.value)">
 
-      <label for="productName">Product name</label>
-      <input type="text" id="productName" name="productName" ngModel required>
-      <label for="productDesc">Product description</label>
-      <input type="text" id="productDesc" name="productDesc" ngModel required>
-      <label for="productImg">Product image</label>
-      <input type="text" id="productImg" name="productImg" ngModel>
-      <label for="productPrice">Product price</label>
-      <input type="text" id="productPrice" name="productPrice" ngModel>
-      <label for="productCategory">Product category</label>
-      <select id="productCategory" name="productCategory" ngModel>
-        <option *ngFor="let category of categoriesList" [value]="category.id">
-          {{ category.name }}
-        </option>
-      </select>
+      <div class="form-group">
+        <label for="productName">Product name</label>
+        <input type="text" id="productName" name="productName" ngModel #productName="ngModel" required minlength="3">
+        <div *ngIf="productName.touched" class="form-validator">
+          <span *ngIf="productName.errors?.['required']">Product name is Required!</span>
+          <span *ngIf="productName.errors?.['minlength']">Product name minimum 3 characters are required!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="productDesc">Product description</label>
+        <input type="text" id="productDesc" name="productDesc" ngModel #productDesc="ngModel" required minlength="50">
+        <div *ngIf="productDesc.touched" class="form-validator">
+          <span *ngIf="productDesc.errors?.['required']">Product description is Required!</span>
+          <span *ngIf="productDesc.errors?.['minlength']">Product description minimum 50 characters are required!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="productImg">Product image</label>
+        <input type="file" class="file-upload" id="productImg" name="productImg" ngModel #fileUpload="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
+        <div *ngIf="fileUpload.touched" class="form-note-text">
+          <span>Selected file: {{ fileName || "No file uploaded yet."}}</span>
+        </div>
+        <div *ngIf="fileUpload.errors?.['requiredFileType']" class="form-validator">
+          <span *ngIf="fileUpload.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="productPrice">Product price</label>
+        <input type="number" id="productPrice" name="productPrice" ngModel #productPrice="ngModel" required min="1">
+        <div *ngIf="productPrice.touched" class="form-validator">
+          <span *ngIf="productPrice.errors?.['required']">Product price is Required!</span>
+          <span *ngIf="productPrice.errors?.['min']">Product price minimum 1 UAH!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="productCategory">Product category</label>
+        <select id="productCategory" name="productCategory" ngModel #productCategory="ngModel" required>
+          <option *ngFor="let category of categoriesList" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+        <div *ngIf="productCategory.touched" class="form-validator">
+          <span *ngIf="productCategory.errors?.['required']">Please select a category!</span>
+        </div>
+      </div>
+
 
       <div class="modal-buttons">
-        <button type="submit" [disabled]="!addProductForm.form.valid || submitted">Save</button>
+        <button type="submit" [disabled]="!addProductForm.form.valid || submitted">Create product</button>
         <button type="button" (click)="closeModal()">Cancel</button>
       </div>
     </form>

@@ -55,6 +55,10 @@ button {
 
   &:disabled{
     background-color: #ddd;
+
+    &:hover{
+      background-color: #ddd;
+    }
   }
   &:hover {
     background-color: $darkGreen;
