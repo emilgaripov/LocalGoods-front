@@ -17,6 +17,7 @@ export class FarmerProductsComponent implements OnInit {
   isModalOpened = false;
   farmId!: number;
   categoriesList: ICategory[] = [];
+  submitted: boolean = false
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +45,8 @@ export class FarmerProductsComponent implements OnInit {
   }
 
   onAddProduct(value: { productName: string, productDescription: string }) {
+    this.submitted = true
+
     if (!value.productName || !value.productDescription) return;
 
     // const newProduct: IProduct = {
@@ -54,6 +57,9 @@ export class FarmerProductsComponent implements OnInit {
     //   image: ''
     // };
     // this.farmerProductsService.createProduct(newProduct);
+
+    this.submitted = false // to add to succes response
+
     this.closeModal();
   }
 }

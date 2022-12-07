@@ -58,6 +58,19 @@
     background-image: url(../../../../assets/images/icons/add.svg);
   }
 }
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  .form-note-text{
+    font-size: 0.7em;
+  }
+}
+.form-validator{
+  font-size: 0.7em;
+  color: red;
+}
 
 @media (min-width: 1120px){
  
