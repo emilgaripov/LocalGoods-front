@@ -58,7 +58,6 @@ export class FarmerFarmsComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    console.log('event.target');
     const file: File = event.target.files[0];
 
     if (file) {

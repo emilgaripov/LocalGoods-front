@@ -17,7 +17,10 @@ export class FarmerProductsComponent implements OnInit {
   isModalOpened = false;
   farmId!: number;
   categoriesList: ICategory[] = [];
-  submitted: boolean = false
+  submitted: boolean = false;
+
+  // image upload
+  fileName = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -61,5 +64,14 @@ export class FarmerProductsComponent implements OnInit {
     this.submitted = false // to add to succes response
 
     this.closeModal();
+
+    
+  }
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.fileName = file.name;
+    }
   }
 }
