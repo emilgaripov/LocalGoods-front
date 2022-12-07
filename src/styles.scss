@@ -53,6 +53,9 @@ button {
   border-radius: 5px;
   cursor: pointer;
 
+  &:disabled{
+    background-color: #ddd;
+  }
   &:hover {
     background-color: $darkGreen;
   }
@@ -82,6 +85,13 @@ button {
       border: 1px solid silver;
       box-sizing: border-box;
       border-radius: 5px;
+
+      &.ng-touched.ng-invalid{
+        border: 1px solid #f00;
+      }
+      &.ng-touched.ng-valid{
+        border: 1px solid $primaryGreen;
+      }
 
       &:hover {
         border-color: $primaryGreen;

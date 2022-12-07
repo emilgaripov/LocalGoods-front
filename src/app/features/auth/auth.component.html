@@ -33,7 +33,7 @@
   
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" ngModel #pass ="ngModel" required minlength="3" maxlength="10" >
+      <input type="password" id="password" name="password" ngModel #pass="ngModel" required minlength="3" maxlength="10" >
       <div *ngIf="pass.touched" class="form-validator">
         <span *ngIf="pass.errors?.['required']">Password is Required!</span>
         <span *ngIf="pass.errors?.['minlength']">Password  minimum 3 characters are required!</span>
