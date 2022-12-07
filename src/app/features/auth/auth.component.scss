@@ -12,6 +12,11 @@ input {
   border: 1px solid #ddd;
   box-sizing: border-box;
   border-radius: 5px;
+  width: 100%;
+
+  &.ng-touched.ng-invalid{
+    border: 1px solid #f00;
+  }
 
   &:hover {
     border-color: $primaryGreen;
@@ -36,4 +41,33 @@ input {
   &:hover {
     color: $darkGreen;
   }
+
+}
+.auth-form{
+  max-width: 280px;
+  margin: 0 auto;
+
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+
+    &.role{
+      flex-direction: row;
+      justify-content: center;
+
+      input{
+        width: 30px;
+
+      }
+    }
+  }
+}
+.auth-button:disabled{
+  background-color: #ddd;
+}
+.form-validator{
+  font-size: 0.7em;
+  color: red;
 }
