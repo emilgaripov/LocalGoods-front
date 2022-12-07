@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Categories, categories } from 'src/app/shared/types/types';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CategoriesService } from "../../../shared/services/categories.service";
+import { ICategory } from "../../../shared/interfaces/category.interface";
 
 @Component({
   selector: 'app-product-categories',
@@ -7,6 +8,12 @@ import { Categories, categories } from 'src/app/shared/types/types';
   styleUrls: ['./product-categories.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductCategoriesComponent {
-  categories: Categories[] = categories
+export class ProductCategoriesComponent implements OnInit {
+  categories: ICategory[] = [];
+
+  constructor(private categoriesService: CategoriesService) {}
+
+  ngOnInit(): void {
+    this.categories = this.categoriesService.categories;
+  }
 }

@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { IFarm } from "../../../shared/interfaces/farm.interface";
-import { FarmerService } from "../../../shared/services/farmer.service";
+import { FarmsService } from "../../../shared/services/farms.service";
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-farmer-farms',
@@ -17,10 +18,14 @@ export class FarmerFarmsComponent implements OnInit {
   latitude = 47.373878;
   longitude = 8.545094;
 
-  constructor(private farmerService: FarmerService) {}
+  constructor(
+    private farmsService: FarmsService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.farms$ = this.farmerService.getFarmsByUserId();
+    const userId = this.userService.currentUser.id;
+    this.farms$ = this.farmsService.getFarmsByUserId(userId);
   }
 
   openModal() {

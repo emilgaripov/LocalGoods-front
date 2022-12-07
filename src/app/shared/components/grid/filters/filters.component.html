@@ -7,9 +7,7 @@
 
   <div class="filter-category">
     <div>
-      <label class="filter-group-parent">
-        Categories
-      </label>
+      <label class="filter-group-parent">Categories</label>
 
       <div class="filter-group-child">
         <div>
@@ -19,16 +17,15 @@
         </div>
 
         <div *ngFor="let category of categoriesList">
-          <input type="checkbox" [value]="category"
-                 [checked]="allCategories.checked || filtersData.includes(category)"
-                 (change)="onCheck(category)">
-          {{ category | titlecase }}
+          <input type="checkbox" (change)="onCheck(category.name)"
+                 [checked]="allCategories.checked || checkedCategories.includes(category.name)">
+          {{ category.name }}
         </div>
       </div>
 
     </div>
   </div>
 
-  <button (click)="applyFilter()" class="filter-button" >Apply filter</button>
-  <button (click)="clearFilters()" class="filter-button" >Clear all filters</button>
+  <button (click)="applyFilter()" class="filter-button">Apply filter</button>
+  <button (click)="clearFilters()" class="filter-button">Clear all filters</button>
 </div>

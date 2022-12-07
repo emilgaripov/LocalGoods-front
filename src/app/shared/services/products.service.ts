@@ -14,8 +14,8 @@ export class ProductsService {
     return this.http.get<IProduct[]>(environment.webApiUrl + 'Products');
   }
 
-  getProductsByFarmId(id: number): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(environment.webApiUrl + 'Farms/' + id + '/FarmProducts');
+  getProductsByFarmId(farmId: number): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(environment.webApiUrl + 'Farms/' + farmId + '/FarmProducts');
   }
 
   // private products$ = new BehaviorSubject<IProduct[]>(this.initProducts());

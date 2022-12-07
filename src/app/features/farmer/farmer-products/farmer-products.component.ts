@@ -3,7 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable, switchMap } from "rxjs";
 import { IProduct } from "../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../shared/services/products.service";
-import { categories } from "../../../shared/types/types";
+import { CategoriesService } from "../../../shared/services/categories.service";
+import { ICategory } from "../../../shared/interfaces/category.interface";
 
 @Component({
   selector: 'app-farmer-products',
@@ -15,14 +16,17 @@ export class FarmerProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;
   isModalOpened = false;
   farmId!: number;
-  categoriesList = [...categories];
+  categoriesList: ICategory[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private categoriesService: CategoriesService
   ) {}
 
   ngOnInit(): void {
+    this.categoriesList = this.categoriesService.categories;
+
     this.products$ = this.route.params.pipe(
       switchMap((param) => {
         this.farmId = +param['id'];
