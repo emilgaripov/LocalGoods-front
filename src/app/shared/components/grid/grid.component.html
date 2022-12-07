@@ -2,7 +2,7 @@
   <h2 class="grid-title">Title</h2>
 
   <div class="grid-toolbar">
-    <button (click)="filterOpened = !filterOpened">Filters</button>
+    <button (click)="openFilters()">Filters</button>
 
     <select class="sort" #sort (change)="onSort(sort.value)">
       <option>Sort by</option>
@@ -21,7 +21,5 @@
 </div>
 
 <app-filters *ngIf="filterOpened"
-             (isFilter)="filterOpen($event)"
-             (filters)="filtersData = $event"
-             [filtersData]="filtersData"
+             (filtersClosed)="closeFilters($event)"
 ></app-filters>

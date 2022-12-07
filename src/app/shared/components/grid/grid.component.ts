@@ -1,26 +1,44 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Categories, SortData } from "../../types/types";
+import { SortData } from "../../types/types";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, OnDestroy {
   @Input() items: any  = [];
 
   filterOpened = false;
   sortData: SortData = null;
-  filtersData: Categories[] = [];
+  filtersData: string[] = [];
+  private subscription!: Subscription;
 
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(){
-    if (!this.route.snapshot.queryParams['category']) return;
-    this.filtersData.push(this.route.snapshot.queryParams['category'])
-    console.log(this.filtersData);
+  ngOnInit(): void {
+    this.subscription = this.route.queryParams.subscribe({
+      next: (params) => {
+        const filterParams = params as {categories: string};
+        if ('categories' in filterParams) {
+          this.filtersData = filterParams.categories.split(',');
+        }
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  openFilters() {
+    this.filterOpened = true;
+  }
+
+  closeFilters(event: false) {
+    this.filterOpened = event;
   }
 
   onSort(value: string) {
@@ -40,9 +58,5 @@ export class GridComponent implements OnInit {
       default:
       this.sortData = null;
     }
-  }
-
-  filterOpen(event: any){
-    this.filterOpened = event
   }
 }

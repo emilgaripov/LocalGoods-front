@@ -3,9 +3,7 @@ export interface IProduct {
   name: string,
   description: string,
   price: number,
-  surplus: number,
   image: string,
   categoryId: number,
   farmId: number,
-  quantityTypeId: number
 }

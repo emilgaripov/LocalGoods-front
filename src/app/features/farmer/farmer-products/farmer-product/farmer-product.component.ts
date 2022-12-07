@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { IProduct } from "../../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../../shared/services/products.service";
-import { categories } from "../../../../shared/types/types";
+import { ICategory } from "../../../../shared/interfaces/category.interface";
+import { CategoriesService } from "../../../../shared/services/categories.service";
 
 @Component({
   selector: 'app-farmer-product',
@@ -9,12 +10,19 @@ import { categories } from "../../../../shared/types/types";
   styleUrls: ['./farmer-product.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FarmerProductComponent {
+export class FarmerProductComponent implements OnInit {
   @Input() product!: IProduct;
   isModalOpened = false;
-  categoriesList = [...categories];
+  categoriesList: ICategory[] = [];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    private categoriesService: CategoriesService
+  ) {}
+
+  ngOnInit(): void {
+    this.categoriesList = this.categoriesService.categories;
+  }
 
   onDeleteProduct() {
     // this.farmerProductsService.deleteProduct(this.product.id);

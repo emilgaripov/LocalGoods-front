@@ -1,14 +1,5 @@
 export type SortData = { sortBy: string, sortDirection: 'asc' | 'desc' } | null;
 
-export type WhoAuth = 'user' | 'farmer';
+export type Roles = 'User' | 'Farmer' | 'Admin';
 
-export type Categories = 'milk' | 'meat' | 'vegetables' | 'fruits' | 'nuts' | 'berries'
-
-export const categories: Categories[] = [
-  'milk',
-  'meat',
-  'vegetables',
-  'fruits',
-  'nuts',
-  'berries',
-]
+// export type Categories = 'milk' | 'meat' | 'vegetables' | 'fruits' | 'nuts' | 'berries'

@@ -1,6 +1,8 @@
 export interface IFarm {
   id: number,
   name: string,
+  image: string,
+  description: string,
   address: string,
   city: string,
   country: string,
