@@ -1,4 +1,5 @@
 <h2>What can you find?</h2>
 <div class="product-categories-list">
-  <app-product-category *ngFor="let category of categories" [category]="category.name"></app-product-category>
+  <app-product-category *ngFor="let category of categories$ | async" [category]="category.name"></app-product-category>
 </div>
+<button class="view-all" routerLink="/products">view all products</button>
