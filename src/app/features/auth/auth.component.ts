@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-type LoginFormValues = { email: string, password: string };
-type RegistrationFormValues = { email: string, password: string, username: string, isFarmer: boolean };
+export type LoginFormValues = { email: string, password: string };
+export type RegistrationFormValues = { email: string, password: string, username: string, isFarmer: boolean };
 
 @Component({
   selector: 'app-auth',
