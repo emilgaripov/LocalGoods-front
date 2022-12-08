@@ -12,7 +12,7 @@ import { UserService } from "../../../shared/services/user.service";
 })
 export class FarmerFarmsComponent implements OnInit {
   farms$!: Observable<IFarm[]>;
-  isModalOpened = false;
+  isModalAddOpened = false;
   submitted = false;
 
   //for map default cords of Zurich
@@ -25,19 +25,11 @@ export class FarmerFarmsComponent implements OnInit {
   constructor(
     private farmsService: FarmsService,
     private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const userId = this.userService.currentUser.id;
     this.farms$ = this.farmsService.getAllFarms();
-  }
-
-  openModal() {
-    this.isModalOpened = true;
-  }
-
-  closeModal() {
-    this.isModalOpened = false;
   }
 
   onAddFarm(value: any) {
@@ -48,7 +40,7 @@ export class FarmerFarmsComponent implements OnInit {
 
     // this.farmerFarmsService.createFarm(value.farmName);
     this.submitted = false; // to add to succes response
-    this.closeModal();
+    this.isModalAddOpened = false;
   }
 
   onChoseLocation(event: any) {

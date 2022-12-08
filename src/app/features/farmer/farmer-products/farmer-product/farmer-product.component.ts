@@ -12,8 +12,9 @@ import { CategoriesService } from "../../../../shared/services/categories.servic
 })
 export class FarmerProductComponent implements OnInit {
   @Input() product!: IProduct;
-  isModalOpened = false;
   categoriesList: ICategory[] = [];
+  isModalEditOpened = false;
+  isModalDeleteOpened = false;
 
   constructor(
     private productsService: ProductsService,
@@ -25,15 +26,8 @@ export class FarmerProductComponent implements OnInit {
   }
 
   onDeleteProduct() {
-    // this.farmerProductsService.deleteProduct(this.product.id);
-  }
-
-  openModal() {
-    this.isModalOpened = true;
-  }
-
-  closeModal() {
-    this.isModalOpened = false;
+    // this.productsService.deleteProduct(this.product.id);
+    this.isModalDeleteOpened = false;
   }
 
   onEditProduct(value: { productName: string, productDescription: string }) {
@@ -47,6 +41,6 @@ export class FarmerProductComponent implements OnInit {
     //   image: ''
     // };
     // this.farmerProductsService.editProduct(newProduct);
-    this.closeModal();
+    this.isModalEditOpened = false;
   }
 }
