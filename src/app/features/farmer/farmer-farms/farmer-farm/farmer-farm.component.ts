@@ -12,6 +12,7 @@ import { FarmsService } from "../../../../shared/services/farms.service";
 export class FarmerFarmComponent implements OnInit {
   @Input() farm!: IFarm;
   @Input() isFirstItem!: boolean;
+  isModalDeleteOpened = false;
 
   constructor(
     private router: Router,
@@ -25,7 +26,8 @@ export class FarmerFarmComponent implements OnInit {
   }
 
   onDeleteFarm() {
-    // this.farmerFarmsService.deleteFarm(this.farm.id);
+    // this.farmsService.deleteFarm(this.farm.id);
+    this.isModalDeleteOpened = false;
   }
 
 }

@@ -3,7 +3,7 @@
   <div class="product-content">
     <div class="product-image">
       <img *ngIf="product.image; else noImage"
-      [src]="product.image"
+      src=""
       alt="product image"
       class="object-fit_cover">
     <ng-template #noImage>No image yet ...</ng-template>
@@ -12,16 +12,16 @@
     <div class="product-description">
       <h3 class="product-name">{{ product.name }}</h3>
       <div>{{ product.description }}</div>
-      <div class="product-price">{{ product.price | currency: ('UAH') }}</div>
+      <div class="product-price">{{ product.price | currency: 'EUR' }}</div>
     </div>
     <div class="product-actions">
-      <button class="edit-btn" (click)="openModal()" title="Edit">Edit</button>
-      <button class="delete-btn" (click)="onDeleteProduct()">Delete</button>
+      <button class="edit-btn" (click)="isModalEditOpened = true" title="Edit">Edit</button>
+      <button class="delete-btn" (click)="isModalDeleteOpened = true">Delete</button>
     </div>
   </div>
 </div>
 
-<app-modal *ngIf="isModalOpened" (isModalOpened)="isModalOpened = $event">
+<app-modal *ngIf="isModalEditOpened" (isModalOpened)="isModalEditOpened = $event">
   <div class="modal">
     <p class="modal-title">Edit product</p>
 
@@ -45,9 +45,19 @@
 
       <div class="modal-buttons">
         <button type="submit">Save</button>
-        <button type="button" (click)="closeModal()">Cancel</button>
+        <button type="button" (click)="isModalEditOpened = false">Cancel</button>
       </div>
     </form>
 
+  </div>
+</app-modal>
+
+<app-modal *ngIf="isModalDeleteOpened" (isModalOpened)="isModalDeleteOpened = $event">
+  <div class="modal">
+    <p class="modal-title">Delete the product {{ product.name }}?</p>
+    <div class="modal-buttons">
+      <button type="button" (click)="onDeleteProduct()">Yes</button>
+      <button type="button" (click)="isModalDeleteOpened = false">No</button>
+    </div>
   </div>
 </app-modal>
