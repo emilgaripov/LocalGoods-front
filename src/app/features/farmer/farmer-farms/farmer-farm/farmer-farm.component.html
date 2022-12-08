@@ -3,7 +3,15 @@
      [routerLink]="'/farmer/' + farm.id">
 
   <p class="farm-name">{{ farm.name }}</p>
-  <button class="farm-delete" (click)="onDeleteFarm()">Delete</button>
+  <button class="farm-delete" (click)="isModalDeleteOpened = true">Delete</button>
 </div>
 
-
+<app-modal *ngIf="isModalDeleteOpened" (isModalOpened)="isModalDeleteOpened = $event">
+  <div class="modal">
+    <p class="modal-title">Delete the farm {{ farm.name }}?</p>
+    <div class="modal-buttons">
+      <button type="button" (click)="onDeleteFarm()">Yes</button>
+      <button type="button" (click)="isModalDeleteOpened = false">No</button>
+    </div>
+  </div>
+</app-modal>

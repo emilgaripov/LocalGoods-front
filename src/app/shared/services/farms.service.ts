@@ -21,4 +21,8 @@ export class FarmsService {
   getFarmById(id: number): Observable<IFarm> {
     return this.http.get<IFarm>(environment.webApiUrl + 'Farms/' + id);
   }
+
+  deleteFarm(id: number) {
+    this.http.delete(environment.webApiUrl + 'Farms/' + id).subscribe();
+  }
 }

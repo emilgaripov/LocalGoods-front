@@ -30,7 +30,8 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     ModalModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB69y9kTzIpVJalAsXsQoz8p4ZT682oo6k'
+      apiKey: 'AIzaSyB69y9kTzIpVJalAsXsQoz8p4ZT682oo6k',
+      language: localStorage && localStorage['gml'] || 'en'
     })
   ]
 })

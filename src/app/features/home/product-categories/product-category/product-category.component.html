@@ -4,7 +4,7 @@
     [ngClass]="category | lowercase"
     [ngStyle]="{'background-image':'url(../../../../../assets/images/icons/categories/' + (category | lowercase) + '.svg)'}"
     [routerLink]="['/products']"
-    [queryParams]="{ category: category }"
+    [queryParams]="{ categories: category }"
     [title]="'category '+ category"
     >{{ category }}</a
   >
