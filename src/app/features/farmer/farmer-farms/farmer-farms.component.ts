@@ -29,7 +29,7 @@ export class FarmerFarmsComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = this.userService.currentUser.id;
-    this.farms$ = this.farmsService.getFarmsByUserId(userId);
+    this.farms$ = this.farmsService.getAllFarms();
   }
 
   openModal() {
