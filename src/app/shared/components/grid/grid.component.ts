@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SortData } from "../../types/types";
 import { Subscription } from "rxjs";
+import { CategoriesService } from "../../services/categories.service";
+import { ICategory } from "../../interfaces/category.interface";
 
 @Component({
   selector: 'app-grid',
@@ -13,17 +15,28 @@ export class GridComponent implements OnInit, OnDestroy {
 
   filterOpened = false;
   sortData: SortData = null;
-  filtersData: string[] = [];
+  categoriesList: ICategory[] = [];
+  filtersData: number[] = [];
   private subscription!: Subscription;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private categoriesService: CategoriesService
+  ) {}
 
   ngOnInit(): void {
+    this.categoriesList = this.categoriesService.categories;
+
     this.subscription = this.route.queryParams.subscribe({
       next: (params) => {
         const filterParams = params as {categories: string};
         if ('categories' in filterParams) {
-          this.filtersData = filterParams.categories.split(',');
+          this.filtersData = filterParams.categories
+            .split(',')
+            .map((catName) => {
+              const cat = this.categoriesList.find((cat) => cat.name === catName);
+              return cat!.id;
+            });
         }
       }
     });

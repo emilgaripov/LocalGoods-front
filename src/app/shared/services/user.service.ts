@@ -8,9 +8,9 @@ import { HttpClient } from "@angular/common/http";
 export class UserService {
   currentUser: IUser = {
     id: 5,
-    username: 'Johnathan',
+    userName: 'Johnathan',
     email: 'Bridgette_Koepp70@gmail.com',
-    roleId: 'Farmer'
+    roles: ['Farmer']
   };
 
   constructor(private http: HttpClient) {}
