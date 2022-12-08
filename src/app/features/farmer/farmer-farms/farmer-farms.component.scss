@@ -76,6 +76,8 @@
  
 .farms-scroll{
   justify-content: center;
+  overflow-x: auto;
+  
   .farms{
     width: 100%;
     justify-content: center;
