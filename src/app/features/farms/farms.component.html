@@ -1,5 +1,5 @@
 <div class="all-farms-container">
-  <app-search [searchBy]="'product'" (term)="searchValue = $event"></app-search>
+  <app-search [searchBy]="'farm'" (term)="searchValue = $event"></app-search>
 
   <app-grid [items]="((farms$ | async) ?? []) | search: searchValue"></app-grid>
 </div>

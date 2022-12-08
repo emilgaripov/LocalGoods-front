@@ -6,15 +6,15 @@
 <nav class="nav-header-menu" [ngStyle]="nav ? {'display':'flex'} : null " #navmenu>
   <app-logo [mode]="'nav'" (click)="toggleMenu($event)"></app-logo>
   <h2 class="nav-header-greeting">Welcome, guest!</h2>
-  <div class="nav-goup"> 
+  <div class="nav-goup">
     <h3 class="nav-parent">Products</h3>
     <ul class="nav-list" >
       <li *ngFor=" let category of categories$ | async">
-        <a [routerLink]="['/products']" [queryParams]="{'category': category.name}" (click)="toggleMenu($event)">{{category.name}}</a>
+        <a [routerLink]="['/products']" [queryParams]="{'categories': category.name}" (click)="toggleMenu($event)">{{category.name}}</a>
       </li>
     </ul>
   </div>
-  <div class="nav-goup"> 
+  <div class="nav-goup">
     <h3 class="nav-parent">Account</h3>
 
     <ul class="nav-list">

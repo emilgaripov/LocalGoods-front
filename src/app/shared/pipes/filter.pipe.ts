@@ -6,11 +6,11 @@ import { IProduct } from "../interfaces/product.interface";
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(initialArray: IProduct[], query: string[]): IProduct[] {
+  transform(initialArray: IProduct[], query: number[]): IProduct[] {
     if (!query.length) return initialArray;
 
     return initialArray.filter((product) => {
-      // return query.includes(product.category!);
+      return query.includes(product.categoryId);
     });
   }
 
