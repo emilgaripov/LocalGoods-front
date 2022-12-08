@@ -1,3 +1,5 @@
+@import "src/variables";
+
 h2{
   margin: 0;
   font-size: 30px;
@@ -5,11 +7,31 @@ h2{
 
 .map-box{
   height: 400px;
+  .farm-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .farm-image{
+      width: 100%;
+      max-width: 100px;
+    }
+    .farm-name{
+      font-size: 1.2em;
+      border: none;
+      font-weight: bold;
+      color: $darkGreen;
+      outline: none;
+    }
+  }
 }
 
 .view-all{
   align-self: center;
 }
+
 @media (min-width: 769px){
   .map-box{
     height: 600px;
