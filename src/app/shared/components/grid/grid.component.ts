@@ -30,14 +30,14 @@ export class GridComponent implements OnInit, OnDestroy {
     this.subscription = this.route.queryParams.subscribe({
       next: (params) => {
         const filterParams = params as {categories: string};
-        if ('categories' in filterParams) {
-          this.filtersData = filterParams.categories
+        this.filtersData = ('categories' in filterParams)
+          ? filterParams.categories
             .split(',')
             .map((catName) => {
               const cat = this.categoriesList.find((cat) => cat.name === catName);
               return cat!.id;
-            });
-        }
+            })
+          : [];
       }
     });
   }
