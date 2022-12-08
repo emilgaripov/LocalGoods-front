@@ -7,23 +7,32 @@
 [disableDefaultUI]="false"
 [zoomControl]="false"
 [scrollwheel]="false"
-[fitBounds]="true"
+[fitBounds]="true" 
 class="map-box">
+
+  <agm-overlay
+    *ngFor="let m of markers; let i = index"
+    [latitude]="m.lat"
+    [longitude]="m.lng"
+    (markerClick)="clickedMarker(m.name, i)"
+  >
+    <div class="farm-details">
+      <a [routerLink]="['farm', m.id]" [title]="m.name" class="farm-image">
+        <img [src]="m.image" alt="farm image">
+      </a>
+      <a [routerLink]="['farm', m.id]" class="farm-name"> 
+        <span>{{m.name}}</span>
+      </a>
+    </div>
+  </agm-overlay>
 
   <agm-marker 
   *ngFor="let m of markers; let i = index" 
-  (markerClick)="clickedMarker(m.name, i)"
   [agmFitBounds]="true"
-  
   [latitude]="m.lat" 
-  [longitude]="m.lng" >
-
-  <agm-info-window>
-    <div class="farm-details">
-      <img [src]="m.image" alt="farm image" class="farm-image">
-      <span><a [routerLink]="['farm', m.id]" class="farm-name">{{m.name}}</a></span>
-    </div>
-  </agm-info-window>
+  [longitude]="m.lng" 
+  [visible]="false"
+  >
 
 </agm-marker>
 </agm-map>
