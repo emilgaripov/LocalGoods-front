@@ -19,7 +19,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +61,10 @@ export class FiltersComponent implements OnInit, OnDestroy {
       [],
       { queryParams: { categories: this.checkedCategories.toString() } }
     );
-    this.closeFilters();
+
+    if(window.innerWidth <= 1024){
+      this.closeFilters();
+    }
   }
 
   clearFilters() {
@@ -70,7 +73,9 @@ export class FiltersComponent implements OnInit, OnDestroy {
       [],
       { queryParams: { } }
     );
-    this.closeFilters();
+    if(window.innerWidth < 1024){
+      this.closeFilters();
+    }
   }
 
 }
