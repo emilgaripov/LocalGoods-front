@@ -1,0 +1,83 @@
+<div auth-container>
+
+  <h2>Registration</h2>
+  
+  <form #form=ngForm (ngSubmit)="onRegister(form.value)" class="auth-form">
+    <div class="form-group">
+      <label for="username">First Name</label>
+      <input type="text" id="firstname" name="firstname" ngModel #firstname ="ngModel" required minlength="3">
+      <div *ngIf="!firstname.touched" class="form-tip">
+        <span>Enter your name without spaces</span>
+      </div>
+      <div *ngIf="firstname.touched" class="form-validator">
+        <span *ngIf="firstname.errors?.['required']">First name is Required!</span>
+        <span *ngIf="firstname.errors?.['minlength']">First name minimum 3 characters are required!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="username">Last name</label>
+      <input type="text" id="lastname" name="lastname" ngModel #lastname ="ngModel" required minlength="3">
+      <div *ngIf="!lastname.touched" class="form-tip">
+        <span>Enter your lastname without spaces</span>
+      </div>
+      <div *ngIf="lastname.touched" class="form-validator">
+        <span *ngIf="lastname.errors?.['required']">Last name is Required!</span>
+        <span *ngIf="lastname.errors?.['minlength']">Last name minimum 3 characters are required!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" ngModel #username ="ngModel" required minlength="3">
+      <div *ngIf="username.touched" class="form-validator">
+        <span *ngIf="username.errors?.['required']">Username is Required!</span>
+        <span *ngIf="username.errors?.['minlength']">Username  minimum 3 characters are required!</span>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+      type="email" 
+      id="email" 
+      name="email" 
+      ngModel  
+      #email="ngModel" 
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+      required
+      >
+      <div *ngIf="!email.touched" class="form-tip">
+        <span>Enter valid email</span>
+      </div>
+      <div *ngIf="email.touched" class="form-validator">
+        <span *ngIf="email.errors?.['required']">Email is a required field!</span>
+        <span *ngIf="email.errors?.['pattern']">This is not a valid Email!</span>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" ngModel #pass="ngModel" required minlength="8" maxlength="10" >
+      <div *ngIf="!pass.touched" class="form-tip">
+        <span>Create a password with at least one capital letter, number and character for us to secure your account better.</span>
+      </div>
+      <div *ngIf="pass.touched" class="form-validator">
+        <span *ngIf="pass.errors?.['required']">Password is Required!</span>
+        <span *ngIf="pass.errors?.['minlength']">Password  minimum 3 characters are required!</span>
+        <span *ngIf="pass.errors?.['maxlength']">Password  max length is 10!</span>
+      </div>
+  
+    </div>
+  
+    <div class="form-group role">
+      <label for="role">Are you farmer?</label>
+      <input type="checkbox" id="role" name="isFarmer" ngModel>
+    </div>
+  
+    <button type="submit" class="auth-button" [disabled]="!form.form.valid || submitted" >Sign up</button>
+    <span class="form-tip">Have an account? Login with link below.</span>
+    <p class="switch-mode" routerLink="/auth" >Login</p>
+  </form>
+
+</div>
+
+
