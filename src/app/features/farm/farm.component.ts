@@ -16,36 +16,25 @@ import { ProductsService } from 'src/app/shared/services/products.service';
     class: 'grow-container'
   }
 })
-export class FarmComponent implements OnInit, OnDestroy {
-  products$!: Observable<IProduct[]>;
-  farm!: IFarm;
+export class FarmComponent implements OnInit {
+  farm$!: Observable<IFarm>;
   isLoading = true;
-  subscription!: Subscription;
+  // farm!: IFarm;
+  // subscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService,
     private farmsService: FarmsService,
   ) {}
 
   ngOnInit(): void {
-    this.products$ = this.route.params.pipe(
+    this.farm$ = this.route.params.pipe(
       switchMap((param) => {
+        this.isLoading = false;
         const farmId = +param['id'];
-        this.getFarm(farmId);
-        return this.productsService.getProductsByFarmId(farmId);
+        return this.farmsService.getFarmById(farmId);
       })
     );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  getFarm(id: number) {
-    this.subscription = this.farmsService.getFarmById(id).subscribe({
-      next: (farm) => this.farm = farm
-    });
   }
 
 }

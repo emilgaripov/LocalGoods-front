@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { IFarm } from "../../../shared/interfaces/farm.interface";
 import { FarmsService } from "../../../shared/services/farms.service";
-import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-farmer-farms',
@@ -22,24 +21,18 @@ export class FarmerFarmsComponent implements OnInit {
   //image upload
   fileName = '';
 
-  constructor(
-    private farmsService: FarmsService,
-    private userService: UserService
-  ) {}
+  constructor(private farmsService: FarmsService) {}
 
   ngOnInit(): void {
-    const userId = this.userService.currentUser.id;
-    this.farms$ = this.farmsService.getAllFarms();
+    this.farms$ = this.farmsService.farmerFarms$;
   }
 
   onAddFarm(value: any) {
     this.submitted = true;
-
-
     if (!value.farmName) return;
 
-    // this.farmerFarmsService.createFarm(value.farmName);
-    this.submitted = false; // to add to succes response
+    // this.farmsService.createFarm();
+    this.submitted = false; // to add to success response
     this.isModalAddOpened = false;
   }
 
