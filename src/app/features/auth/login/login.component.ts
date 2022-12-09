@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { LoginFormData } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-login',
@@ -8,41 +9,29 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss'],
   host: {
     class: 'grow-container'
-  },
+  }
 })
 export class LoginComponent implements OnInit {
-
   submitted = false;
 
   constructor(
     private authService: AuthService,
-    private route: Router){}
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  onLogin(data: any){
-    console.log(data);
-    
-
-  this.submitted = true;
-
-    return this.authService.login(
-      {
-      emailAddress: data.email,
-      password: data.password,
-    }
-    )
-      .subscribe({
-        next: () => {
-          this.route.navigate(['/']);
-          this.submitted = false;
-        },
-        error: () => {
-          this.submitted = false;
-        },
-        complete: () => console.log('done'),
-      })
+  onLogin(data: LoginFormData) {
+    this.submitted = true;
+    this.authService.login(data).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/');
+        this.submitted = false;
+      },
+      error: () => {
+        this.submitted = false;
+      }
+    });
   }
 
 }
