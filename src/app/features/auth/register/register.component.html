@@ -1,7 +1,7 @@
 <div auth-container>
 
   <h2>Registration</h2>
-  
+
   <form #form=ngForm (ngSubmit)="onRegister(form.value)" class="auth-form">
     <div class="form-group">
       <label for="username">First Name</label>
@@ -33,16 +33,16 @@
         <span *ngIf="username.errors?.['minlength']">Username  minimum 3 characters are required!</span>
       </div>
     </div>
-  
+
     <div class="form-group">
       <label for="email">Email</label>
-      <input 
-      type="email" 
-      id="email" 
-      name="email" 
-      ngModel  
-      #email="ngModel" 
-      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+      <input
+      type="email"
+      id="email"
+      name="email"
+      ngModel
+      #email="ngModel"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       required
       >
       <div *ngIf="!email.touched" class="form-tip">
@@ -53,7 +53,7 @@
         <span *ngIf="email.errors?.['pattern']">This is not a valid Email!</span>
       </div>
     </div>
-  
+
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" id="password" name="password" ngModel #pass="ngModel" required minlength="8" maxlength="10" >
@@ -65,17 +65,17 @@
         <span *ngIf="pass.errors?.['minlength']">Password  minimum 3 characters are required!</span>
         <span *ngIf="pass.errors?.['maxlength']">Password  max length is 10!</span>
       </div>
-  
+
     </div>
-  
+
     <div class="form-group role">
       <label for="role">Are you farmer?</label>
       <input type="checkbox" id="role" name="isFarmer" ngModel>
     </div>
-  
+
     <button type="submit" class="auth-button" [disabled]="!form.form.valid || submitted" >Sign up</button>
     <span class="form-tip">Have an account? Login with link below.</span>
-    <p class="switch-mode" routerLink="/auth" >Login</p>
+    <p class="switch-mode" routerLink="/auth/login" >Login</p>
   </form>
 
 </div>
