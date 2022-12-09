@@ -17,5 +17,5 @@ export interface IFarm {
   email: string,
   faceBook: string,
   instagram: string,
-  products: IProduct[]
+  products?: IProduct[]
 }

@@ -64,10 +64,6 @@ export class FarmsService {
   }
 
   private getUserId() {
-    const userData = localStorage.getItem('LocalGoodsUser');
-    if (!userData) return;
-
-    const { id } = JSON.parse(userData);
-    return id;
+    return localStorage.getItem('userId');
   }
 }

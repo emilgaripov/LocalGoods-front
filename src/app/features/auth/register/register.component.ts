@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { RegistrationFormData } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-register',
@@ -8,49 +9,33 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./register.component.scss'],
   host: {
     class: 'grow-container'
-  },
+  }
 })
 export class RegisterComponent implements OnInit {
-
   submitted = false;
 
   constructor(
     private authService: AuthService,
-    private router: Router){}
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  onRegister(data: any) {
-    console.log(data);
-
-     this.submitted = true;
-
-    this.authService.createUser(
-      {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        emailAddress: data.email,
-        userName: data.username,
-        password: data.password,
-        isFarmer: data.isFarmer
+  onRegister(data: RegistrationFormData) {
+    this.submitted = true;
+    this.authService.createUser(data).subscribe({
+      next: () => {
+        this.submitted = false;
+        this.goToLogin();
+      },
+      error: () => {
+        this.submitted = false;
       }
-    )
-      .subscribe({
-        next: () => {
-          this.submitted = false;
-          this.goToLogin();
-        },
-        error: () => {
-          this.submitted = false;
-        },
-        complete: () => {
-          console.log('done');
-        }
-      })
+    });
   }
-  goToLogin(){
-    this.router.navigate(['/auth/login'])
+
+  private goToLogin() {
+    this.router.navigateByUrl('/auth/login');
   }
 
 }

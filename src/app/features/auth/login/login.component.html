@@ -1,29 +1,27 @@
 <div auth-container>
-
   <h2>Login</h2>
-  
+
   <form #form=ngForm (ngSubmit)="onLogin(form.value)" class="auth-form">
-  
     <div class="form-group">
       <label for="email">Email</label>
-      <input 
-      type="email" 
-      id="email" 
-      name="email" 
-      ngModel  
-      #email="ngModel" 
-      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+      <input
+      type="email"
+      id="email"
+      name="emailAddress"
+      ngModel
+      #emailAddress="ngModel"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       required
       >
-      <div *ngIf="!email.touched" class="form-tip">
+      <div *ngIf="!emailAddress.touched" class="form-tip">
         <span>Enter your account email</span>
       </div>
-      <div *ngIf="email.touched" class="form-validator">
-        <span *ngIf="email.errors?.['required']">Email is a required field!</span>
-        <span *ngIf="email.errors?.['pattern']">This is not a valid Email!</span>
+      <div *ngIf="emailAddress.touched" class="form-validator">
+        <span *ngIf="emailAddress.errors?.['required']">Email is a required field!</span>
+        <span *ngIf="emailAddress.errors?.['pattern']">This is not a valid Email!</span>
       </div>
     </div>
-  
+
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" id="password" name="password" ngModel #pass="ngModel" required minlength="8" maxlength="10" >
@@ -35,14 +33,12 @@
         <span *ngIf="pass.errors?.['minlength']">Password  minimum 3 characters are required!</span>
         <span *ngIf="pass.errors?.['maxlength']">Password  max length is 10!</span>
       </div>
-  
-    </div> 
-     
+    </div>
+
     <button type="submit" class="auth-button" [disabled]="!form.form.valid || submitted" >Sign in</button>
     <span class="form-tip">No account? Register with the link below.</span>
     <p class="switch-mode"  routerLink="/auth/register" >Register</p>
   </form>
-
 </div>
 
 
