@@ -10,7 +10,7 @@ export class UserService {
     id: 5,
     userName: 'Johnathan',
     email: 'Bridgette_Koepp70@gmail.com',
-    roles: ['Farmer']
+    roles: ['User', 'Farmer']
   };
 
   constructor(private http: HttpClient) {}
