@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { BehaviorSubject, catchError, Observable, Subject, tap, throwError } from "rxjs";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { BehaviorSubject, catchError, Observable, Subject, switchMap, tap, throwError } from "rxjs";
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
+import { IUser } from "../../shared/interfaces/user.interface";
 
 type User = {
   firstName?: string,
@@ -13,6 +14,11 @@ type User = {
   isFarmer?: boolean
 }
 
+type Tokens = {
+  expiresAt: string,
+  refreshToken: string,
+  token: string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -41,24 +47,37 @@ export class AuthService {
       )
   }
 
-  login(user: User): Observable<User> {
-    return this.http.post<User>(this.url + 'Authentication/login-user', user)
+  login(user: User): Observable<IUser> {
+    return this.http.post<Tokens>(this.url + 'Authentication/login-user', user)
       .pipe(
-        tap((res) => {
-          this.setToken(res)
-          console.log(res);
-          
-        }),
+        switchMap((res) => {
+          this.setToken(res);
+          return this.getUser(res.token);
+        })
         // catchError(this.errorHandler.bind(this))
       )
   }
 
-  private setToken(res: any) { 
+  getUser(token: string): Observable<IUser> {
+    const httpOptions = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
+    }
+
+    return this.http
+      .get<IUser>(this.url + 'Users/getidbysession', httpOptions)
+      .pipe(tap((user) => this.setUserId(user.id)));
+  }
+
+  private setToken(res: Tokens) {
     if(res){
-      localStorage.setItem('token', res.token)
+      localStorage.setItem('token', res.token);
     } else {
       localStorage.clear()
     }
+  }
+
+  private setUserId(userId: string) {
+    localStorage.setItem('userId', userId);
   }
 
   isAuthenticated(): boolean {

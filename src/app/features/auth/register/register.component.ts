@@ -16,13 +16,13 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private route: Router){}
+    private router: Router){}
 
   ngOnInit(): void {
   }
 
   onRegister(data: any) {
-    console.log(data);    
+    console.log(data);
 
      this.submitted = true;
 
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
         emailAddress: data.email,
         userName: data.username,
         password: data.password,
-        isFarmer: data.isFarmer ? true : false
+        isFarmer: data.isFarmer
       }
     )
       .subscribe({
@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
       })
   }
   goToLogin(){
-    this.route.navigate(['/auth'])
+    this.router.navigate(['/auth/login'])
   }
 
 }
