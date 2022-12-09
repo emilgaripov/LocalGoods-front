@@ -1,9 +1,15 @@
 <div class="grid-container">
   <h2 class="grid-title">Title</h2>
 
-  <div class="grid-toolbar">
-    <button (click)="openFilters()">Filters</button>
+  <div class="grid-filters">
+    <button (click)="openFilters()" class="open-filters-button">Filters</button>
 
+    <app-filters *ngIf="filterOpened"
+                (filtersClosed)="closeFilters($event)"
+    ></app-filters>
+  </div>
+
+  <div class="grid-sort">
     <select class="sort" #sort (change)="onSort(sort.value)">
       <option>Sort by</option>
       <option value="nameAsc">Name A-Z</option>
@@ -18,8 +24,6 @@
                    [item]="item">
     </app-grid-item>
   </div>
+
 </div>
 
-<app-filters *ngIf="filterOpened"
-             (filtersClosed)="closeFilters($event)"
-></app-filters>

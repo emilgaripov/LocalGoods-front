@@ -25,6 +25,10 @@ export class GridComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    if(window.innerWidth >= 1024){
+      this.filterOpened = true
+    }
+
     this.categoriesList = this.categoriesService.categories;
 
     this.subscription = this.route.queryParams.subscribe({

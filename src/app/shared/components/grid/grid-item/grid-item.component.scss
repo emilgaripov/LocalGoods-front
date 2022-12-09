@@ -3,6 +3,8 @@
 .item {
   display: flex;
   gap: 2em;
+  flex-wrap: wrap;
+  justify-content: center;
 
   &-content{
     display: flex;
@@ -28,12 +30,14 @@
       }
     }
   }
-
+  &-content{
+    min-width: 200px;
+  }
   &-image {
     width: 200px;
     height: 200px;
     flex-shrink: 0;
-    background-color: $primaryGreen;
+    background-color: #eee;
     overflow: hidden;
     border-radius: 10px;
     display: flex;
