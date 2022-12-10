@@ -18,10 +18,15 @@
     <h3 class="nav-parent">Account</h3>
 
     <ul class="nav-list">
-      <li *ngIf="isUser"><a (click)=viewAccount()>Personal Info</a></li>
-      <li *ngIf="isUser"><a (click)=signOut()>Sign out</a></li>
-      <li *ngIf="!isUser"><a  routerLink="auth/login">Sign in</a></li>
-      <li *ngIf="!isUser"><a  routerLink="auth/register" >Sign up</a></li>
+      <ng-container *ngIf="isUser$ | async">
+        <li><a (click)=viewAccount()>Personal Info</a></li>
+        <li><a (click)=signOut()>Sign out</a></li>
+      </ng-container>
+
+      <ng-container *ngIf="!(isUser$ | async)">
+        <li><a  routerLink="auth/login">Sign in</a></li>
+        <li><a  routerLink="auth/register" >Sign up</a></li>
+      </ng-container>
     </ul>
     <!-- <ul class="nav-list">
       <li><a href="#" class="nav-parent">personal info</a></li>

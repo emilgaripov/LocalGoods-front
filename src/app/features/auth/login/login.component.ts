@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   onLogin(data: LoginFormData) {
     this.submitted = true;
     this.authService.login(data).subscribe({
-      next: () => {
+      next: (user) => {
+        this.authService.user$.next(user);
         this.router.navigateByUrl('/');
         this.submitted = false;
       },
