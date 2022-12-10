@@ -12,7 +12,6 @@ import { editUserFormData } from 'src/app/shared/types/types';
     class: 'grow-container'
   },
   changeDetection: ChangeDetectionStrategy.OnPush
-
 })
 export class UserComponent implements OnInit {
 
@@ -31,7 +30,7 @@ export class UserComponent implements OnInit {
 
   oneditUser(data: editUserFormData){
     console.log(data);
-    
+
     this.userService.editUser(data)
 
   }

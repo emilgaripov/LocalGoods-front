@@ -8,17 +8,17 @@ import {
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/features/auth/auth.service';
 import { ICategory } from "../../../shared/interfaces/category.interface";
 import { CategoriesService } from "../../../shared/services/categories.service";
+import { IUser } from "../../../shared/interfaces/user.interface";
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
-
 })
 export class NavComponent implements OnInit {
   @ViewChild('toggleButton') toggleButton!: ElementRef;
@@ -29,7 +29,7 @@ export class NavComponent implements OnInit {
   categories$!: Observable<ICategory[]>;
 
   nav = false;
-  isUser = false;
+  isUser$!: Observable<IUser | null>;
 
   constructor(
     private renderer: Renderer2,
@@ -44,11 +44,11 @@ export class NavComponent implements OnInit {
         this.isNav.emit(this.nav)
       }
     });
-    this.isUser = this.authService.isAuthenticated()
   }
 
   ngOnInit(): void {
     this.categories$ = this.categoriesService.getHomeCategories();
+    this.isUser$ = this.authService.user$;
   }
 
   toggleMenu(event?: Event) {
@@ -58,7 +58,7 @@ export class NavComponent implements OnInit {
   }
 
   signOut() {
-    localStorage.clear()
+    this.authService.logout();
     this.route.navigate(['/'])
 
     if (window.innerWidth < 1024) {
