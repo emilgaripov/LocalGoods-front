@@ -21,3 +21,12 @@ export type JWT = {
   refreshToken: string,
   token: string
 };
+
+export type editUserFormData = {
+  firstName?: string,
+  lastName?: string,
+  emailAddress?: string,
+  userName?: string,
+  password?: string,
+  roles?: string[],
+};
