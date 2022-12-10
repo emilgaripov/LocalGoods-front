@@ -29,7 +29,6 @@ export class NavComponent implements OnInit {
   categories$!: Observable<ICategory[]>;
 
   nav = false;
-
   isUser = false;
 
   constructor(
@@ -45,9 +44,7 @@ export class NavComponent implements OnInit {
         this.isNav.emit(this.nav)
       }
     });
-
     this.isUser = this.authService.isAuthenticated()
-
   }
 
   ngOnInit(): void {
@@ -60,16 +57,16 @@ export class NavComponent implements OnInit {
     this.isNav.emit(this.nav)
   }
 
-  signOut(){
+  signOut() {
     localStorage.clear()
     this.route.navigate(['/'])
 
-    if(window.innerWidth < 1024){
+    if (window.innerWidth < 1024) {
       this.toggleMenu()
     }
   }
 
-  viewAccount(){
-    this.route.navigate(['user', 1])
+  viewAccount() {
+    this.route.navigate(['user'])
   }
 }

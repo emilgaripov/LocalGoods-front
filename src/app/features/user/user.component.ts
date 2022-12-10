@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { first, Observable } from 'rxjs';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
+import { UserService } from 'src/app/shared/services/user.service';
+import { editUserFormData } from 'src/app/shared/types/types';
 
 @Component({
   selector: 'app-user',
@@ -13,12 +16,23 @@ import { IUser } from 'src/app/shared/interfaces/user.interface';
 })
 export class UserComponent implements OnInit {
 
-  user!: IUser;
+  user$!: Observable<IUser>
+  edit=false;
 
-  constructor() { }
+  constructor(
+    public userService: UserService
+  ) { }
 
   ngOnInit(): void {
-    
+    this.user$ = this.userService.getUserById()
+    .pipe(first())
+    // .subscribe((user) => this.user = user)
   }
 
+  oneditUser(data: editUserFormData){
+    console.log(data);
+    
+    this.userService.editUser(data)
+
+  }
 }
