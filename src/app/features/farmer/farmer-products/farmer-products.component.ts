@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { Observable, switchMap } from "rxjs";
+import { Observable } from "rxjs";
 import { IProduct } from "../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../shared/services/products.service";
 import { CategoriesService } from "../../../shared/services/categories.service";
@@ -14,10 +14,9 @@ import { ICategory } from "../../../shared/interfaces/category.interface";
 })
 export class FarmerProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;
-  isModalOpened = false;
   farmId!: number;
   categoriesList: ICategory[] = [];
-  submitted: boolean = false;
+  isModalAddOpened = false;
 
   // image upload
   fileName = '';
@@ -30,46 +29,18 @@ export class FarmerProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriesList = this.categoriesService.categories;
-
-    this.products$ = this.route.params.pipe(
-      switchMap((param) => {
-        this.farmId = +param['id'];
-        return this.productsService.getProductsByFarmId(this.farmId);
-      })
-    );
+    this.products$ = this.productsService.farmerFarmProducts$;
+    this.farmId = +this.route.snapshot.params['id'];
+    this.productsService.getProductsByFarmId(this.farmId);
   }
 
-  openModal() {
-    this.isModalOpened = true;
+  onAddProduct(value: any) {
+    // this.productsService.createProduct(this.farmId, value);
+    this.isModalAddOpened = false;
   }
 
-  closeModal() {
-    this.isModalOpened = false;
-  }
-
-  onAddProduct(value: { productName: string, productDescription: string }) {
-    this.submitted = true
-
-    if (!value.productName || !value.productDescription) return;
-
-    // const newProduct: IProduct = {
-    //   id: 0,
-    //   farmId: this.farmId,
-    //   name: value.productName,
-    //   description: value.productDescription,
-    //   image: ''
-    // };
-    // this.farmerProductsService.createProduct(newProduct);
-
-    this.submitted = false // to add to succes response
-
-    this.closeModal();
-
-    
-  }
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-
     if (file) {
       this.fileName = file.name;
     }

@@ -12,7 +12,6 @@ import { FarmsService } from "../../../shared/services/farms.service";
 export class FarmerFarmsComponent implements OnInit {
   farms$!: Observable<IFarm[]>;
   isModalAddOpened = false;
-  submitted = false;
 
   //for map default cords of Zurich
   latitude = 47.373878;
@@ -25,14 +24,11 @@ export class FarmerFarmsComponent implements OnInit {
 
   ngOnInit(): void {
     this.farms$ = this.farmsService.farmerFarms$;
+    this.farmsService.getFarmerFarms();
   }
 
   onAddFarm(value: any) {
-    this.submitted = true;
-    if (!value.farmName) return;
-
-    // this.farmsService.createFarm();
-    this.submitted = false; // to add to success response
+    // this.farmsService.createFarm(value);
     this.isModalAddOpened = false;
   }
 

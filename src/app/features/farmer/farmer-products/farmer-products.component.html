@@ -1,7 +1,6 @@
 <div class="products-container">
   <h2>My goods</h2>
-
-  <button class="add-product-btn" (click)="openModal()">Add product</button>
+  <button class="add-product-btn" (click)="isModalAddOpened = true">Add product</button>
 
   <div class="products">
     <app-farmer-product *ngFor="let product of products$ | async"
@@ -10,7 +9,7 @@
   </div>
 </div>
 
-<app-modal *ngIf="isModalOpened" (isModalOpened)="isModalOpened = $event">
+<app-modal *ngIf="isModalAddOpened" (isModalOpened)="isModalAddOpened = $event">
   <div class="modal">
     <p class="modal-title">Add product</p>
 
@@ -25,6 +24,7 @@
           <span *ngIf="productName.errors?.['minlength']">Product name minimum 3 characters are required!</span>
         </div>
       </div>
+
       <div class="form-group">
         <label for="productDesc">Product description</label>
         <input type="text" id="productDesc" name="productDesc" ngModel #productDesc="ngModel" required minlength="50">
@@ -33,6 +33,7 @@
           <span *ngIf="productDesc.errors?.['minlength']">Product description minimum 50 characters are required!</span>
         </div>
       </div>
+
       <div class="form-group">
         <label for="productImg">Product image</label>
         <input type="file" class="file-upload" id="productImg" name="productImg" ngModel #fileUpload="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
@@ -43,6 +44,7 @@
           <span *ngIf="fileUpload.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
         </div>
       </div>
+
       <div class="form-group">
         <label for="productPrice">Product price</label>
         <input type="number" id="productPrice" name="productPrice" ngModel #productPrice="ngModel" required min="1">
@@ -51,6 +53,7 @@
           <span *ngIf="productPrice.errors?.['min']">Product price minimum 1 UAH!</span>
         </div>
       </div>
+
       <div class="form-group">
         <label for="productCategory">Product category</label>
         <select id="productCategory" name="productCategory" ngModel #productCategory="ngModel" required>
@@ -63,10 +66,9 @@
         </div>
       </div>
 
-
       <div class="modal-buttons">
-        <button type="submit" [disabled]="!addProductForm.form.valid || submitted">Create product</button>
-        <button type="button" (click)="closeModal()">Cancel</button>
+        <button type="submit" [disabled]="!addProductForm.form.valid">Create product</button>
+        <button type="button" (click)="isModalAddOpened = false">Cancel</button>
       </div>
     </form>
 
