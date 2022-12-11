@@ -26,58 +26,56 @@
       (ngSubmit)="onAddFarm(addFarmForm.value)">
 
       <div class="form-group">
-        <label for="farmName">Farm name</label>
-        <input type="text" id="farmName" name="farmName" ngModel #farmName="ngModel" required minlength="3">
-        <div *ngIf="farmName.touched" class="form-validator">
-          <span *ngIf="farmName.errors?.['required']">Farm name is Required!</span>
-          <span *ngIf="farmName.errors?.['minlength']">Farm name  minimum 3 characters are required!</span>
+        <label for="name">Farm name</label>
+        <input type="text" id="name" name="name" ngModel #name="ngModel" required minlength="3">
+        <div *ngIf="name.touched" class="form-validator">
+          <span *ngIf="name.errors?.['required']">Farm name is Required!</span>
+          <span *ngIf="name.errors?.['minlength']">Farm name  minimum 3 characters are required!</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="farmDesc">Farm description</label>
-        <input type="text" id="farmDesc" name="farmDesc" ngModel #farmDescription="ngModel" required minlength="50">
-        <div *ngIf="farmDescription.touched" class="form-validator">
-          <span *ngIf="farmDescription.errors?.['required']">Farm description is Required!</span>
-          <span *ngIf="farmDescription.errors?.['minlength']">Farm description  minimum 50 characters are required!</span>
+        <label for="description">Farm description</label>
+        <input type="text" id="description" name="description" ngModel #description="ngModel" required>
+        <div *ngIf="description.touched" class="form-validator">
+          <span *ngIf="description.errors?.['required']">Farm description is Required!</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="farmImg">Farm image</label>
-        <input type="file" class="file-upload" id="farmImg" name="farmImg" ngModel #fileUpload="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
-        <div *ngIf="fileUpload.touched" class="form-note-text">
+        <label for="imagePath">Farm image</label>
+        <input type="file" class="file-upload" id="imagePath" name="imagePath" ngModel #imagePath="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
+        <div *ngIf="imagePath.touched" class="form-note-text">
           <span>Selected file: {{ fileName || "No file uploaded yet."}}</span>
         </div>
-        <div *ngIf="fileUpload.errors?.['requiredFileType']" class="form-validator">
-          <span *ngIf="fileUpload.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
+        <div *ngIf="imagePath.errors?.['requiredFileType']" class="form-validator">
+          <span *ngIf="imagePath.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="farmCounty">Country</label>
-        <input type="text" id="farmCounty" name="farmCounty" ngModel #farmCounty="ngModel" required minlength="3">
-        <div *ngIf="farmCounty.touched" class="form-validator">
-          <span *ngIf="farmCounty.errors?.['required']">County is Required!</span>
-          <span *ngIf="farmCounty.errors?.['minlength']">County minimum 3 characters are required!</span>
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country" ngModel #country="ngModel" required minlength="3">
+        <div *ngIf="country.touched" class="form-validator">
+          <span *ngIf="country.errors?.['required']">County is Required!</span>
+          <span *ngIf="country.errors?.['minlength']">County minimum 3 characters are required!</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="farmCity">City</label>
-        <input type="text" id="farmCity" name="farmCity" ngModel #farmCity="ngModel" required minlength="3">
-        <div *ngIf="farmCity.touched" class="form-validator">
-          <span *ngIf="farmCity.errors?.['required']">City is Required!</span>
-          <span *ngIf="farmCity.errors?.['minlength']">City minimum 3 characters are required!</span>
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" ngModel #city="ngModel" required minlength="3">
+        <div *ngIf="city.touched" class="form-validator">
+          <span *ngIf="city.errors?.['required']">City is Required!</span>
+          <span *ngIf="city.errors?.['minlength']">City minimum 3 characters are required!</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="farmAddress">Address</label>
-        <input type="text" id="farmAddress" name="farmAddress" ngModel #farmAddress="ngModel" required minlength="10">
-        <div *ngIf="farmAddress.touched" class="form-validator">
-          <span *ngIf="farmAddress.errors?.['required']">Address is Required!</span>
-          <span *ngIf="farmAddress.errors?.['minlength']">Address minimum 10 characters are required!</span>
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" ngModel #address="ngModel" required>
+        <div *ngIf="address.touched" class="form-validator">
+          <span *ngIf="address.errors?.['required']">Address is Required!</span>
         </div>
       </div>
 
@@ -89,26 +87,26 @@
       </div>
 
       <div class="form-group">
-        <label for="farmFacebook">Facebook link</label>
-        <input type="text" id="farmFacebook" name="farmFacebook" ngModel>
+        <label for="faceBook">Facebook link</label>
+        <input type="text" id="faceBook" name="faceBook" ngModel>
       </div>
 
       <div class="form-group">
-        <label for="farmInstagram">Instagram link</label>
-        <input type="text" id="farmInstagram" name="farmInstagram" ngModel>
+        <label for="instagram">Instagram link</label>
+        <input type="text" id="instagram" name="instagram" ngModel>
       </div>
 
       <div class="form-group">
-        <label for="farmTel">Phone number</label>
-        <input type="text" id="farmTel" name="farmTel" ngModel #farmTel="ngModel" pattern="[- +()0-9]{10,12}">
-        <div *ngIf="farmTel.touched" class="form-validator">
-          <span *ngIf="farmTel.errors?.['pattern']">Phone number should correspond "380123546789" format! </span>
+        <label for="telephone">Phone number</label>
+        <input type="text" id="telephone" name="telephone" ngModel #telephone="ngModel" pattern="[- +()0-9]{10,12}">
+        <div *ngIf="telephone.touched" class="form-validator">
+          <span *ngIf="telephone.errors?.['pattern']">Phone number should correspond "380123546789" format!</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="farmEmail">Farm email address</label>
-        <input type="text" id="farmEmail" name="farmEmail" ngModel #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+        <label for="email">Farm email address</label>
+        <input type="text" id="email" name="email" ngModel #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
         <div *ngIf="email.touched" class="form-validator">
           <span *ngIf="email.errors?.['required']">Email is a required field!</span>
           <span *ngIf="email.errors?.['pattern']">This is not a valid Email!</span>
@@ -116,7 +114,7 @@
       </div>
 
       <div class="modal-buttons">
-        <button type="submit" [disabled]="!addFarmForm.form.valid || submitted" >Add new farm</button>
+        <button type="submit" [disabled]="!addFarmForm.form.valid" >Add new farm</button>
         <button type="button" (click)="isModalAddOpened = false">Cancel</button>
       </div>
     </form>

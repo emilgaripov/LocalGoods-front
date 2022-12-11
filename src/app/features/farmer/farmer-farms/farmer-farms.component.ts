@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { IFarm } from "../../../shared/interfaces/farm.interface";
 import { FarmsService } from "../../../shared/services/farms.service";
+import { FarmFormData } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-farmer-farms',
@@ -27,8 +28,17 @@ export class FarmerFarmsComponent implements OnInit {
     this.farmsService.getFarmerFarms();
   }
 
-  onAddFarm(value: any) {
-    // this.farmsService.createFarm(value);
+  onAddFarm(newFarmData: FarmFormData) {
+    const newFarm: IFarm = {
+      ...newFarmData,
+      latitude: this.latitude,
+      longitude: this.longitude,
+      userId: localStorage.getItem('userId') ?? '',
+      createdOn: new Date().toString()
+    };
+    console.log(newFarm);
+
+    this.farmsService.createFarm(newFarm);
     this.isModalAddOpened = false;
   }
 
@@ -40,9 +50,6 @@ export class FarmerFarmsComponent implements OnInit {
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-
-    if (file) {
-      this.fileName = file.name;
-    }
+    this.fileName = file ? file.name : '';
   }
 }

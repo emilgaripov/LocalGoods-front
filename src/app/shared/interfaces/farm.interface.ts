@@ -1,17 +1,17 @@
 import { IProduct } from "./product.interface";
 
 export interface IFarm {
-  id: number,
+  id?: number,
   name: string,
-  image: string,
+  imagePath: string,
   description: string,
   address: string,
   city: string,
   country: string,
   latitude: number,
   longitude: number,
-  rating: number,
-  userId: number,
+  rating?: number,
+  userId: string,
   createdOn: string,
   telephone: string,
   email: string,

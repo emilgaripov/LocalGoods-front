@@ -39,8 +39,7 @@ export class ProductsService {
 
   deleteProduct(id: number) {
     this.http.delete<boolean>(environment.webApiUrl + 'Products/' + id).subscribe({
-      next: (value) => {
-        if (!value) return console.log('Failed to delete');
+      next: () => {
         const index = this.farmerFarmProducts.findIndex((product) => product.id === id);
         this.farmerFarmProducts.splice(index, 1);
         this.farmerFarmProducts$.next([...this.farmerFarmProducts]);
@@ -48,7 +47,7 @@ export class ProductsService {
     });
   }
 
-  updateProduct(id: number, updatedProductData: any) {
+  updateProduct(id: number, updatedProductData: IProduct) {
     this.http.put<IProduct>(environment.webApiUrl + 'Products/Update/' + id, updatedProductData)
       .subscribe({
         next: (updatedProd) => {
