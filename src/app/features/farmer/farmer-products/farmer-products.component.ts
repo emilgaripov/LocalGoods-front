@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, switchMap } from "rxjs";
 import { IProduct } from "../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../shared/services/products.service";
 import { CategoriesService } from "../../../shared/services/categories.service";
 import { ICategory } from "../../../shared/interfaces/category.interface";
+import { ProductFormData } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-farmer-products',
@@ -29,20 +30,28 @@ export class FarmerProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriesList = this.categoriesService.categories;
-    this.products$ = this.productsService.farmerFarmProducts$;
-    this.farmId = +this.route.snapshot.params['id'];
-    this.productsService.getProductsByFarmId(this.farmId);
+    this.products$ = this.route.params.pipe(
+      switchMap((param) => {
+        this.farmId = +param['id'];
+        this.productsService.getProductsByFarmId(this.farmId);
+        return this.productsService.farmerFarmProducts$;
+      })
+    );
   }
 
-  onAddProduct(value: any) {
-    // this.productsService.createProduct(this.farmId, value);
+  onAddProduct(newProductData: ProductFormData) {
+    const newProduct: IProduct = {
+      ...newProductData,
+      farmId: this.farmId
+    };
+    console.log(newProduct);
+
+    this.productsService.createProduct(this.farmId, newProduct);
     this.isModalAddOpened = false;
   }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    if (file) {
-      this.fileName = file.name;
-    }
+    this.fileName = file ? file.name : '';
   }
 }

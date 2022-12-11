@@ -1,7 +1,7 @@
 <div class="product">
   <div class="product-content">
     <div class="product-image">
-      <img *ngIf="product.image; else noImage"
+      <img *ngIf="product.imagePath; else noImage"
       src=""
       alt="product image"
       class="object-fit_cover">
@@ -28,23 +28,56 @@
     <form class="modal-form" #editProductForm="ngForm"
           (ngSubmit)="onEditProduct(editProductForm.value)">
 
-      <label for="productName">Product name</label>
-      <input type="text" id="productName" name="productName" required [ngModel]="product.name">
-      <label for="productDesc">Product description</label>
-      <input type="text" id="productDesc" name="productDesc" required [ngModel]="product.description">
-      <label for="productImg">Product image</label>
-      <input type="text" id="productImg" name="productImg" [ngModel]="product.image">
-      <label for="productPrice">Product price</label>
-      <input type="text" id="productPrice" name="productPrice" [ngModel]="product.price">
-<!--      <label for="productCategory">Product category</label>-->
-<!--      <select id="productCategory" name="productCategory" [ngModel]="product.category">-->
-<!--        <option *ngFor="let category of categoriesList" [value]="category">-->
-<!--          {{ category | titlecase }}-->
-<!--        </option>-->
-<!--      </select>-->
+      <div class="form-group">
+        <label for="name">Product name</label>
+        <input type="text" id="name" name="name" [ngModel]="product.name" #name="ngModel" required minlength="3">
+        <div *ngIf="name.touched" class="form-validator">
+          <span *ngIf="name.errors?.['required']">Product name is Required!</span>
+          <span *ngIf="name.errors?.['minlength']">Product name minimum 3 characters are required!</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Product description</label>
+        <input type="text" id="description" name="description" [ngModel]="product.description" #description="ngModel" required>
+        <div *ngIf="description.touched" class="form-validator">
+          <span *ngIf="description.errors?.['required']">Product description is Required!</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="imagePath">Product image</label>
+        <input type="file" class="file-upload" id="imagePath" name="imagePath" ngModel #imagePath="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
+        <div *ngIf="imagePath.touched" class="form-note-text">
+          <span>Selected file: {{ fileName || "No file uploaded yet."}}</span>
+        </div>
+        <div *ngIf="imagePath.errors?.['requiredFileType']" class="form-validator">
+          <span *ngIf="imagePath.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Product price</label>
+        <input type="number" id="price" name="price" [ngModel]="product.price" #price="ngModel" required min="0">
+        <div *ngIf="price.touched" class="form-validator">
+          <span *ngIf="price.errors?.['required']">Product price is Required!</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="categoryId">Product category</label>
+        <select id="categoryId" name="categoryId" ngModel #categoryId="ngModel" required>
+          <option *ngFor="let category of categoriesList" [value]="category.id" [selected]="category.id === product.categoryId">
+            {{ category.name }}
+          </option>
+        </select>
+        <div *ngIf="categoryId.touched" class="form-validator">
+          <span *ngIf="categoryId.errors?.['required']">Please select a category!</span>
+        </div>
+      </div>
 
       <div class="modal-buttons">
-        <button type="submit">Save</button>
+        <button type="submit" [disabled]="!editProductForm.form.valid">Create product</button>
         <button type="button" (click)="isModalEditOpened = false">Cancel</button>
       </div>
     </form>

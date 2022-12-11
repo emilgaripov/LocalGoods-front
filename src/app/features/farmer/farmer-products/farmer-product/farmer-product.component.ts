@@ -3,6 +3,7 @@ import { IProduct } from "../../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../../shared/services/products.service";
 import { ICategory } from "../../../../shared/interfaces/category.interface";
 import { CategoriesService } from "../../../../shared/services/categories.service";
+import { ProductFormData } from "../../../../shared/types/types";
 
 @Component({
   selector: 'app-farmer-product',
@@ -16,6 +17,9 @@ export class FarmerProductComponent implements OnInit {
   isModalEditOpened = false;
   isModalDeleteOpened = false;
 
+  // image upload
+  fileName = '';
+
   constructor(
     private productsService: ProductsService,
     private categoriesService: CategoriesService
@@ -26,12 +30,23 @@ export class FarmerProductComponent implements OnInit {
   }
 
   onDeleteProduct() {
-    this.productsService.deleteProduct(this.product.id);
+    this.productsService.deleteProduct(this.product.id!);
     this.isModalDeleteOpened = false;
   }
 
-  onEditProduct(value: any) {
-    // this.productsService.updateProduct(this.product.id, value);
+  onEditProduct(updatedProductData: ProductFormData) {
+    const updatedProduct: IProduct = {
+      ...updatedProductData,
+      farmId: this.product.farmId
+    };
+    console.log(updatedProduct);
+
+    this.productsService.updateProduct(this.product.id!, updatedProduct);
     this.isModalEditOpened = false;
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.fileName = file ? file.name : '';
   }
 }

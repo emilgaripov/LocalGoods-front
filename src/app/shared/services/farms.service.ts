@@ -43,8 +43,7 @@ export class FarmsService {
 
   deleteFarm(id: number) {
     this.http.delete<boolean>(environment.webApiUrl + 'Farms/' + id).subscribe({
-      next: (value) => {
-        if (!value) return console.log('Failed to delete');
+      next: () => {
         const index = this.farmerFarms.findIndex((farm) => farm.id === id);
         this.farmerFarms.splice(index, 1);
         this.farmerFarms$.next([...this.farmerFarms]);
@@ -52,7 +51,7 @@ export class FarmsService {
     });
   }
 
-  updateFarm(id: number, updatedFarmData: any) {
+  updateFarm(id: number, updatedFarmData: IFarm) {
     this.http.put<IFarm>(environment.webApiUrl + 'Farms/' + id, updatedFarmData).subscribe({
       next: (updatedFarm) => {
         const index = this.farmerFarms.findIndex((farm) => farm.id === id);

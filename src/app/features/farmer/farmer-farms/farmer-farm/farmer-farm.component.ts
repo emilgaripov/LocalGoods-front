@@ -26,7 +26,7 @@ export class FarmerFarmComponent implements OnInit {
   }
 
   onDeleteFarm() {
-    this.farmsService.deleteFarm(this.farm.id);
+    this.farmsService.deleteFarm(this.farm.id!);
     this.isModalDeleteOpened = false;
   }
 }

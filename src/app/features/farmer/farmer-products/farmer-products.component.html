@@ -17,52 +17,50 @@
           (ngSubmit)="onAddProduct(addProductForm.value)">
 
       <div class="form-group">
-        <label for="productName">Product name</label>
-        <input type="text" id="productName" name="productName" ngModel #productName="ngModel" required minlength="3">
-        <div *ngIf="productName.touched" class="form-validator">
-          <span *ngIf="productName.errors?.['required']">Product name is Required!</span>
-          <span *ngIf="productName.errors?.['minlength']">Product name minimum 3 characters are required!</span>
+        <label for="name">Product name</label>
+        <input type="text" id="name" name="name" ngModel #name="ngModel" required minlength="3">
+        <div *ngIf="name.touched" class="form-validator">
+          <span *ngIf="name.errors?.['required']">Product name is Required!</span>
+          <span *ngIf="name.errors?.['minlength']">Product name minimum 3 characters are required!</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="productDesc">Product description</label>
-        <input type="text" id="productDesc" name="productDesc" ngModel #productDesc="ngModel" required minlength="50">
-        <div *ngIf="productDesc.touched" class="form-validator">
-          <span *ngIf="productDesc.errors?.['required']">Product description is Required!</span>
-          <span *ngIf="productDesc.errors?.['minlength']">Product description minimum 50 characters are required!</span>
+        <label for="description">Product description</label>
+        <input type="text" id="description" name="description" ngModel #description="ngModel" required>
+        <div *ngIf="description.touched" class="form-validator">
+          <span *ngIf="description.errors?.['required']">Product description is Required!</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="productImg">Product image</label>
-        <input type="file" class="file-upload" id="productImg" name="productImg" ngModel #fileUpload="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
-        <div *ngIf="fileUpload.touched" class="form-note-text">
+        <label for="imagePath">Product image</label>
+        <input type="file" class="file-upload" id="imagePath" name="imagePath" ngModel #imagePath="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
+        <div *ngIf="imagePath.touched" class="form-note-text">
           <span>Selected file: {{ fileName || "No file uploaded yet."}}</span>
         </div>
-        <div *ngIf="fileUpload.errors?.['requiredFileType']" class="form-validator">
-          <span *ngIf="fileUpload.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
+        <div *ngIf="imagePath.errors?.['requiredFileType']" class="form-validator">
+          <span *ngIf="imagePath.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="productPrice">Product price</label>
-        <input type="number" id="productPrice" name="productPrice" ngModel #productPrice="ngModel" required min="1">
-        <div *ngIf="productPrice.touched" class="form-validator">
-          <span *ngIf="productPrice.errors?.['required']">Product price is Required!</span>
-          <span *ngIf="productPrice.errors?.['min']">Product price minimum 1 UAH!</span>
+        <label for="price">Product price</label>
+        <input type="number" id="price" name="price" ngModel #price="ngModel" required min="0">
+        <div *ngIf="price.touched" class="form-validator">
+          <span *ngIf="price.errors?.['required']">Product price is Required!</span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="productCategory">Product category</label>
-        <select id="productCategory" name="productCategory" ngModel #productCategory="ngModel" required>
+        <label for="categoryId">Product category</label>
+        <select id="categoryId" name="categoryId" ngModel #categoryId="ngModel" required>
           <option *ngFor="let category of categoriesList" [value]="category.id">
             {{ category.name }}
           </option>
         </select>
-        <div *ngIf="productCategory.touched" class="form-validator">
-          <span *ngIf="productCategory.errors?.['required']">Please select a category!</span>
+        <div *ngIf="categoryId.touched" class="form-validator">
+          <span *ngIf="categoryId.errors?.['required']">Please select a category!</span>
         </div>
       </div>
 
