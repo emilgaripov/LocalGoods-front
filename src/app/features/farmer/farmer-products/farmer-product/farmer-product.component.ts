@@ -26,21 +26,12 @@ export class FarmerProductComponent implements OnInit {
   }
 
   onDeleteProduct() {
-    // this.productsService.deleteProduct(this.product.id);
+    this.productsService.deleteProduct(this.product.id);
     this.isModalDeleteOpened = false;
   }
 
-  onEditProduct(value: { productName: string, productDescription: string }) {
-    if (!value.productName || !value.productDescription) return;
-
-    // const newProduct: IProduct = {
-    //   id: this.product.id,
-    //   farmId: this.product.farmId,
-    //   name: value.productName,
-    //   description: value.productDescription,
-    //   image: ''
-    // };
-    // this.farmerProductsService.editProduct(newProduct);
+  onEditProduct(value: any) {
+    // this.productsService.updateProduct(this.product.id, value);
     this.isModalEditOpened = false;
   }
 }

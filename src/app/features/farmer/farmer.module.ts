@@ -24,9 +24,8 @@ import { AgmCoreModule } from '@agm/core';
     RouterModule.forChild([{
       path: '',
       component: FarmerComponent,
-      children: [{path: ':id', component: FarmerProductsComponent}]
-    }
-    ]),
+      children: [{ path: ':id', component: FarmerProductsComponent }]
+    }]),
     FormsModule,
     ModalModule,
     AgmCoreModule.forRoot({

@@ -1,5 +1,4 @@
 <div class="product">
-
   <div class="product-content">
     <div class="product-image">
       <img *ngIf="product.image; else noImage"
@@ -14,6 +13,7 @@
       <div>{{ product.description }}</div>
       <div class="product-price">{{ product.price | currency: 'EUR' }}</div>
     </div>
+
     <div class="product-actions">
       <button class="edit-btn" (click)="isModalEditOpened = true" title="Edit">Edit</button>
       <button class="delete-btn" (click)="isModalDeleteOpened = true">Delete</button>

@@ -20,8 +20,8 @@ export class FarmsService {
   getFarmerFarms() {
     const userId = this.getUserId();
     this.http.get<IFarm[]>(environment.webApiUrl + 'Farmers/' + userId + '/Farms').subscribe({
-      next: (data) => {
-        this.farmerFarms = data;
+      next: (farms) => {
+        this.farmerFarms = farms;
         this.farmerFarms$.next([...this.farmerFarms]);
       }
     });
@@ -29,18 +29,6 @@ export class FarmsService {
 
   getFarmById(id: number): Observable<IFarm> {
     return this.http.get<IFarm>(environment.webApiUrl + 'Farms/' + id);
-  }
-
-  deleteFarm(id: number) {
-    this.http.delete<boolean>(environment.webApiUrl + 'Farms/' + id).subscribe({
-      next: (value) => {
-        if (!value) return console.log('Failed to delete');
-
-        const index = this.farmerFarms.findIndex((farm) => farm.id === id);
-        this.farmerFarms.splice(index, 1);
-        this.farmerFarms$.next([...this.farmerFarms]);
-      }
-    });
   }
 
   createFarm(newFarmData: any) {
@@ -53,10 +41,21 @@ export class FarmsService {
     });
   }
 
-  updateFarm(farmId: number, updatedFarmData: any) {
-    this.http.put<IFarm>(environment.webApiUrl + 'Farms/' + farmId, updatedFarmData).subscribe({
+  deleteFarm(id: number) {
+    this.http.delete<boolean>(environment.webApiUrl + 'Farms/' + id).subscribe({
+      next: (value) => {
+        if (!value) return console.log('Failed to delete');
+        const index = this.farmerFarms.findIndex((farm) => farm.id === id);
+        this.farmerFarms.splice(index, 1);
+        this.farmerFarms$.next([...this.farmerFarms]);
+      }
+    });
+  }
+
+  updateFarm(id: number, updatedFarmData: any) {
+    this.http.put<IFarm>(environment.webApiUrl + 'Farms/' + id, updatedFarmData).subscribe({
       next: (updatedFarm) => {
-        const index = this.farmerFarms.findIndex((farm) => farm.id === updatedFarm.id);
+        const index = this.farmerFarms.findIndex((farm) => farm.id === id);
         this.farmerFarms[index] = updatedFarm;
         this.farmerFarms$.next([...this.farmerFarms]);
       }
