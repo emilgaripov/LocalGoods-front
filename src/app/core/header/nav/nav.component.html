@@ -9,6 +9,7 @@
   <div class="nav-goup">
     <h3 class="nav-parent">Products</h3>
     <ul class="nav-list" >
+      <li><a (click)="visitAllProducts($event)" >All products</a></li>
       <li *ngFor=" let category of categories$ | async">
         <a [routerLink]="['/products']" [queryParams]="{'categories': category.name}" (click)="toggleMenu($event)">{{category.name}}</a>
       </li>
@@ -24,14 +25,10 @@
       </ng-container>
 
       <ng-container *ngIf="!(isUser$ | async)">
-        <li><a  routerLink="auth/login">Sign in</a></li>
+        <li><a  routerLink="auth/login" (click)="toggleMenu($event)">Sign in</a></li>
         <li><a  routerLink="auth/register" >Sign up</a></li>
       </ng-container>
     </ul>
-    <!-- <ul class="nav-list">
-      <li><a href="#" class="nav-parent">personal info</a></li>
-      <li><a href="#" class="nav-parent">shopping list</a></li>
-      <li><a href="#" class="nav-parent">favorites</a></li>
-    </ul> -->
+
   </div>
 </nav>
