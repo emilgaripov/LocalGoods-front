@@ -18,8 +18,7 @@ export class FarmsService {
   }
 
   getFarmerFarms() {
-    const userId = this.getUserId();
-    this.http.get<IFarm[]>(environment.webApiUrl + 'Farmers/' + userId + '/Farms').subscribe({
+    this.http.get<IFarm[]>('https://localgoodsback.azurewebsites.net/MyFarms').subscribe({
       next: (farms) => {
         this.farmerFarms = farms;
         this.farmerFarms$.next([...this.farmerFarms]);

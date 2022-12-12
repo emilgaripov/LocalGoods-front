@@ -18,21 +18,26 @@ import { ProductsService } from 'src/app/shared/services/products.service';
 })
 export class FarmComponent implements OnInit {
   farm$!: Observable<IFarm>;
+  farmProducts$!: Observable<IProduct[]>;
+  farmId!: number;
   isLoading = true;
 
   constructor(
     private route: ActivatedRoute,
     private farmsService: FarmsService,
+    private productsService: ProductsService
   ) {}
 
   ngOnInit(): void {
     this.farm$ = this.route.params.pipe(
       switchMap((param) => {
         this.isLoading = false;
-        const farmId = +param['id'];
-        return this.farmsService.getFarmById(farmId);
+        this.farmId = +param['id'];
+        this.productsService.getProductsByFarmId(this.farmId);
+        return this.farmsService.getFarmById(this.farmId);
       })
     );
+    this.farmProducts$ = this.productsService.farmerFarmProducts$;
   }
 
 }

@@ -32,9 +32,9 @@ export class AuthService {
   }
 
   logout() {
-    this.user$.next(null);
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    this.user$.next(null);
   }
 
   autoLogin() {

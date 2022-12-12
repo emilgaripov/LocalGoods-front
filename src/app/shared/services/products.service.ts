@@ -47,7 +47,7 @@ export class ProductsService {
     });
   }
 
-  updateProduct(id: number, updatedProductData: IProduct) {
+  updateProduct(id: number, updatedProductData: any) {
     this.http.put<IProduct>(environment.webApiUrl + 'Products/Update/' + id, updatedProductData)
       .subscribe({
         next: (updatedProd) => {
