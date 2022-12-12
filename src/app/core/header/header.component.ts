@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
+import { first, Observable } from 'rxjs';
+import { AuthService } from 'src/app/features/auth/auth.service';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +13,14 @@ import { NavigationEnd, Router } from "@angular/router";
 export class HeaderComponent implements OnInit {
   @Input() navOpen?: boolean
   currentPage!: string;
+  isUser$!: Observable<IUser | null>;
+  user!: IUser
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.router.events.subscribe({
@@ -20,9 +30,18 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+    this.isUser$ = this.authService.user$;
+
+    this.isUser$.subscribe((u) => {
+      if (u) {
+        this.userService.getUserById()
+          .pipe(first())
+          .subscribe((user) => this.user = user)
+      }
+    })
   }
 
-  setIsNav(event:any){
+  setIsNav(event: any) {
     this.navOpen = event
   }
 }

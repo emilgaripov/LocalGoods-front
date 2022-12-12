@@ -1,13 +1,21 @@
 <div class="header-container" [ngClass]="currentPage === '' ? 'home' : currentPage === 'farmer' ? 'farm' : null">
   <app-logo class="logo-container" [ngClass]=" navOpen ? 'nav-open' : null "></app-logo>
-  <app-nav class="nav-container" (isNav)="setIsNav($event)"></app-nav>
+  <app-nav class="nav-container" (isNav)="setIsNav($event)" [user]="user"></app-nav>
   <div class="redirect-container" *ngIf="currentPage === ''">
-    <button class="button submit login-redirect" routerLink="farmer">
-      Farmer in
-    </button>
+    <ng-container *ngIf="user && (user.roles.includes('Farmer'))">
+      <button  class="button submit login-redirect" routerLink="farmer">
+        My Farms
+      </button>
+    </ng-container>
+    <ng-container *ngIf="!user">
+      <button class="button submit login-redirect" routerLink="auth/login">
+        Sign in
+      </button>
+    </ng-container>
   </div>
   <app-greeting
     class="welcome-user"
     *ngIf="currentPage === 'farmer'"
+    [user]="user"
   ></app-greeting>
 </div>
