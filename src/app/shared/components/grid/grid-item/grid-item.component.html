@@ -1,7 +1,7 @@
 <div class="item">
   <div class="item-image">
-    <img *ngIf="item.image; else noImage"
-      src=""
+    <img *ngIf="item.imagePath"
+      [src]="'https://localgoodsback.azurewebsites.net/Images/Products/'+ item.imagePath"
       alt="product image"
       class="object-fit_cover">
     <ng-template #noImage>No image yet ...</ng-template>

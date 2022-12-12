@@ -16,6 +16,15 @@
     </ul>
   </div>
   <div class="nav-goup">
+    <h3 class="nav-parent">Farms</h3>
+    <ul class="nav-list" >
+      <li><a (click)="visitAllFarms($event)" >All farms</a></li>
+      <li *ngFor=" let farm of farms$ | async">
+        <a [routerLink]="['/farm', farm.id]" (click)="toggleMenu($event)">{{farm.name}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="nav-goup">
     <h3 class="nav-parent">Account</h3>
 
     <ul class="nav-list">

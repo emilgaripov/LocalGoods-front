@@ -19,8 +19,6 @@ import { ProductsService } from 'src/app/shared/services/products.service';
 export class FarmComponent implements OnInit {
   farm$!: Observable<IFarm>;
   isLoading = true;
-  // farm!: IFarm;
-  // subscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,

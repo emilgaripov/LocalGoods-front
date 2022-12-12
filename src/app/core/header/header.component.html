@@ -7,7 +7,7 @@
         My Farms
       </button>
     </ng-container>
-    <ng-container *ngIf="!user">
+    <ng-container *ngIf="!(isUser$ | async)">
       <button class="button submit login-redirect" routerLink="auth/login">
         Sign in
       </button>
