@@ -11,26 +11,26 @@
 class="map-box">
 
   <agm-overlay
-    *ngFor="let m of markers; let i = index"
-    [latitude]="m.lat"
-    [longitude]="m.lng"
-    (markerClick)="clickedMarker(m.name, i)"
+    *ngFor="let f of farms$ | async; let i = index"
+    [latitude]="f.latitude"
+    [longitude]="f.longitude"
+    (markerClick)="clickedMarker(f.name, i)"
   >
     <div class="farm-details">
-      <a [routerLink]="['farm', m.id]" [title]="m.name" class="farm-image">
-        <img [src]="m.image" alt="farm image">
+      <a [routerLink]="['farm', f.id]" [title]="f.name" class="farm-image">
+        <img [src]="'https://localgoodsback.azurewebsites.net/Images/Farms/' + f.imagePath" alt="farm image">
       </a>
-      <a [routerLink]="['farm', m.id]" class="farm-name"> 
-        <span>{{m.name}}</span>
+      <a [routerLink]="['farm', f.id]" class="farm-name"> 
+        <span>{{f.name}}</span>
       </a>
     </div>
   </agm-overlay>
 
   <agm-marker 
-  *ngFor="let m of markers; let i = index" 
+  *ngFor="let f of farms$ | async; let i = index" 
   [agmFitBounds]="true"
-  [latitude]="m.lat" 
-  [longitude]="m.lng" 
+  [latitude]="f.latitude" 
+  [longitude]="f.longitude" 
   [visible]="false"
   >
 
