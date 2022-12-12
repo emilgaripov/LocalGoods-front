@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter, OnInit,
+  EventEmitter, Input, OnInit,
   Output,
   Renderer2,
   ViewChild
@@ -13,6 +13,8 @@ import { AuthService } from 'src/app/features/auth/auth.service';
 import { ICategory } from "../../../shared/interfaces/category.interface";
 import { CategoriesService } from "../../../shared/services/categories.service";
 import { IUser } from "../../../shared/interfaces/user.interface";
+import { IFarm } from 'src/app/shared/interfaces/farm.interface';
+import { FarmsService } from 'src/app/shared/services/farms.service';
 
 @Component({
   selector: 'app-nav',
@@ -27,15 +29,18 @@ export class NavComponent implements OnInit {
   @Output() isNav = new EventEmitter<boolean>()
 
   categories$!: Observable<ICategory[]>;
+  farms$!:Observable<IFarm[]>;
 
   nav = false;
   isUser$!: Observable<IUser | null>;
+  @Input() user!:IUser;
 
   constructor(
     private renderer: Renderer2,
     private route: Router,
     private categoriesService: CategoriesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private farmsService:FarmsService
   ) {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (!this.nav) return
@@ -48,6 +53,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories$ = this.categoriesService.getHomeCategories();
+    this.farms$ = this.farmsService.getAllFarms();
     this.isUser$ = this.authService.user$;
   }
 
@@ -67,11 +73,22 @@ export class NavComponent implements OnInit {
   }
 
   viewAccount() {
-    this.route.navigate(['user'])
+    this.route.navigate(['user']);
+    this.toggleMenu()
   }
 
   visitAllProducts(event: Event){
     this.route.navigate(['products'])
+    this.toggleMenu(event);
+  }
+
+  viewFarms(event: Event){
+    this.route.navigate(['farmer'])
+    this.toggleMenu(event);
+  }
+
+  visitAllFarms(event: Event){
+    this.route.navigate(['farms'])
     this.toggleMenu(event);
   }
 }

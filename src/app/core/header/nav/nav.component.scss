@@ -33,6 +33,7 @@ h2 {
   flex-direction: column;
   gap: 2em;
   z-index: 10;
+  overflow-y: scroll;
 
   .nav-parent {
     color: #fff;
@@ -76,11 +77,10 @@ h2 {
     height: auto;
     background-color: $limeGreen;
     position: static;
-    // top: 0;
-    // left: 0;
     flex-direction: row;
     gap: 2em;
     z-index: 10;
+    overflow: visible;
 
     .nav-goup {
       position: relative;

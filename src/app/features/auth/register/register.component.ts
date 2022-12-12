@@ -26,11 +26,15 @@ export class RegisterComponent implements OnInit {
     this.authService.createUser(data).subscribe({
       next: () => {
         this.submitted = false;
-        this.goToLogin();
+        // this.goToLogin();
       },
       error: () => {
         this.submitted = false;
+      },
+      complete: () => {
+        this.goToLogin();
       }
+
     });
   }
 

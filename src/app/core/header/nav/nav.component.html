@@ -5,7 +5,7 @@
 </button>
 <nav class="nav-header-menu" [ngStyle]="nav ? {'display':'flex'} : null " #navmenu>
   <app-logo [mode]="'nav'" (click)="toggleMenu($event)"></app-logo>
-  <h2 class="nav-header-greeting">Welcome, guest!</h2>
+  <h2 class="nav-header-greeting">Welcome, {{ user ? user.userName : 'guest'}}!</h2>
   <div class="nav-goup">
     <h3 class="nav-parent">Products</h3>
     <ul class="nav-list" >
@@ -16,11 +16,21 @@
     </ul>
   </div>
   <div class="nav-goup">
+    <h3 class="nav-parent">Farms</h3>
+    <ul class="nav-list" >
+      <li><a (click)="visitAllFarms($event)" >All farms</a></li>
+      <li *ngFor=" let farm of farms$ | async">
+        <a [routerLink]="['/farm', farm.id]" (click)="toggleMenu($event)">{{farm.name}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="nav-goup">
     <h3 class="nav-parent">Account</h3>
 
     <ul class="nav-list">
       <ng-container *ngIf="isUser$ | async">
         <li><a (click)=viewAccount()>Personal Info</a></li>
+        <li *ngIf="user && user.roles.includes('Farmer')"><a (click)=viewFarms($event)>My Farms</a></li>
         <li><a (click)=signOut()>Sign out</a></li>
       </ng-container>
 

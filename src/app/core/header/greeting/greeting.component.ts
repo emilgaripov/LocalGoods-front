@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-greeting',
@@ -8,4 +9,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class GreetingComponent {
 
+  @Input() user!: IUser
 }
