@@ -32,8 +32,7 @@ export class FarmsService {
   }
 
   createFarm(newFarmData: any) {
-    const userId = this.getUserId();
-    this.http.post<IFarm>(environment.webApiUrl + 'Farms/' + userId, newFarmData).subscribe({
+    this.http.post<IFarm>(environment.webApiUrl + 'Farms/', newFarmData).subscribe({
       next: (newFarm) => {
         this.farmerFarms.push(newFarm);
         this.farmerFarms$.next([...this.farmerFarms]);
