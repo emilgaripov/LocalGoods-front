@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter, OnInit,
+  EventEmitter, Input, OnInit,
   Output,
   Renderer2,
   ViewChild
@@ -30,6 +30,7 @@ export class NavComponent implements OnInit {
 
   nav = false;
   isUser$!: Observable<IUser | null>;
+  @Input() user!:IUser;
 
   constructor(
     private renderer: Renderer2,
@@ -67,11 +68,17 @@ export class NavComponent implements OnInit {
   }
 
   viewAccount() {
-    this.route.navigate(['user'])
+    this.route.navigate(['user']);
+    this.toggleMenu()
   }
 
   visitAllProducts(event: Event){
     this.route.navigate(['products'])
+    this.toggleMenu(event);
+  }
+
+  viewFarms(event: Event){
+    this.route.navigate(['farmer'])
     this.toggleMenu(event);
   }
 }
