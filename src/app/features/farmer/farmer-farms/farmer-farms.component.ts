@@ -25,11 +25,12 @@ export class FarmerFarmsComponent implements OnInit {
   constructor(private farmsService: FarmsService) {}
 
   ngOnInit(): void {
-    this.farms$ = this.farmsService.getAllFarms();
-    // this.farmsService.getFarmerFarms();
+    this.farms$ = this.farmsService.farmerFarms$;
+    this.farmsService.getFarmerFarms();
   }
 
   onAddFarm(newFarmData: FarmFormData) {
+    const formData = new FormData();
     const newFarm = {
       ...newFarmData,
       latitude: this.latitude,
@@ -37,9 +38,22 @@ export class FarmerFarmsComponent implements OnInit {
       createdOn: new Date().toString(),
       imageFile: this.file
     };
-    console.log(newFarm);
 
-    this.farmsService.createFarm(newFarm);
+    formData.append('name', newFarm.name);
+    formData.append('description', newFarm.description);
+    formData.append('imageFile', newFarm.imageFile);
+    formData.append('country', newFarm.country);
+    formData.append('city', newFarm.city);
+    formData.append('address', newFarm.address);
+    formData.append('latitude', newFarm.latitude.toString());
+    formData.append('longitude', newFarm.longitude.toString());
+    formData.append('email', newFarm.email);
+    formData.append('telephone', newFarm.telephone);
+    formData.append('faceBook', newFarm.faceBook);
+    formData.append('instagram', newFarm.instagram);
+    formData.append('createdOn', '12.12.2022');
+
+    this.farmsService.createFarm(formData);
     this.isModalAddOpened = false;
   }
 
@@ -51,6 +65,7 @@ export class FarmerFarmsComponent implements OnInit {
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    this.file = file;
     this.fileName = file ? file.name : '';
   }
 }
