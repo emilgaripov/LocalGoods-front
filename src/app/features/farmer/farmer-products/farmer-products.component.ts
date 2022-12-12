@@ -21,6 +21,7 @@ export class FarmerProductsComponent implements OnInit {
 
   // image upload
   fileName = '';
+  file!: File;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,18 +41,21 @@ export class FarmerProductsComponent implements OnInit {
   }
 
   onAddProduct(newProductData: ProductFormData) {
-    const newProduct: IProduct = {
-      ...newProductData,
-      farmId: this.farmId
-    };
-    console.log(newProduct);
+    const formData = new FormData();
 
-    this.productsService.createProduct(this.farmId, newProduct);
+    formData.append('name', newProductData.name);
+    formData.append('description', newProductData.description);
+    formData.append('imageFile', this.file);
+    formData.append('price', newProductData.price.toString());
+    formData.append('categoryId', newProductData.categoryId.toString());
+
+    this.productsService.createProduct(this.farmId, formData);
     this.isModalAddOpened = false;
   }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    this.file = file;
     this.fileName = file ? file.name : '';
   }
 }
