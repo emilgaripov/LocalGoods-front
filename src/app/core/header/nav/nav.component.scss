@@ -77,11 +77,11 @@ h2 {
     height: auto;
     background-color: $limeGreen;
     position: static;
-    // top: 0;
-    // left: 0;
     flex-direction: row;
     gap: 2em;
     z-index: 10;
+    overflow-y: visible;
+
 
     .nav-goup {
       position: relative;
