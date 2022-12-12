@@ -1,6 +1,6 @@
 <div class="farm-page-container" *ngIf="farm$ | async as farm; else loading">
   <div class="farm-page-image">
-    <img src="" alt="farm image">
+    <img [src]="farm.imagePath ? 'https://localgoodsback.azurewebsites.net/Images/Farms/' + farm.imagePath : '../../../../assets/images/no-image.webp'" [alt]="'farm ' + (farm.name | lowercase) + ' image'">
   </div>
   <div class="farm-page-description">
     <h1>{{ farm.name }}</h1>
