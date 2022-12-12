@@ -20,21 +20,22 @@ export class FarmerFarmsComponent implements OnInit {
 
   //image upload
   fileName = '';
+  file!: File;
 
   constructor(private farmsService: FarmsService) {}
 
   ngOnInit(): void {
-    this.farms$ = this.farmsService.farmerFarms$;
-    this.farmsService.getFarmerFarms();
+    this.farms$ = this.farmsService.getAllFarms();
+    // this.farmsService.getFarmerFarms();
   }
 
   onAddFarm(newFarmData: FarmFormData) {
-    const newFarm: IFarm = {
+    const newFarm = {
       ...newFarmData,
       latitude: this.latitude,
       longitude: this.longitude,
-      userId: localStorage.getItem('userId') ?? '',
-      createdOn: new Date().toString()
+      createdOn: new Date().toString(),
+      imageFile: this.file
     };
     console.log(newFarm);
 

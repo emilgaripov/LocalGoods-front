@@ -43,13 +43,13 @@
       </div>
 
       <div class="form-group">
-        <label for="imagePath">Farm image</label>
-        <input type="file" class="file-upload" id="imagePath" name="imagePath" ngModel #imagePath="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
-        <div *ngIf="imagePath.touched" class="form-note-text">
+        <label for="imageFile">Farm image</label>
+        <input type="file" class="file-upload" id="imageFile" name="imageFile" ngModel #imageFile="ngModel" (change)="onFileSelected($event)" requiredFileType="image/jpg">
+        <div *ngIf="imageFile.touched" class="form-note-text">
           <span>Selected file: {{ fileName || "No file uploaded yet."}}</span>
         </div>
-        <div *ngIf="imagePath.errors?.['requiredFileType']" class="form-validator">
-          <span *ngIf="imagePath.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
+        <div *ngIf="imageFile.errors?.['requiredFileType']" class="form-validator">
+          <span *ngIf="imageFile.errors?.['requiredFileType']">Only jpg is acceptable file format</span>
         </div>
       </div>
 
@@ -87,8 +87,8 @@
       </div>
 
       <div class="form-group">
-        <label for="faceBook">Facebook link</label>
-        <input type="text" id="faceBook" name="faceBook" ngModel>
+        <label for="facebook">Facebook link</label>
+        <input type="text" id="facebook" name="facebook" ngModel>
       </div>
 
       <div class="form-group">
