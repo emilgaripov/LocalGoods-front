@@ -69,4 +69,9 @@ export class NavComponent implements OnInit {
   viewAccount() {
     this.route.navigate(['user'])
   }
+
+  visitAllProducts(event: Event){
+    this.route.navigate(['products'])
+    this.toggleMenu(event);
+  }
 }

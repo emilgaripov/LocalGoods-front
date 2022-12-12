@@ -1,5 +1,5 @@
 <div class="header-container" [ngClass]="currentPage === '' ? 'home' : currentPage === 'farmer' ? 'farm' : null">
-  <app-logo class="logo-container" [ngStyle]="{visibility: navOpen ? 'hidden' : 'visible'}"></app-logo>
+  <app-logo class="logo-container" [ngClass]=" navOpen ? 'nav-open' : null "></app-logo>
   <app-nav class="nav-container" (isNav)="setIsNav($event)"></app-nav>
   <div class="redirect-container" *ngIf="currentPage === ''">
     <button class="button submit login-redirect" routerLink="farmer">

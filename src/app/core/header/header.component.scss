@@ -23,6 +23,10 @@
   .logo-container {
     grid-area: logo;
     justify-self: flex-start;
+
+    &.nav-open{
+      visibility: hidden;
+    }
   }
   .redirect-container {
     grid-area: redirect;
@@ -74,6 +78,12 @@
     &.farm {
       grid-template-areas: "logo nav . welcome";
       grid-template-columns: 100px auto;
+    }
+    .logo-container {
+  
+      &.nav-open{
+        visibility: visible;
+      }
     }
   }
 }
