@@ -8,6 +8,5 @@ import { IUser } from 'src/app/shared/interfaces/user.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GreetingComponent {
-
-  @Input() user!: IUser
+  @Input() user!: IUser | null;
 }

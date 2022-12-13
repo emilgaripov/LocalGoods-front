@@ -24,9 +24,7 @@ export class CategoriesService {
 
   private getAllCategories() {
     this.http.get<ICategory[]>(environment.webApiUrl + 'Categories')
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (data) => this.allCategories = data
       });
@@ -34,10 +32,9 @@ export class CategoriesService {
 
   getHomeCategories() {
     return this.http.get<ICategory[]>(environment.webApiUrl + 'Categories')
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
   }
+
   private errorHandler(error: HttpErrorResponse) {
     this.errorService.handle(error.error.errors.id)
     return throwError(() => error.error.errors.id)

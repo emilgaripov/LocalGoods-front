@@ -16,7 +16,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private errorService: ErrorService
-  ) { }
+  ) {}
 
   get token() {
     return localStorage.getItem('token');
@@ -24,9 +24,7 @@ export class AuthService {
 
   createUser(user: RegistrationFormData): Observable<unknown> {
     return this.http.post(this.url + 'Authentication/register-user', user)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
   }
 
   login(user: LoginFormData): Observable<IUser> {
@@ -40,24 +38,19 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+    localStorage.clear();
     this.user$.next(null);
   }
 
   autoLogin() {
-    if (!this.token) return this.user$.next(null);
-
-    this.getAuthorizedUser().subscribe({
-      next: (user) => this.user$.next(user)
-    });
+    this.user$.next(this.getUser());
   }
 
   private getAuthorizedUser(): Observable<IUser> {
     return this.http
       .get<IUser>(this.url + 'Users/getidbysession')
       .pipe(
-        tap((user) => this.setUserId(user.id)),
+        tap((user) => this.setUser(user)),
         catchError(this.errorHandler.bind(this))
       );
   }
@@ -66,9 +59,16 @@ export class AuthService {
     localStorage.setItem('token', res.token);
   }
 
-  private setUserId(userId: string) {
-    localStorage.setItem('userId', userId);
+  private setUser(user: IUser) {
+    localStorage.setItem('user', JSON.stringify(user));
   }
+
+  private getUser(): IUser | null {
+    const user = localStorage.getItem('user');
+    if (!user) return null;
+    return JSON.parse(user);
+  }
+
   private errorHandler(error: HttpErrorResponse) {
     this.errorService.handle(error.error.errors.id)
     return throwError(() => error.error.errors.id)
