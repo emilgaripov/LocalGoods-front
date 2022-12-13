@@ -48,8 +48,8 @@ export class GridComponent implements OnInit, OnDestroy {
 
   private getCategoriesIdFromNames(categoriesNames: string) {
     return categoriesNames.split(',').map((catName) => {
-      const cat = this.categoriesList.find((cat) => cat.name === catName);
-      return cat!.id;
+      const cat = this.categoriesList.find((cat) => cat.name === catName)!;
+      return cat.id;
     });
   }
 
