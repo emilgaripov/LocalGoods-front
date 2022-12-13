@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, Observable, switchMap, tap } from "rxjs";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { BehaviorSubject, catchError, Observable, switchMap, tap, throwError } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { IUser } from "../../shared/interfaces/user.interface";
 import { JWT, LoginFormData, RegistrationFormData } from "../../shared/types/types";
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,20 @@ export class AuthService {
   user$ = new BehaviorSubject<IUser | null>(null);
   url = environment.webApiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorService
+  ) { }
 
   get token() {
     return localStorage.getItem('token');
   }
 
   createUser(user: RegistrationFormData): Observable<unknown> {
-    return this.http.post(this.url + 'Authentication/register-user', user);
+    return this.http.post(this.url + 'Authentication/register-user', user)
+      .pipe(
+        catchError(this.errorHandler.bind(this))
+      )
   }
 
   login(user: LoginFormData): Observable<IUser> {
@@ -27,7 +34,8 @@ export class AuthService {
       switchMap((jwt) => {
         this.setToken(jwt);
         return this.getAuthorizedUser();
-      })
+      }),
+      catchError(this.errorHandler.bind(this))
     );
   }
 
@@ -48,7 +56,10 @@ export class AuthService {
   private getAuthorizedUser(): Observable<IUser> {
     return this.http
       .get<IUser>(this.url + 'Users/getidbysession')
-      .pipe(tap((user) => this.setUserId(user.id)));
+      .pipe(
+        tap((user) => this.setUserId(user.id)),
+        catchError(this.errorHandler.bind(this))
+      );
   }
 
   private setToken(res: JWT) {
@@ -57,6 +68,10 @@ export class AuthService {
 
   private setUserId(userId: string) {
     localStorage.setItem('userId', userId);
+  }
+  private errorHandler(error: HttpErrorResponse) {
+    this.errorService.handle(error.error.errors.id)
+    return throwError(() => error.error.errors.id)
   }
 
 }
