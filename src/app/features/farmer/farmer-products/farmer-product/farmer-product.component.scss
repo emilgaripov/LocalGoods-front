@@ -4,10 +4,13 @@
 
   &-name {
     text-align: left;
+    margin: 0;
   }
 
   &-content {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 1em;
   }
 

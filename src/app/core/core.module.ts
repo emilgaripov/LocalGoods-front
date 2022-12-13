@@ -7,6 +7,7 @@ import { RouterLink, RouterLinkWithHref } from "@angular/router";
 import { LogoComponent } from './header/logo/logo.component';
 import { GreetingComponent } from './header/greeting/greeting.component';
 import { NavComponent } from './header/nav/nav.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NavComponent } from './header/nav/nav.component';
     FooterComponent,
     LogoComponent,
     GreetingComponent,
-    NavComponent
+    NavComponent,
+    ErrorComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,7 @@ import { NavComponent } from './header/nav/nav.component';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ]
 })
 export class CoreModule { }

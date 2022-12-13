@@ -1,0 +1,9 @@
+<div class="error-container" *ngIf="errorService.error$ | async as error" >
+  <div class="error">Goat's beard! You've got an error: {{ error }}</div>
+  
+  <button 
+  (click)="errorService.close()"
+  class="button-close"
+  title="close error"
+  >x</button>
+</div>

@@ -1,0 +1,25 @@
+.error-container{
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  gap: 10px;
+
+  .error{
+    color: #f00;
+    font-size: 12px;
+  }
+  .button-close{
+    background-color: #ff0000;
+    font-size: 12px;
+    width: 10px;
+    height: 10px;
+    line-height: 8px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
