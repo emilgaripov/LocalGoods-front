@@ -2,6 +2,10 @@
 
 .farm-page-description {
   padding: 0 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .farm-page-image {
   width: 100%;
@@ -64,11 +68,15 @@
       &.fb {
         &::after {
           background-image: url("../../../assets/images/icons/social/facebook.png");
+          filter: invert(53%) sepia(100%) saturate(5722%) hue-rotate(206deg)
+            brightness(102%) contrast(90%);
         }
       }
       &.insta {
         &::after {
           background-image: url("../../../assets/images/icons/social/instagram.png");
+          filter: invert(12%) sepia(94%) saturate(7449%) hue-rotate(294deg)
+            brightness(102%) contrast(119%);
         }
       }
     }

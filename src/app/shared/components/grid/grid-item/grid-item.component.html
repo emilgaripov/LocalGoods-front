@@ -30,6 +30,18 @@
         <a class="item-social-icon insta" [href]="farm.instagram">Instagram</a>
       </div>
     </div>
+    <div class="farm-info" *ngIf="item.userId">
+      <div class="item-location" >
+        <a  [href]="'https://www.google.com/maps/dir/?api=1&query'+ item.latitude + '-' + item.longitude" >{{ item.country + ', ' + item.city + ', ' + item.address }}</a>
+      </div>
+      <div class="item-phone">
+        <a [href]="'tel:'+ item.telephone" >+{{ item.telephone }}</a>
+      </div>
+      <div class="item-social">
+        <a class="item-social-icon fb" [href]="item.faceBook">Facebook</a>
+        <a class="item-social-icon insta" [href]="item.instagram">Instagram</a>
+      </div>
+    </div>
 
 
   </div>

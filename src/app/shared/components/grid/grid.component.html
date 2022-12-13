@@ -1,5 +1,5 @@
-<div class="grid-container">
-  <h2 class="grid-title">Title</h2>
+<div class="grid-container" [ngClass]="itemsType === 'Products' ? 'products': 'farms'">
+  <h2 class="grid-title">{{itemsType === 'Products' ? 'Products' : 'Farms'}}</h2>
 
   <div class="grid-filters" *ngIf="itemsType === 'Products'">
     <button (click)="openFilters()" class="open-filters-button">Filters</button>
