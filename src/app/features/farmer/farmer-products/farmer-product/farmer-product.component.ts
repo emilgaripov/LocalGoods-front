@@ -27,8 +27,7 @@ export class FarmerProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.product);
-    
+    console.log(this.product)
     this.categoriesList = this.categoriesService.categories;
   }
 

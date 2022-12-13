@@ -19,16 +19,12 @@ export class ProductsService {
 
   getAllProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(environment.webApiUrl + 'Products')
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
   }
 
   getProductsByFarmId(farmId: number) {
     this.http.get<IProduct[]>(environment.webApiUrl + 'Farms/' + farmId + '/FarmProducts')
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (products) => {
           this.farmerFarmProducts = products;
@@ -39,11 +35,10 @@ export class ProductsService {
 
   createProduct(farmId: number, newProductData: any) {
     this.http.post<IProduct>(environment.webApiUrl + 'Products/' + farmId, newProductData)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (newProduct) => {
+          console.log(newProduct)
           this.farmerFarmProducts.push(newProduct);
           this.farmerFarmProducts$.next([...this.farmerFarmProducts]);
         }
@@ -51,10 +46,8 @@ export class ProductsService {
   }
 
   deleteProduct(id: number) {
-    this.http.delete<boolean>(environment.webApiUrl + 'Products/ljh' + id)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+    this.http.delete<boolean>(environment.webApiUrl + 'Products/' + id)
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: () => {
           const index = this.farmerFarmProducts.findIndex((product) => product.id === id);
@@ -66,17 +59,17 @@ export class ProductsService {
 
   updateProduct(id: number, updatedProductData: any) {
     this.http.put<IProduct>(environment.webApiUrl + 'Products/Update/' + id, updatedProductData)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (updatedProd) => {
+          console.log(updatedProd)
           const index = this.farmerFarmProducts.findIndex((prod) => prod.id === id);
           this.farmerFarmProducts[index] = updatedProd;
           this.farmerFarmProducts$.next([...this.farmerFarmProducts]);
         }
       });
   }
+
   private errorHandler(error: HttpErrorResponse) {
     this.errorService.handle(error.error.errors.id)
     return throwError(() => error.error.errors.id)
