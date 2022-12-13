@@ -2,7 +2,7 @@
   <h1>Welcome, {{ user.userName}}!</h1>
 
   <form class="user-edit-form" #editUserForm="ngForm"
-  (ngSubmit)="oneditUser(editUserForm.value)">
+  (ngSubmit)="onEditUser(editUserForm.value)">
 
     <div class="user-edit-form form-froup">
       <label class="user-edit-form label" for="userName">Username:</label>
@@ -15,7 +15,7 @@
 
     <div class="user-edit-form buttons">
       <button *ngIf="editUserForm.valid && edit" type="submit">Save</button>
-      <button *ngIf="!edit" class="edit" (click)="edit=true">edit</button>
+      <button *ngIf="!edit" class="edit" (click)="edit=true">Edit</button>
     </div>
   </form>
 </div>

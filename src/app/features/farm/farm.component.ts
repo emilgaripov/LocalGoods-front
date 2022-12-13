@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 import { IFarm } from 'src/app/shared/interfaces/farm.interface';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
@@ -12,9 +12,7 @@ import { ProductsService } from 'src/app/shared/services/products.service';
   selector: 'app-farm',
   templateUrl: './farm.component.html',
   styleUrls: ['./farm.component.scss'],
-  host: {
-    class: 'grow-container'
-  }
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FarmComponent implements OnInit {
   farm$!: Observable<IFarm>;

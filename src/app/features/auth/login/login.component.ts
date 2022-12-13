@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { LoginFormData } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  host: {
-    class: 'grow-container'
-  }
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   submitted = false;

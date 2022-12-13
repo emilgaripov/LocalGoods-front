@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { RegistrationFormData } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
-  host: {
-    class: 'grow-container'
-  }
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   submitted = false;
