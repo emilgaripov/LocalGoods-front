@@ -14,13 +14,11 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private errorService: ErrorService
-  ) { }
+  ) {}
 
   getUserById() {
     return this.http.get<IUser>(environment.webApiUrl + 'Users/' + this.userId)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
   }
 
   get userId() {
@@ -29,9 +27,7 @@ export class UserService {
 
   editUser(data: editUserFormData) {
     return this.http.put<IUser>(environment.webApiUrl + 'Users/' + this.userId, data)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
   }
 
   private errorHandler(error: HttpErrorResponse) {

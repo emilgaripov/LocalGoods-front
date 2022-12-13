@@ -15,7 +15,7 @@ export class FarmsService {
   constructor(
     private http: HttpClient,
     private errorService: ErrorService
-  ) { }
+  ) {}
 
   getAllFarms(): Observable<IFarm[]> {
     return this.http.get<IFarm[]>(environment.webApiUrl + 'Farms');
@@ -23,9 +23,7 @@ export class FarmsService {
 
   getFarmerFarms() {
     this.http.get<IFarm[]>('https://localgoodsback.azurewebsites.net/MyFarms')
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (farms) => {
           this.farmerFarms = farms;
@@ -36,16 +34,12 @@ export class FarmsService {
 
   getFarmById(id: number): Observable<IFarm> {
     return this.http.get<IFarm>(environment.webApiUrl + 'Farms/' + id)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
   }
 
   createFarm(newFarmData: any) {
     this.http.post<IFarm>(environment.webApiUrl + 'Farms/', newFarmData)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (newFarm) => {
           this.farmerFarms.push(newFarm);
@@ -56,9 +50,7 @@ export class FarmsService {
 
   deleteFarm(id: number) {
     this.http.delete<boolean>(environment.webApiUrl + 'Farms/' + id)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: () => {
           const index = this.farmerFarms.findIndex((farm) => farm.id === id);
@@ -70,9 +62,7 @@ export class FarmsService {
 
   updateFarm(id: number, updatedFarmData: IFarm) {
     this.http.put<IFarm>(environment.webApiUrl + 'Farms/' + id, updatedFarmData)
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-      )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (updatedFarm) => {
           const index = this.farmerFarms.findIndex((farm) => farm.id === id);
