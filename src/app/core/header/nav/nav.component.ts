@@ -26,21 +26,19 @@ export class NavComponent implements OnInit {
   @ViewChild('toggleButton') toggleButton!: ElementRef;
   @ViewChild('navmenu') menu!: ElementRef;
 
-  @Output() isNav = new EventEmitter<boolean>()
+  @Input() user!: IUser | null;
+  @Output() isNav = new EventEmitter<boolean>();
 
   categories$!: Observable<ICategory[]>;
-  farms$!:Observable<IFarm[]>;
-
+  farms$!: Observable<IFarm[]>;
   nav = false;
-  isUser$!: Observable<IUser | null>;
-  @Input() user!:IUser;
 
   constructor(
     private renderer: Renderer2,
     private route: Router,
     private categoriesService: CategoriesService,
     private authService: AuthService,
-    private farmsService:FarmsService
+    private farmsService: FarmsService
   ) {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (!this.nav) return
@@ -54,7 +52,6 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.categories$ = this.categoriesService.getHomeCategories();
     this.farms$ = this.farmsService.getAllFarms();
-    this.isUser$ = this.authService.user$;
   }
 
   toggleMenu(event?: Event) {
