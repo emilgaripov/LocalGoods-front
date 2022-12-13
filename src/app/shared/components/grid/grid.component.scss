@@ -8,10 +8,16 @@
                         "filt sort"
                         "items items";
   gap: 1em;
+
+  &.farms{
+    grid-template-areas: "title title"
+    "sort sort"
+    "items items";
+  }
 }
 
 .grid-title {
-  text-align: start;
+  text-align: center;
   grid-area: title;
 }
 
