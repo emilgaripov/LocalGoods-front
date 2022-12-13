@@ -75,6 +75,17 @@
   }
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  .form-note-text {
+    font-size: 0.7em;
+  }
+}
+
 .edit-btn {
   background-color: $primaryGreen;
 

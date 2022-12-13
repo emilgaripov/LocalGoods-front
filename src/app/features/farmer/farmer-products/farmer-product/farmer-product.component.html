@@ -1,11 +1,9 @@
 <div class="product">
   <div class="product-content">
-    <div class="product-image" >
-      <img
-      [src]="'https://localgoodsback.azurewebsites.net/Images/Products/' + product.imagePath"
-      alt="product image"
-      class="object-fit_cover">
-    <ng-template #noImage>No image yet ...</ng-template>
+    <div class="product-image">
+      <img class="object-fit_cover" alt="product image"
+      [src]="'https://localgoodsback.azurewebsites.net/Images/Products/' + product.imagePath">
+      <ng-template #noImage>No image yet ...</ng-template>
     </div>
 
     <div class="product-description">
@@ -77,7 +75,7 @@
       </div>
 
       <div class="modal-buttons">
-        <button type="submit" [disabled]="!editProductForm.form.valid">Update product</button>
+        <button type="submit" [disabled]="!editProductForm.form.valid">Update</button>
         <button type="button" (click)="isModalEditOpened = false">Cancel</button>
       </div>
     </form>
