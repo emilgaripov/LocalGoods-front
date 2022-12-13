@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable, switchMap, tap } from "rxjs";
 import { environment } from "../../../environments/environment";
-import { IUser } from "../../shared/interfaces/user.interface";
-import { JWT, LoginFormData, RegistrationFormData } from "../../shared/types/types";
+import { IUser } from "../interfaces/user.interface";
+import { JWT, LoginFormData, RegistrationFormData } from "../types/types";
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SortData } from "../../types/types";
+import { ItemsType, SortData } from "../../types/types";
 import { Subscription } from "rxjs";
 import { CategoriesService } from "../../services/categories.service";
 import { ICategory } from "../../interfaces/category.interface";
@@ -12,6 +12,7 @@ import { ICategory } from "../../interfaces/category.interface";
 })
 export class GridComponent implements OnInit, OnDestroy {
   @Input() items: any  = [];
+  @Input() itemsType: ItemsType = 'Farms';
 
   filterOpened = false;
   sortData: SortData = null;
@@ -25,7 +26,7 @@ export class GridComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if(window.innerWidth >= 1024){
+    if (window.innerWidth >= 1024) {
       this.filterOpened = true
     }
 
@@ -35,12 +36,7 @@ export class GridComponent implements OnInit, OnDestroy {
       next: (params) => {
         const filterParams = params as {categories: string};
         this.filtersData = ('categories' in filterParams)
-          ? filterParams.categories
-            .split(',')
-            .map((catName) => {
-              const cat = this.categoriesList.find((cat) => cat.name === catName);
-              return cat!.id;
-            })
+          ? this.getCategoriesIdFromNames(filterParams.categories)
           : [];
       }
     });
@@ -48,6 +44,13 @@ export class GridComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  private getCategoriesIdFromNames(categoriesNames: string) {
+    return categoriesNames.split(',').map((catName) => {
+      const cat = this.categoriesList.find((cat) => cat.name === catName);
+      return cat!.id;
+    });
   }
 
   openFilters() {

@@ -1,12 +1,12 @@
 <div class="grid-container">
   <h2 class="grid-title">Title</h2>
 
-  <div class="grid-filters">
+  <div class="grid-filters" *ngIf="itemsType === 'Products'">
     <button (click)="openFilters()" class="open-filters-button">Filters</button>
 
     <app-filters *ngIf="filterOpened"
-                (filtersClosed)="closeFilters($event)"
-    ></app-filters>
+                (filtersClosed)="closeFilters($event)">
+    </app-filters>
   </div>
 
   <div class="grid-sort">
@@ -14,8 +14,11 @@
       <option>Sort by</option>
       <option value="nameAsc">Name A-Z</option>
       <option value="nameDesc">Name Z-A</option>
-      <option value="priceAsc">Price lower</option>
-      <option value="priceDesc">Price higher</option>
+
+      <ng-container *ngIf="itemsType === 'Products'">
+        <option value="priceAsc">Price lower</option>
+        <option value="priceDesc">Price higher</option>
+      </ng-container>
     </select>
   </div>
 
@@ -24,6 +27,5 @@
                    [item]="item">
     </app-grid-item>
   </div>
-
 </div>
 

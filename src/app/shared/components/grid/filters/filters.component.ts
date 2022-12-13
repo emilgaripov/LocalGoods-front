@@ -44,12 +44,13 @@ export class FiltersComponent implements OnInit, OnDestroy {
   }
 
   onCheck(category: string) {
-    if (this.checkedCategories.includes(category)) {
-      const i = this.checkedCategories.indexOf(category);
-      this.checkedCategories.splice(i, 1);
-    } else {
+    if (!this.checkedCategories.includes(category)) {
       this.checkedCategories.push(category);
+      return;
     }
+
+    const i = this.checkedCategories.indexOf(category);
+    this.checkedCategories.splice(i, 1);
   }
 
   onCheckAll(isChecked: boolean) {

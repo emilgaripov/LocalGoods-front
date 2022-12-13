@@ -8,8 +8,8 @@ import {
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
-import { AuthService } from 'src/app/features/auth/auth.service';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ICategory } from "../../../shared/interfaces/category.interface";
 import { CategoriesService } from "../../../shared/services/categories.service";
 import { IUser } from "../../../shared/interfaces/user.interface";

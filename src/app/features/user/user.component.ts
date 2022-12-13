@@ -1,37 +1,30 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { UserService } from 'src/app/shared/services/user.service';
 import { editUserFormData } from 'src/app/shared/types/types';
+import { AuthService } from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  host: {
-    class: 'grow-container'
-  },
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent implements OnInit {
-
-  user$!: Observable<IUser>
-  edit=false;
+  user$!: Observable<IUser | null>
+  edit = false;
 
   constructor(
-    public userService: UserService
-  ) { }
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.user$ = this.userService.getUserById()
-    .pipe(first())
-    // .subscribe((user) => this.user = user)
+    this.user$ = this.authService.user$;
   }
 
-  oneditUser(data: editUserFormData){
-    console.log(data);
-
+  onEditUser(data: editUserFormData){
     this.userService.editUser(data)
-
   }
 }

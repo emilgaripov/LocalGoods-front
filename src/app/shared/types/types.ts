@@ -2,6 +2,8 @@ export type SortData = { sortBy: string, sortDirection: 'asc' | 'desc' } | null;
 
 export type Roles = 'User' | 'Farmer' | 'Admin';
 
+export type ItemsType = 'Farms' | 'Products';
+
 export type RegistrationFormData = {
   firstName: string,
   lastName: string,
@@ -51,3 +53,4 @@ export type ProductFormData = {
   categoryId: number,
   imagePath: string,
 };
+

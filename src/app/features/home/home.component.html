@@ -2,26 +2,30 @@
   <section class="slide">
     <app-slide></app-slide>
   </section>
+
   <section class="app-description">
     <div class="app-description-text">
       <p>
-        Looking for the best local food in the region? Try our FarmsFoods
-        application to find the best fresh and organic products near you. Browse farms. Search for food. Locate and reserve.
-        Subscribe to be updated on new offers. 
-        <span><a href="#" routerLink="/auth/register" class="redirect-link">Join as a Farmer</a> to be able to find new customers over the Globe or <a href="#" routerLink="/auth" class="redirect-link">Sign up/in</a> and enjoy all the great features for registered users</span>
+        Looking for the best local food in the region? Try our FarmsFoods application to find the best
+        fresh and organic products near you. Browse farms. Search for food. Locate and reserve.
+        Subscribe to be updated on new offers.
+        <span>
+          <a href="#" routerLink="/auth/register" class="redirect-link">Join as a Farmer</a>
+          to be able to find new customers over the Globe or
+          <a href="#" routerLink="/auth/login" class="redirect-link">Sign in/up</a>
+          and enjoy all the great features for registered users
+        </span>
       </p>
     </div>
   </section>
+
   <section>
-    <app-product-categories
-      class="product-categories"
-      id="product-categories"
-    ></app-product-categories>
+    <app-product-categories class="product-categories"
+                            id="product-categories">
+    </app-product-categories>
   </section>
+
   <section>
     <app-map class="map" id="farm-map"></app-map>
-  </section>
-  <section>
-    <!-- <app-top-farms class="top-farms" id="top-farms"></app-top-farms> -->
   </section>
 </div>
