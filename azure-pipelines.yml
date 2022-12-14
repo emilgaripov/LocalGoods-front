@@ -20,6 +20,10 @@ steps:
     script: |
       git config --global user.email "emil.garipov@gmail.com"
       git config --global user.name "egaripov"
-      git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
-      git remote add origin https://github.com/emilgaripov/LocalGoods-front.git
-      git branch -r | grep -v '\->' | while read remote; do git -c http.extraheader="AUTHORIZATION: bearer $(system_accesstoken)" push "${remote#origin/}"; done
+      git remote set-url origin https://EmilGaripov@dev.azure.com/EmilGaripov/LocalGoods/_git/LocalGoods-front.git
+      git remote add upstream https://github.com/emilgaripov/LocalGoods-front.git
+      git fetch upstream
+      git remote -v
+      git checkout
+      git -c http.extraheader="AUTHORIZATION: bearer $(system_accesstoken)" 
+      git push origin
