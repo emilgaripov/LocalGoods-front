@@ -1,7 +1,7 @@
 @import "src/variables";
 
-.error-container{
-  background-color: rgb(255, 209, 209);
+.success-container{
+  background-color: rgb(184, 233, 161);
     position: absolute;
     display: flex;
     border-radius: 10px;
@@ -21,7 +21,7 @@
     flex-direction: column;
   }
   .button-close{
-    background-color: #f00;
+    background-color: $primaryGreen;
     font-size: 14px;
     width: 10px;
     height: 10px;

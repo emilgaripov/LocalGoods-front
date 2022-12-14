@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SuccessService } from 'src/app/shared/services/success.service';
 import { AuthService } from '../../../shared/services/auth.service';
 import { LoginFormData } from "../../../shared/types/types";
 
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {}
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
       },
       error: () => {
         this.submitted = false;
-      }
+     }
     });
   }
 
