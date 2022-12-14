@@ -5,7 +5,7 @@ env:
   UPSTREAM_URL: "https://github.com/FortisBs/LocalGoods.git"
   # Required, token to authenticate bot, could use ${{ secrets.GITHUB_TOKEN }} 
   # Over here, we use a PAT instead to authenticate workflow file changes.
-  WORKFLOW_TOKEN: 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
+  WORKFLOW_TOKEN: "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"
   # Optional, defaults to main
   UPSTREAM_BRANCH: "main"
   # Optional, defaults to UPSTREAM_BRANCH
