@@ -25,4 +25,5 @@ steps:
       git fetch upstream
       git remote -v
       git checkout
-      git push https://$(System.AccessToken)@dev.azure.com/EmilGaripov/LocalGoods/_git/LocalGoods-front.git
+      git branch -m main
+      git push -u https://$(System.AccessToken)@dev.azure.com/EmilGaripov/LocalGoods/_git/LocalGoods-front.git
