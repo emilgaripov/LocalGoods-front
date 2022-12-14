@@ -73,7 +73,7 @@
 
     <div class="form-group role">
       <label for="role">Are you farmer?</label>
-      <input type="checkbox" id="role" name="isFarmer" #isFarmer [ngModel]="isFarmer.checked">
+      <input type="checkbox" id="role" name="isFarmer" #isFarmer [ngModel]="isFarmer.checked" [checked]="isFarmer">
     </div>
 
     <button type="submit" class="auth-button" [disabled]="!form.form.valid || submitted">Sign up</button>

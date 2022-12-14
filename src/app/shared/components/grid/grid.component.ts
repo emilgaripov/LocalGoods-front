@@ -15,6 +15,8 @@ export class GridComponent implements OnInit, OnDestroy {
   @Input() itemsType: ItemsType = 'Farms';
 
   filterOpened = false;
+  wideScreen = false;
+
   sortData: SortData = null;
   categoriesList: ICategory[] = [];
   filtersData: number[] = [];
@@ -28,6 +30,7 @@ export class GridComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (window.innerWidth >= 1024) {
       this.filterOpened = true
+      this.wideScreen = true;
     }
 
     this.categoriesList = this.categoriesService.categories;

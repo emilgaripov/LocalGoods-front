@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
 import { RegistrationFormData } from "../../../shared/types/types";
 
@@ -10,20 +10,27 @@ import { RegistrationFormData } from "../../../shared/types/types";
 })
 export class RegisterComponent implements OnInit {
   submitted = false;
+  toBeFarmer?: boolean;
+  isFarmer!: boolean
 
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.toBeFarmer = this.route.snapshot.queryParams['farmer']
+    if (this.toBeFarmer) {
+      this.isFarmer = true
+    }
+  }
 
   onRegister(data: RegistrationFormData) {
     this.submitted = true;
     this.authService.createUser(data).subscribe({
       next: () => {
         this.submitted = false;
-        // this.goToLogin();
       },
       error: () => {
         this.submitted = false;
@@ -31,7 +38,6 @@ export class RegisterComponent implements OnInit {
       complete: () => {
         this.goToLogin();
       }
-
     });
   }
 
