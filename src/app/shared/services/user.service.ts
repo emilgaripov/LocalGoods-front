@@ -28,6 +28,8 @@ export class UserService {
   }
 
   editUser(data: editUserFormData) {
+    console.log(data);
+    
     return this.http.put<IUser>(environment.webApiUrl + 'Users/' + this.userId, data)
       .pipe(
         tap(()=> this.successService.handle('User updated successfully')),
