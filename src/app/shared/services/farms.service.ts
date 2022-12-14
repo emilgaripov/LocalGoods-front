@@ -22,7 +22,7 @@ export class FarmsService {
   }
 
   getFarmerFarms() {
-    this.http.get<IFarm[]>('https://localgoodsback.azurewebsites.net/MyFarms')
+    this.http.get<IFarm[]>('https://localgoodsback.azurewebsites.net/api/Farmers/MyFarms')
       .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (farms) => {
