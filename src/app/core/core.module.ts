@@ -8,6 +8,7 @@ import { LogoComponent } from './header/logo/logo.component';
 import { GreetingComponent } from './header/greeting/greeting.component';
 import { NavComponent } from './header/nav/nav.component';
 import { ErrorComponent } from './error/error.component';
+import { SuccessComponent } from './success/success.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ErrorComponent } from './error/error.component';
     LogoComponent,
     GreetingComponent,
     NavComponent,
-    ErrorComponent
+    ErrorComponent,
+    SuccessComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,8 @@ import { ErrorComponent } from './error/error.component';
   exports: [
     HeaderComponent,
     FooterComponent,
+    ErrorComponent,
+    SuccessComponent
   ]
 })
 export class CoreModule { }

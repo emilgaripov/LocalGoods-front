@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, Subject, throwError } from "rxjs";
+import { catchError, Observable, Subject, tap, throwError } from "rxjs";
 import { IFarm } from "../interfaces/farm.interface";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { ErrorService } from './error.service';
+import { SuccessService } from './success.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class FarmsService {
 
   constructor(
     private http: HttpClient,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private successService: SuccessService
   ) {}
 
   getAllFarms(): Observable<IFarm[]> {
@@ -23,7 +25,9 @@ export class FarmsService {
 
   getFarmerFarms() {
     this.http.get<IFarm[]>('https://localgoodsback.azurewebsites.net/api/Farmers/MyFarms')
-      .pipe(catchError(this.errorHandler.bind(this)))
+      .pipe(
+        catchError(this.errorHandler.bind(this))
+        )
       .subscribe({
         next: (farms) => {
           this.farmerFarms = farms;
@@ -39,7 +43,10 @@ export class FarmsService {
 
   createFarm(newFarmData: any) {
     this.http.post<IFarm>(environment.webApiUrl + 'Farms/', newFarmData)
-      .pipe(catchError(this.errorHandler.bind(this)))
+      .pipe(
+        tap(()=> this.successService.handle('Farm created successfully')),
+        catchError(this.errorHandler.bind(this))
+        )
       .subscribe({
         next: (newFarm) => {
           this.farmerFarms.push(newFarm);
@@ -50,7 +57,10 @@ export class FarmsService {
 
   deleteFarm(id: number) {
     this.http.delete<boolean>(environment.webApiUrl + 'Farms/' + id)
-      .pipe(catchError(this.errorHandler.bind(this)))
+      .pipe(
+        tap(()=> this.successService.handle('Farm deleted successfully')),
+        catchError(this.errorHandler.bind(this))
+        )
       .subscribe({
         next: () => {
           const index = this.farmerFarms.findIndex((farm) => farm.id === id);
@@ -62,7 +72,10 @@ export class FarmsService {
 
   updateFarm(id: number, updatedFarmData: IFarm) {
     this.http.put<IFarm>(environment.webApiUrl + 'Farms/' + id, updatedFarmData)
-      .pipe(catchError(this.errorHandler.bind(this)))
+      .pipe(
+        tap(()=> this.successService.handle('Farm updated successfully')),
+        catchError(this.errorHandler.bind(this))
+        )
       .subscribe({
         next: (updatedFarm) => {
           const index = this.farmerFarms.findIndex((farm) => farm.id === id);

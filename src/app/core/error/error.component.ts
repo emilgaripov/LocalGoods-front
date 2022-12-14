@@ -6,17 +6,16 @@ import { ErrorService } from 'src/app/shared/services/error.service';
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss']
 })
-export class ErrorComponent  {
+export class ErrorComponent {
 
   constructor(
-    public errorService: ErrorService,    
+    public errorService: ErrorService,
   ) { }
 
-    ngOnInit(){
-      this.errorService.error$
-      .subscribe((e)=>console.log('e', e)
-      )
-      
-    }
+  ngOnInit() {
+    this.errorService.error$
+      .subscribe((e) => console.log('e', e)
+      );
+  }
 
 }

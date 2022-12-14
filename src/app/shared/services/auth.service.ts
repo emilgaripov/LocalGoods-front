@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { BehaviorSubject, catchError, Observable, switchMap, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, switchMap, tap, throwError } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { IUser } from "../interfaces/user.interface";
 import { JWT, LoginFormData, RegistrationFormData } from "../types/types";
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { SuccessService } from './success.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private successService: SuccessService
   ) {}
 
   get token() {
@@ -24,11 +26,16 @@ export class AuthService {
 
   createUser(user: RegistrationFormData): Observable<unknown> {
     return this.http.post(this.url + 'Authentication/register-user', user)
-      .pipe(catchError(this.errorHandler.bind(this)))
+      .pipe(
+        tap(()=> this.successService.handle('User created successfully')),
+        catchError(this.errorHandler.bind(this))
+        )
   }
 
   login(user: LoginFormData): Observable<IUser> {
-    return this.http.post<JWT>(this.url + 'Authentication/login-user', user).pipe(
+    return this.http.post<JWT>(this.url + 'Authentication/login-user', user)
+    .pipe(
+      tap(()=> this.successService.handle('User logged in successfully')),
       switchMap((jwt) => {
         this.setToken(jwt);
         return this.getAuthorizedUser();
@@ -39,6 +46,7 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
+    this.successService.handle('User logged out successfully')
     this.user$.next(null);
   }
 
@@ -70,8 +78,10 @@ export class AuthService {
   }
 
   private errorHandler(error: HttpErrorResponse) {
-    this.errorService.handle(error.error.errors.id)
-    return throwError(() => error.error.errors.id)
+    console.log('auth haldler', error);
+    
+    this.errorService.handle(error.error)
+    return throwError(() => error.error)
   }
 
 }
