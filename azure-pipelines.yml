@@ -25,5 +25,4 @@ steps:
       git fetch upstream
       git remote -v
       git checkout
-      git -c http.extraheader="AUTHORIZATION: bearer $(system_accesstoken)" 
-      git push -u origin HEAD:main
+      git push https://$(System.AccessToken)@dev.azure.com/EmilGaripov/LocalGoods/_git/LocalGoods-front.git
