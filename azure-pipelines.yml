@@ -26,4 +26,4 @@ steps:
       git remote -v
       git checkout
       git branch -m main
-      git push -u https://$(System.AccessToken)@dev.azure.com/EmilGaripov/LocalGoods/_git/LocalGoods-front.git HEAD:main
+      git push -u https://$(System.AccessToken)@dev.azure.com/EmilGaripov/LocalGoods/_git/LocalGoods-front.git origin:main
