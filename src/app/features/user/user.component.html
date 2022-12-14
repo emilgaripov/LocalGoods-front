@@ -1,0 +1,21 @@
+<div class="userpage-container" *ngIf="user$ | async as user" >
+  <h1>Welcome, {{ user.userName}}!</h1>
+
+  <form class="user-edit-form" #editUserForm="ngForm"
+  (ngSubmit)="onEditUser(editUserForm.value)">
+
+    <div class="user-edit-form form-froup">
+      <label class="user-edit-form label" for="userName">Username:</label>
+      <input class="user-edit-form input" type="text" id="userName" name="userName" required [ngModel]="user.userName" [disabled]="!edit">
+    </div>
+    <div class="user-edit-form form-froup">
+      <label class="user-edit-form label" for="emailAddress">Email:</label>
+      <input class="user-edit-form input" type="text" id="emailAddress" name="emailAddress" required [ngModel]="user.email" [disabled]="!edit">
+    </div>
+
+    <div class="user-edit-form buttons">
+      <button *ngIf="editUserForm.valid && edit" type="submit">Save</button>
+      <button *ngIf="!edit" class="edit" (click)="edit=true">Edit</button>
+    </div>
+  </form>
+</div>

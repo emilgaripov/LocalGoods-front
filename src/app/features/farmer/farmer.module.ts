@@ -24,13 +24,13 @@ import { AgmCoreModule } from '@agm/core';
     RouterModule.forChild([{
       path: '',
       component: FarmerComponent,
-      children: [{path: ':id', component: FarmerProductsComponent}]
-    }
-    ]),
+      children: [{ path: ':id', component: FarmerProductsComponent }]
+    }]),
     FormsModule,
     ModalModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB69y9kTzIpVJalAsXsQoz8p4ZT682oo6k'
+      apiKey: 'AIzaSyB69y9kTzIpVJalAsXsQoz8p4ZT682oo6k',
+      language: localStorage && localStorage['gml'] || 'en'
     })
   ]
 })

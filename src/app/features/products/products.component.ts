@@ -7,10 +7,7 @@ import { ProductsService } from "../../shared/services/products.service";
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'grow-container'
-  }
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;

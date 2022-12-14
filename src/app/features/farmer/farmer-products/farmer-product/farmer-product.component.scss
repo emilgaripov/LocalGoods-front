@@ -1,13 +1,16 @@
 @import "src/variables";
 
 .product {
-  
+
   &-name {
     text-align: left;
+    margin: 0;
   }
 
   &-content {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 1em;
   }
 
@@ -22,7 +25,6 @@
     justify-content: center;
     align-items: center;
     color: #fff;
-
 
     .object-fit_cover {
       object-fit: cover;
@@ -73,6 +75,17 @@
   }
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  .form-note-text {
+    font-size: 0.7em;
+  }
+}
+
 .edit-btn {
   background-color: $primaryGreen;
 
@@ -86,4 +99,8 @@
   &::after {
     background-image: url(../../../../../assets/images/icons/trash.svg);
   }
+}
+
+.form-group {
+  width: 100%;
 }

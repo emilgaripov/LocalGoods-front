@@ -1,39 +1,21 @@
+import { IProduct } from "./product.interface";
+
 export interface IFarm {
-  id: number,
+  id?: number,
   name: string,
+  imagePath: string,
+  description: string,
   address: string,
   city: string,
   country: string,
   latitude: number,
   longitude: number,
+  rating?: number,
+  userId: string,
   createdOn: string,
-  rating: number,
-  userId: number,
   telephone: string,
   email: string,
   faceBook: string,
-  instagram: string
+  instagram: string,
+  products?: IProduct[]
 }
-
-// export interface IFarm {
-//   id: number,
-//   farmerId: number,
-//   createdAt?: Date,
-//   name: string,
-//   image?: string,
-//   description?: string,
-//   location?: {
-//     address: string,
-//     city: string,
-//     country: string
-//   },
-//   rating?:number,
-//   social?: {
-//     fb:string,
-//     instagram: string
-//   },
-//   contacts?: {
-//     tel:string,
-//     email:string
-//   }
-// }

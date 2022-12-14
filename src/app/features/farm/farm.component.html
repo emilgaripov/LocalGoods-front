@@ -1,15 +1,25 @@
-<div class="farm-page-container">
-<!--  <div class="farm-page-image">-->
-<!--    <img *ngIf="!isLoading; else loading"-->
-<!--         [src]="farm.image || null"-->
-<!--         alt="farm image">-->
-<!--    <ng-template class="loading" #loading>Loading ...</ng-template>-->
-<!--  </div>-->
-<!--  <div class="farm-page-description" *ngIf="!isLoading">-->
-<!--    <h1>{{ farm.name }}</h1>-->
-<!--    <p>{{ farm.description }}</p>-->
-<!--  </div>-->
+<div class="farm-page-container" *ngIf="farm$ | async as farm; else loading">
+  <div class="farm-page-image">
+    <img [src]="farm.imagePath ? 'https://localgoodsback.azurewebsites.net/Images/Farms/' + farm.imagePath : '../../../../assets/images/no-image.webp'" [alt]="'farm ' + (farm.name | lowercase) + ' image'">
+  </div>
+
+  <div class="farm-page-description">
+    <h1>{{ farm.name }}</h1>
+    <p>{{ farm.description }}</p>
+  </div>
+
+  <div class="farm-contacts">
+    <div class="facebook"><a [href]="farm.faceBook" class="fb item-social-icon">facebook</a></div>
+    <div class="instagram"><a [href]="farm.instagram" class="insta item-social-icon">instagram</a></div>
+    <div class="mail"><a [href]="'mailto:'+farm.email">{{farm.email}}</a></div>
+    <div class="address"><a [href]="'https://www.google.com/maps/dir/?api=1&query'+ farm.latitude + '-' + farm.longitude">{{farm.country}}, {{farm.city}}, {{farm.address}}</a></div>
+  </div>
+
   <div class="farm-page-products">
-    <app-grid [items]="(products$ | async) ?? []"></app-grid>
+    <ng-container *ngIf="farmProducts$ | async as farmProducts">
+      <app-grid itemsType="Products" [items]="farmProducts"></app-grid>
+    </ng-container>
   </div>
 </div>
+
+<ng-template class="loading" #loading>Loading ...</ng-template>

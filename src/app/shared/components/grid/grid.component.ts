@@ -1,26 +1,64 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Categories, SortData } from "../../types/types";
+import { ItemsType, SortData } from "../../types/types";
+import { Subscription } from "rxjs";
+import { CategoriesService } from "../../services/categories.service";
+import { ICategory } from "../../interfaces/category.interface";
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, OnDestroy {
   @Input() items: any  = [];
+  @Input() itemsType: ItemsType = 'Farms';
 
   filterOpened = false;
   sortData: SortData = null;
-  filtersData: Categories[] = [];
+  categoriesList: ICategory[] = [];
+  filtersData: number[] = [];
+  private subscription!: Subscription;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private categoriesService: CategoriesService
+  ) {}
 
-  ngOnInit(){
-    if (!this.route.snapshot.queryParams['category']) return;
-    this.filtersData.push(this.route.snapshot.queryParams['category'])
-    console.log(this.filtersData);
+  ngOnInit(): void {
+    if (window.innerWidth >= 1024) {
+      this.filterOpened = true
+    }
+
+    this.categoriesList = this.categoriesService.categories;
+
+    this.subscription = this.route.queryParams.subscribe({
+      next: (params) => {
+        const filterParams = params as {categories: string};
+        this.filtersData = ('categories' in filterParams)
+          ? this.getCategoriesIdFromNames(filterParams.categories)
+          : [];
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private getCategoriesIdFromNames(categoriesNames: string) {
+    return categoriesNames.split(',').map((catName) => {
+      const cat = this.categoriesList.find((cat) => cat.name === catName)!;
+      return cat.id;
+    });
+  }
+
+  openFilters() {
+    this.filterOpened = true;
+  }
+
+  closeFilters(event: false) {
+    this.filterOpened = event;
   }
 
   onSort(value: string) {
@@ -40,9 +78,5 @@ export class GridComponent implements OnInit {
       default:
       this.sortData = null;
     }
-  }
-
-  filterOpen(event: any){
-    this.filterOpened = event
   }
 }

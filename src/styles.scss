@@ -2,36 +2,40 @@
 
 @font-face {
   font-family: "OpenSans";
-  src: local("OpenSans"), url(./assets/fonts/OpenSans/OpenSans-Regular.ttf) format("truetype");
+  src: local("OpenSans"),
+    url(./assets/fonts/OpenSans/OpenSans-Regular.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "OpenSansBold";
-  src: local("OpenSans"), url(./assets/fonts/OpenSans/OpenSans-Bold.ttf) format("truetype");
+  src: local("OpenSans"),
+    url(./assets/fonts/OpenSans/OpenSans-Bold.ttf) format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: "OpenSansLight";
-  src: local("OpenSans"), url(./assets/fonts/OpenSans/OpenSans-Light.ttf) format("truetype");
+  src: local("OpenSans"),
+    url(./assets/fonts/OpenSans/OpenSans-Light.ttf) format("truetype");
   font-weight: 100;
   font-style: normal;
 }
 @font-face {
   font-family: "Pacifico";
-  src: local("Pacifico"), url(./assets/fonts/Pacifico/Pacifico-Regular.ttf) format("truetype");
+  src: local("Pacifico"),
+    url(./assets/fonts/Pacifico/Pacifico-Regular.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 html {
   scroll-behavior: smooth;
 }
-body{
+body {
   padding: 0;
   margin: 0;
   font-family: "OpenSans", sans-serif;
@@ -50,9 +54,17 @@ button {
   color: white;
   background-color: $primaryGreen;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 1em;
 
+  &:disabled {
+    background-color: #ddd;
+
+    &:hover {
+      background-color: #ddd;
+    }
+  }
   &:hover {
     background-color: $darkGreen;
   }
@@ -73,15 +85,23 @@ button {
 
   &-form {
     display: flex;
-    width: 100%;
+    width: 90%;
     flex-direction: column;
     gap: 10px;
 
-    input, select {
+    input,
+    select {
       padding: 10px 10px;
       border: 1px solid silver;
       box-sizing: border-box;
       border-radius: 5px;
+
+      &.ng-touched.ng-invalid {
+        border: 1px solid #f00;
+      }
+      &.ng-touched.ng-valid {
+        border: 1px solid $primaryGreen;
+      }
 
       &:hover {
         border-color: $primaryGreen;
@@ -91,23 +111,51 @@ button {
 
   &-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    width: 100%;
   }
 }
-.grow-container{
+.grow-container {
   flex-grow: 1;
 }
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
-input[type="checkbox"]{
-  border-radius: 2px;
-  width: 20px;
-  height: 20px;
+input {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 100%;
 
-  &:checked{
-    outline: none;
-    background-color: $primaryGreen;
-  border-radius: 2px;
-  filter:hue-rotate(250deg);
+  &.ng-touched.ng-invalid {
+    border: 1px solid #f00;
+  }
 
+  &:hover {
+    border-color: $primaryGreen;
+  }
+
+  &:focus {
+    outline-color: $primaryGreen;
+  }
+  &[type="checkbox"] {
+    border-radius: 2px;
+    width: 20px;
+    height: 20px;
+
+    &:checked {
+      outline: none;
+      background-color: $primaryGreen;
+      border-radius: 2px;
+      filter: hue-rotate(250deg);
+    }
+  }
+  &:disabled{
+    background-color:transparent;
   }
 }

@@ -1,3 +1,5 @@
+@import "src/variables";
+
 h2{
   margin: 0;
   font-size: 30px;
@@ -5,8 +7,100 @@ h2{
 
 .map-box{
   height: 400px;
+
+  .farm-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+
+    .farm-image{
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 50%;
+      box-shadow: none;
+      animation: none;
+      border: 2px solid #fff;
+      cursor: pointer;
+
+      img{
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+
+      &:hover{
+        box-shadow: 0 0 0 #fff;
+        animation: pulse 2s infinite;
+      }
+    }
+    .farm-name{
+      font-size: 1.4em;
+      border: none;
+      align-self: center;
+      padding: 10px 14px;
+      border-radius: 5px;
+      font-weight: bold;
+      color: $darkGreen;
+      outline: none;
+      background-color: #fff;
+      position: relative;
+      transition: all 0.3s;
+
+      &::before{
+        content: '';
+        width: 14px;
+        height: 14px;
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: rotate(45deg) translateX(-50%);
+        transition: all 0.3s;
+      }
+      &:hover{
+        background-color: $limeGreen;
+        &::before{
+        background-color: $limeGreen;
+
+        }
+
+      }
+    }
+  }
 }
 
+.view-all{
+  align-self: center;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+      box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
 
 @media (min-width: 769px){
   .map-box{

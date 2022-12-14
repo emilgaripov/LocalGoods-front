@@ -1,0 +1,34 @@
+.userpage-container{
+  margin: 0 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 300px;
+}
+
+.user-edit-form{
+  align-items: flex-start;
+  width: 300px;
+  justify-content: space-between;
+  align-items: center;
+
+  &.form-froup{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .label{
+    font-family: "OpenSansBold";
+  }
+
+  .input{
+    width: 200px;
+    font-size: 0.9em;
+
+    &:disabled{
+      border: none;
+    }
+  }
+
+}

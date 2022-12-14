@@ -7,31 +7,26 @@
   justify-items: center;
   align-items: center;
   gap: 1em;
-  grid-template-columns: auto;
+  grid-template-columns: 40px auto;
   grid-template-rows: auto;
-  grid-template-areas:
-    "nav . logo";
+  grid-template-areas: "nav logo . .";
   box-sizing: border-box;
 
   &.home {
-    grid-template-areas: "nav logo redirect";
-
-    .logo-container {
-      justify-self: center;
-    }
+    grid-template-areas: "nav logo . redirect";
   }
   &.farm {
-    grid-template-areas: "nav logo welcome";
-    grid-template-columns: 10% auto 20%;
-
-    .logo-container {
-      justify-self: center;
-    }
+    grid-template-areas: "nav logo . welcome";
+    grid-template-columns: 40px auto;
   }
 
   .logo-container {
     grid-area: logo;
-    justify-self: flex-end;
+    justify-self: flex-start;
+
+    &.nav-open{
+      visibility: hidden;
+    }
   }
   .redirect-container {
     grid-area: redirect;
@@ -73,10 +68,22 @@
   .header-container {
     background-color: $limeGreen;
     padding: 0 1em;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "logo nav . .";
+
+    grid-template-columns: 100px auto;
+    &.home {
+      grid-template-areas: "logo nav . redirect";
+    }
 
     &.farm {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas: "logo nav . welcome";
+      grid-template-columns: 100px auto;
+    }
+    .logo-container {
+  
+      &.nav-open{
+        visibility: visible;
+      }
     }
   }
 }

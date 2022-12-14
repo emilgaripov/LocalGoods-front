@@ -1,3 +1,5 @@
+@import "src/variables";
+
 h2{
   margin: 0;
   font-size: 30px;
@@ -10,9 +12,14 @@ h2{
   overflow-x: scroll;
   justify-content: flex-start;
 }
+.view-all{
+  align-self: center;
+  background-color: $limeGreen;
+}
 
 @media (min-width: 1120px){
   .product-categories-list{
     justify-content: center;
+    overflow-x: auto;
   }
 }

@@ -2,12 +2,19 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, Input, OnInit,
   Output,
   Renderer2,
   ViewChild
 } from '@angular/core';
-import { Categories, categories } from 'src/app/shared/types/types';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { ICategory } from "../../../shared/interfaces/category.interface";
+import { CategoriesService } from "../../../shared/services/categories.service";
+import { IUser } from "../../../shared/interfaces/user.interface";
+import { IFarm } from 'src/app/shared/interfaces/farm.interface';
+import { FarmsService } from 'src/app/shared/services/farms.service';
 
 @Component({
   selector: 'app-nav',
@@ -15,16 +22,24 @@ import { Categories, categories } from 'src/app/shared/types/types';
   styleUrls: ['./nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavComponent {
+export class NavComponent implements OnInit {
   @ViewChild('toggleButton') toggleButton!: ElementRef;
   @ViewChild('navmenu') menu!: ElementRef;
 
-  @Output() isNav = new EventEmitter<boolean>()
+  @Input() user!: IUser | null;
+  @Output() isNav = new EventEmitter<boolean>();
 
-  categories: Categories[] = categories
+  categories$!: Observable<ICategory[]>;
+  farms$!: Observable<IFarm[]>;
   nav = false;
 
-  constructor(private renderer: Renderer2) {
+  constructor(
+    private renderer: Renderer2,
+    private route: Router,
+    private categoriesService: CategoriesService,
+    private authService: AuthService,
+    private farmsService: FarmsService
+  ) {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (!this.nav) return
       if (e.target !== this.toggleButton.nativeElement && !this.menu.nativeElement.contains(e.target)) {
@@ -34,9 +49,43 @@ export class NavComponent {
     });
   }
 
-  toggleMenu(event: Event) {
-    event.stopImmediatePropagation();
+  ngOnInit(): void {
+    this.categories$ = this.categoriesService.getHomeCategories();
+    this.farms$ = this.farmsService.getAllFarms();
+  }
+
+  toggleMenu(event?: Event) {
+    event?.stopImmediatePropagation();
     this.nav = !this.nav
     this.isNav.emit(this.nav)
+  }
+
+  signOut() {
+    this.authService.logout();
+    this.route.navigate(['/'])
+
+    if (window.innerWidth < 1024) {
+      this.toggleMenu()
+    }
+  }
+
+  viewAccount() {
+    this.route.navigate(['user']);
+    this.toggleMenu()
+  }
+
+  visitAllProducts(event: Event){
+    this.route.navigate(['products'])
+    this.toggleMenu(event);
+  }
+
+  viewFarms(event: Event){
+    this.route.navigate(['farmer'])
+    this.toggleMenu(event);
+  }
+
+  visitAllFarms(event: Event){
+    this.route.navigate(['farms'])
+    this.toggleMenu(event);
   }
 }

@@ -1,8 +1,8 @@
+import { Roles } from "../types/types";
+
 export interface IUser {
-  id: number,
-  firstName: string,
-  lastName: string,
+  id: string,
+  userName: string,
   email: string,
-  telePhone: string,
-  roleId: number
+  roles: Roles[]
 }

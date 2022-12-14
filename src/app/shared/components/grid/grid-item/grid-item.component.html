@@ -1,21 +1,48 @@
 <div class="item">
   <div class="item-image">
-    <img *ngIf="item.image; else noImage"
-      [src]="item.image"
+    <img *ngIf="item.imagePath"
+      [src]="'https://localgoodsback.azurewebsites.net/Images/'+ (item.farmId ? 'Products/': 'Farms/') + item.imagePath"
       alt="product image"
       class="object-fit_cover">
     <ng-template #noImage>No image yet ...</ng-template>
   </div>
 
   <div class="item-content">
-    <h3 class="item-name">{{ item.name }}</h3>
-    <div class="item-description">{{ item.description | slice:0:100 }}...</div>
-    <div class="item-price"  *ngIf="item.price">{{ item.price | currency: 'EUR' }}</div>
-    <div class="item-farm-name" *ngIf="productFarm"><a [routerLink]="'/farm/'+ productFarm.id">{{ productFarm.name }}</a></div>
-<!--    <div class="item-location">{{ item.location ? item.location.address + ', ' + item.location.city : productFarm?.location ? productFarm?.location?.address + ', ' + productFarm?.location?.city: 'somewhere' }}</div>-->
-    <div class="item-social">
-      <a class="item-social-icon fb" [href]="item.faceBook">Facebook</a>
-      <a class="item-social-icon insta" [href]="item.instagram">Instagram</a>
+    <h3 class="item-name" [routerLink]="!item.farmId ? ('/farm/'+item.id) : null " >{{ item.name }}</h3>
+    <div class="item-description">
+      {{ item.description | slice:0:100 }}...
     </div>
+    <div class="item-price" *ngIf="item.price">
+      {{ item.price | currency: 'EUR' }}
+    </div>
+    <div class="farm-info" *ngIf="item.farmId">
+      <div class="item-farm-name">
+        <a [routerLink]="'/farm/'+ item.farmId" *ngIf="farm$ | async as farm">{{ farm.name }}</a>
+      </div>
+      <div class="item-location" >
+        <a  *ngIf="farm$ | async as farm" [href]="'https://www.google.com/maps/dir/?api=1&query'+ farm.latitude + '-' + farm.longitude" >{{ farm.country + ', ' + farm.city + ', ' + farm.address }}</a>
+      </div>
+      <div class="item-phone">
+        <a  *ngIf="farm$ | async as farm" [href]="'tel:'+ farm.telephone" >+{{ farm.telephone }}</a>
+      </div>
+      <div class="item-social" *ngIf="farm$ | async as farm">
+        <a class="item-social-icon fb" [href]="farm.faceBook">Facebook</a>
+        <a class="item-social-icon insta" [href]="farm.instagram">Instagram</a>
+      </div>
+    </div>
+    <div class="farm-info" *ngIf="item.userId">
+      <div class="item-location" >
+        <a  [href]="'https://www.google.com/maps/dir/?api=1&query'+ item.latitude + '-' + item.longitude" >{{ item.country + ', ' + item.city + ', ' + item.address }}</a>
+      </div>
+      <div class="item-phone">
+        <a [href]="'tel:'+ item.telephone" >+{{ item.telephone }}</a>
+      </div>
+      <div class="item-social">
+        <a class="item-social-icon fb" [href]="item.faceBook">Facebook</a>
+        <a class="item-social-icon insta" [href]="item.instagram">Instagram</a>
+      </div>
+    </div>
+
+
   </div>
 </div>

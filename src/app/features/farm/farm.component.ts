@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 import { IFarm } from 'src/app/shared/interfaces/farm.interface';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
@@ -12,40 +12,30 @@ import { ProductsService } from 'src/app/shared/services/products.service';
   selector: 'app-farm',
   templateUrl: './farm.component.html',
   styleUrls: ['./farm.component.scss'],
-  host: {
-    class: 'grow-container'
-  }
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FarmComponent implements OnInit, OnDestroy {
-  products$!: Observable<IProduct[]>;
-  farm!: IFarm;
+export class FarmComponent implements OnInit {
+  farm$!: Observable<IFarm>;
+  farmProducts$!: Observable<IProduct[]>;
+  farmId!: number;
   isLoading = true;
-  subscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService,
     private farmsService: FarmsService,
+    private productsService: ProductsService
   ) {}
 
   ngOnInit(): void {
-    this.products$ = this.route.params.pipe(
+    this.farm$ = this.route.params.pipe(
       switchMap((param) => {
-        const farmId = +param['id'];
-        this.getFarm(farmId);
-        return this.productsService.getProductsByFarmId(farmId);
+        this.isLoading = false;
+        this.farmId = +param['id'];
+        this.productsService.getProductsByFarmId(this.farmId);
+        return this.farmsService.getFarmById(this.farmId);
       })
     );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  getFarm(id: number) {
-    this.subscription = this.farmsService.getFarmById(id).subscribe({
-      next: (farm) => this.farm = farm
-    });
+    this.farmProducts$ = this.productsService.farmerFarmProducts$;
   }
 
 }

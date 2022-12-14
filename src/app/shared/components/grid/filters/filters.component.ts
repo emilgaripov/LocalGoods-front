@@ -1,62 +1,82 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { categories, Categories } from "../../../types/types";
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ICategory } from "../../../interfaces/category.interface";
+import { CategoriesService } from "../../../services/categories.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./filters.component.scss']
 })
-export class FiltersComponent {
-  @Input() filterOpened = false;
-  @Input() filtersData!: Categories[];
-  @Output() isFilter = new EventEmitter<boolean>();
-  @Output() filters = new EventEmitter<Categories[]>();
+export class FiltersComponent implements OnInit, OnDestroy {
+  @Output() filtersClosed = new EventEmitter<false>();
 
-  categoriesList = [...categories];
-  checkedCategories: Categories[] = [];
+  categoriesList: ICategory[] = [];
+  checkedCategories: string[] = [];
+  private subscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
-  ){}
+    private router: Router,
+    private categoriesService: CategoriesService,
+  ) {}
 
-  closeFilters() {
-    this.filterOpened = false;
-    this.isFilter.emit(this.filterOpened);
+  ngOnInit(): void {
+    this.categoriesList = this.categoriesService.categories;
+
+    this.subscription = this.route.queryParams.subscribe({
+      next: (params) => {
+        const filterParams = params as {categories: string};
+        if ('categories' in filterParams) {
+          this.checkedCategories = filterParams.categories.split(',');
+        }
+      }
+    });
   }
 
-  onCheck(category: Categories) {
-    this.checkedCategories = [...this.filtersData]
-    if (this.checkedCategories.includes(category)) {
-      const i = this.checkedCategories.indexOf(category);
-      this.checkedCategories.splice(i, 1);
-    } else {
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  closeFilters() {
+    this.filtersClosed.emit(false);
+  }
+
+  onCheck(category: string) {
+    if (!this.checkedCategories.includes(category)) {
       this.checkedCategories.push(category);
+      return;
     }
+
+    const i = this.checkedCategories.indexOf(category);
+    this.checkedCategories.splice(i, 1);
   }
 
   onCheckAll(isChecked: boolean) {
-    this.checkedCategories = isChecked ? [...this.categoriesList] : [];
+    this.checkedCategories = isChecked ? this.categoriesList.map(cat => cat.name) : [];
   }
-  
 
   applyFilter() {
-    this.filters.emit(this.checkedCategories);
     this.router.navigate(
-      ['.'], 
-      { relativeTo: this.route, queryParams: { } }
+      [],
+      { queryParams: { categories: this.checkedCategories.toString() } }
     );
-    this.closeFilters();
+
+    if(window.innerWidth <= 1024){
+      this.closeFilters();
+    }
   }
 
-  clearFilters(){
-    this.checkedCategories = []
+  clearFilters() {
+    this.checkedCategories = [];
     this.router.navigate(
-      ['.'], 
-      { relativeTo: this.route, queryParams: { } }
+      [],
+      { queryParams: { } }
     );
-    this.filters.emit(this.checkedCategories);
+    if(window.innerWidth < 1024){
+      this.closeFilters();
+    }
   }
+
 }

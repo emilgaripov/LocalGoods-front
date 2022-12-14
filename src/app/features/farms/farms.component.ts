@@ -7,10 +7,7 @@ import { FarmsService } from 'src/app/shared/services/farms.service';
   selector: 'app-farms',
   templateUrl: './farms.component.html',
   styleUrls: ['./farms.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'grow-container'
-  }
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FarmsComponent implements OnInit {
   farms$!: Observable<IFarm[]>;

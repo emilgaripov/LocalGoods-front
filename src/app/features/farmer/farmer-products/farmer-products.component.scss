@@ -11,8 +11,6 @@
 .products {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 1em;
   margin: 0 1em;
 }
@@ -30,7 +28,23 @@
     background-color: $darkGreen;
   }
 }
-@media (min-width: 769px){
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  .form-note-text {
+    font-size: 0.7em;
+  }
+}
+
+.form-validator {
+  font-size: 0.7em;
+  color: red;
+}
+
+@media (min-width: 769px) {
   .products{
     flex-direction: row;
     flex-wrap: wrap;

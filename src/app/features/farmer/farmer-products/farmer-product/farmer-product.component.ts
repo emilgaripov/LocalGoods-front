@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { IProduct } from "../../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../../shared/services/products.service";
-import { categories } from "../../../../shared/types/types";
+import { ICategory } from "../../../../shared/interfaces/category.interface";
+import { CategoriesService } from "../../../../shared/services/categories.service";
+import { ProductFormData } from "../../../../shared/types/types";
 
 @Component({
   selector: 'app-farmer-product',
@@ -9,36 +11,47 @@ import { categories } from "../../../../shared/types/types";
   styleUrls: ['./farmer-product.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FarmerProductComponent {
+export class FarmerProductComponent implements OnInit {
   @Input() product!: IProduct;
-  isModalOpened = false;
-  categoriesList = [...categories];
+  categoriesList: ICategory[] = [];
+  isModalEditOpened = false;
+  isModalDeleteOpened = false;
 
-  constructor(private productsService: ProductsService) {}
+  // image upload
+  fileName = '';
+  file!: File;
+
+  constructor(
+    private productsService: ProductsService,
+    private categoriesService: CategoriesService
+  ) {}
+
+  ngOnInit(): void {
+    console.log(this.product)
+    this.categoriesList = this.categoriesService.categories;
+  }
 
   onDeleteProduct() {
-    // this.farmerProductsService.deleteProduct(this.product.id);
+    this.productsService.deleteProduct(this.product.id!);
+    this.isModalDeleteOpened = false;
   }
 
-  openModal() {
-    this.isModalOpened = true;
+  onEditProduct(updatedProductData: ProductFormData) {
+    const formData = new FormData();
+
+    formData.append('name', updatedProductData.name);
+    formData.append('description', updatedProductData.description);
+    formData.append('imageFile', this.file);
+    formData.append('price', updatedProductData.price.toString());
+    formData.append('categoryId', updatedProductData.categoryId.toString());
+
+    this.productsService.updateProduct(this.product.id!, formData);
+    this.isModalEditOpened = false;
   }
 
-  closeModal() {
-    this.isModalOpened = false;
-  }
-
-  onEditProduct(value: { productName: string, productDescription: string }) {
-    if (!value.productName || !value.productDescription) return;
-
-    // const newProduct: IProduct = {
-    //   id: this.product.id,
-    //   farmId: this.product.farmId,
-    //   name: value.productName,
-    //   description: value.productDescription,
-    //   image: ''
-    // };
-    // this.farmerProductsService.editProduct(newProduct);
-    this.closeModal();
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.file = file;
+    this.fileName = file ? file.name : '';
   }
 }

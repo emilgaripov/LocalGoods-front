@@ -3,8 +3,10 @@
 .item {
   display: flex;
   gap: 2em;
+  flex-wrap: wrap;
+  justify-content: center;
 
-  &-content{
+  &-content {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -28,12 +30,14 @@
       }
     }
   }
-
+  &-content {
+    max-width: 200px;
+  }
   &-image {
     width: 200px;
     height: 200px;
     flex-shrink: 0;
-    background-color: $primaryGreen;
+    background-color: #eee;
     overflow: hidden;
     border-radius: 10px;
     display: flex;
@@ -51,6 +55,7 @@
     color: #f00;
     font-weight: bold;
   }
+
   &-social {
     display: flex;
     gap: 0.5em;
@@ -84,35 +89,70 @@
       &.fb {
         &::after {
           background-image: url("../../../../../assets/images/icons/social/facebook.png");
+          filter: invert(53%) sepia(100%) saturate(5722%) hue-rotate(206deg)
+            brightness(102%) contrast(90%);
         }
       }
       &.insta {
         &::after {
           background-image: url("../../../../../assets/images/icons/social/instagram.png");
+          filter: invert(12%) sepia(94%) saturate(7449%) hue-rotate(294deg)
+            brightness(102%) contrast(119%);
         }
       }
     }
   }
+  &-location {
+    position: relative;
+    padding-left: 30px;
+    font-size: 0.9em;
+
+    a {
+      color: #000;
+    }
+
+    &::before {
+      content: "";
+      background-image: url("../../../../../assets/images/icons/map-pin.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 25px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      height: 25px;
+      filter: invert(64%) sepia(77%) saturate(367%) hue-rotate(43deg)
+        brightness(96%) contrast(87%);
+    }
+  }
+  &-phone {
+    font-size: 0.9em;
+    position: relative;
+    padding-left: 30px;
+
+    a {
+      color: #000;
+    }
+    &::before {
+      content: "";
+      background-image: url("../../../../../assets/images/icons/call.svg");
+      background-repeat: no-repeat;
+      background-size: 80%;
+      width: 25px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      height: 25px;
+      filter: invert(64%) sepia(77%) saturate(367%) hue-rotate(43deg)
+        brightness(96%) contrast(87%);
+    }
+  }
 }
 
-.item-location {
-  color: $primaryGreen;
-  position: relative;
-  padding-left: 25px;
-  font-size: 0.9em;
-
-  &::before {
-    content: "";
-    background-image: url("../../../../../assets/images/icons/map-pin.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 25px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    height: 25px;
-    filter: invert(64%) sepia(77%) saturate(367%) hue-rotate(43deg)
-      brightness(96%) contrast(87%);
-  }
+.farm-info {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
 }

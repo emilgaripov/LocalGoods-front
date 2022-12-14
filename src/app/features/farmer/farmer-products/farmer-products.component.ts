@@ -3,7 +3,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable, switchMap } from "rxjs";
 import { IProduct } from "../../../shared/interfaces/product.interface";
 import { ProductsService } from "../../../shared/services/products.service";
-import { categories } from "../../../shared/types/types";
+import { CategoriesService } from "../../../shared/services/categories.service";
+import { ICategory } from "../../../shared/interfaces/category.interface";
+import { ProductFormData } from "../../../shared/types/types";
 
 @Component({
   selector: 'app-farmer-products',
@@ -13,43 +15,47 @@ import { categories } from "../../../shared/types/types";
 })
 export class FarmerProductsComponent implements OnInit {
   products$!: Observable<IProduct[]>;
-  isModalOpened = false;
   farmId!: number;
-  categoriesList = [...categories];
+  categoriesList: ICategory[] = [];
+  isModalAddOpened = false;
+
+  // image upload
+  fileName = '';
+  file!: File;
 
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private categoriesService: CategoriesService
   ) {}
 
   ngOnInit(): void {
+    this.categoriesList = this.categoriesService.categories;
     this.products$ = this.route.params.pipe(
       switchMap((param) => {
         this.farmId = +param['id'];
-        return this.productsService.getProductsByFarmId(this.farmId);
+        this.productsService.getProductsByFarmId(this.farmId);
+        return this.productsService.farmerFarmProducts$;
       })
     );
   }
 
-  openModal() {
-    this.isModalOpened = true;
+  onAddProduct(newProductData: ProductFormData) {
+    const formData = new FormData();
+
+    formData.append('name', newProductData.name);
+    formData.append('description', newProductData.description);
+    formData.append('imageFile', this.file);
+    formData.append('price', newProductData.price.toString());
+    formData.append('categoryId', newProductData.categoryId.toString());
+
+    this.productsService.createProduct(this.farmId, formData);
+    this.isModalAddOpened = false;
   }
 
-  closeModal() {
-    this.isModalOpened = false;
-  }
-
-  onAddProduct(value: { productName: string, productDescription: string }) {
-    if (!value.productName || !value.productDescription) return;
-
-    // const newProduct: IProduct = {
-    //   id: 0,
-    //   farmId: this.farmId,
-    //   name: value.productName,
-    //   description: value.productDescription,
-    //   image: ''
-    // };
-    // this.farmerProductsService.createProduct(newProduct);
-    this.closeModal();
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.file = file;
+    this.fileName = file ? file.name : '';
   }
 }

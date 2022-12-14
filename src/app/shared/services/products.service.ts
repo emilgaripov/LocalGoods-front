@@ -1,83 +1,77 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { catchError, Observable, Subject, throwError } from "rxjs";
 import { IProduct } from "../interfaces/product.interface";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  constructor(private http: HttpClient) {}
+  readonly farmerFarmProducts$ = new Subject<IProduct[]>();
+  private farmerFarmProducts: IProduct[] = [];
+
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorService
+  ) { }
 
   getAllProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(environment.webApiUrl + 'Products');
+    return this.http.get<IProduct[]>(environment.webApiUrl + 'Products')
+      .pipe(catchError(this.errorHandler.bind(this)))
   }
 
-  getProductsByFarmId(id: number): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(environment.webApiUrl + 'Farms/' + id + '/FarmProducts');
+  getProductsByFarmId(farmId: number) {
+    this.http.get<IProduct[]>(environment.webApiUrl + 'Farms/' + farmId + '/FarmProducts')
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe({
+        next: (products) => {
+          this.farmerFarmProducts = products;
+          this.farmerFarmProducts$.next([...this.farmerFarmProducts]);
+        }
+      });
   }
 
-  // private products$ = new BehaviorSubject<IProduct[]>(this.initProducts());
-  //
-  // private initProducts(): IProduct[] {
-  //   let allProducts: IProduct[] = [];
-  //   products.pipe(take(1)).subscribe({
-  //     next: (data) => allProducts = data
-  //   });
-  //   return allProducts;
-  // }
-  //
-  // get getAllProducts(): Observable<IProduct[]> {
-  //   return this.products$;
-  // }
-  //
-  // getProductById(id: number): Observable<IProduct | undefined> {
-  //   return this.products$.pipe(
-  //     take(1),
-  //     map((prods) => {
-  //       return prods.find((prod) => prod.id === id);
-  //     })
-  //   );
-  // }
-  //
-  // getProductsByFarmId(farmId: number): Observable<IProduct[]> {
-  //   return this.products$.pipe(
-  //     map((prods) => {
-  //       return prods.filter((prod) => prod.farmId === farmId);
-  //     })
-  //   );
-  // }
-  //
-  // createProduct(newProduct: IProduct) {
-  //   this.products$.pipe(take(1)).subscribe({
-  //     next: (data) => {
-  //       newProduct.id = data.length + 1;
-  //       data.push(newProduct);
-  //       this.products$.next([...data]);
-  //     }
-  //   });
-  // }
-  //
-  // editProduct(editedProduct: IProduct) {
-  //   this.products$.pipe(take(1)).subscribe({
-  //     next: (data) => {
-  //       const indexOfProductToBeEdited = data.findIndex((prod) => prod.id === editedProduct.id);
-  //       data[indexOfProductToBeEdited] = editedProduct;
-  //       this.products$.next([...data]);
-  //     }
-  //   });
-  // }
-  //
-  // deleteProduct(id: number): void {
-  //   this.products$.pipe(take(1)).subscribe({
-  //     next: (data) => {
-  //       const indexOfProductToBeDeleted = data.findIndex((prod) => prod.id === id);
-  //       data.splice(indexOfProductToBeDeleted, 1);
-  //       this.products$.next([...data]);
-  //     }
-  //   });
-  // }
+  createProduct(farmId: number, newProductData: any) {
+    this.http.post<IProduct>(environment.webApiUrl + 'Products/' + farmId, newProductData)
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe({
+        next: (newProduct) => {
+          console.log(newProduct)
+          this.farmerFarmProducts.push(newProduct);
+          this.farmerFarmProducts$.next([...this.farmerFarmProducts]);
+        }
+      });
+  }
 
+  deleteProduct(id: number) {
+    this.http.delete<boolean>(environment.webApiUrl + 'Products/' + id)
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe({
+        next: () => {
+          const index = this.farmerFarmProducts.findIndex((product) => product.id === id);
+          this.farmerFarmProducts.splice(index, 1);
+          this.farmerFarmProducts$.next([...this.farmerFarmProducts]);
+        }
+      });
+  }
 
+  updateProduct(id: number, updatedProductData: any) {
+    this.http.put<IProduct>(environment.webApiUrl + 'Products/Update/' + id, updatedProductData)
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe({
+        next: (updatedProd) => {
+          console.log(updatedProd)
+          const index = this.farmerFarmProducts.findIndex((prod) => prod.id === id);
+          this.farmerFarmProducts[index] = updatedProd;
+          this.farmerFarmProducts$.next([...this.farmerFarmProducts]);
+        }
+      });
+  }
+
+  private errorHandler(error: HttpErrorResponse) {
+    this.errorService.handle(error.error.errors.id)
+    return throwError(() => error.error.errors.id)
+  }
 }

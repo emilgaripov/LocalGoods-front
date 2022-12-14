@@ -1,65 +1,83 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { catchError, Observable, Subject, throwError } from "rxjs";
 import { IFarm } from "../interfaces/farm.interface";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FarmsService {
-  constructor(private http: HttpClient) {}
+  readonly farmerFarms$ = new Subject<IFarm[]>();
+  private farmerFarms: IFarm[] = [];
+
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorService
+  ) {}
 
   getAllFarms(): Observable<IFarm[]> {
     return this.http.get<IFarm[]>(environment.webApiUrl + 'Farms');
   }
 
-  getFarmById(id: number): Observable<IFarm> {
-    return this.http.get<IFarm>(environment.webApiUrl + 'Farms/' + id);
+  getFarmerFarms() {
+    this.http.get<IFarm[]>('https://localgoodsback.azurewebsites.net/MyFarms')
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe({
+        next: (farms) => {
+          this.farmerFarms = farms;
+          this.farmerFarms$.next([...this.farmerFarms]);
+        }
+      });
   }
 
-  // private farms$ = new BehaviorSubject<IFarm[]>(this.initFarms());
-  //
-  // private initFarms(): IFarm[] {
-  //   let allFarms: IFarm[] = [];
-  //   farms.pipe(take(1)).subscribe({
-  //     next: (data) => allFarms = data
-  //   });
-  //   return allFarms;
-  // }
-  //
-  // get getAllFarms(): Observable<IFarm[]> {
-  //   return this.farms$;
-  // }
-  //
-  // getFarmById(id: number): Observable<IFarm | undefined> {
-  //   return this.farms$.pipe(
-  //     take(1),
-  //     map((farms) => {
-  //       return farms.find((farm) => farm.id === id);
-  //     })
-  //   );
-  // }
-  //
-  // createFarm(farmName: string) {
-  //   this.farms$.pipe(take(1)).subscribe({
-  //     next: (data) => {
-  //       const newFarm: IFarm = { id: data.length + 1, farmerId: 0, name: farmName };
-  //       data.push(newFarm);
-  //       this.farms$.next([...data]);
-  //     }
-  //   });
-  // }
-  //
-  // deleteFarm(id: number): void {
-  //   this.farms$.pipe(take(1)).subscribe({
-  //     next: (data) => {
-  //       const indexOfFarmToBeDeleted = data.findIndex((farm) => farm.id === id);
-  //       data.splice(indexOfFarmToBeDeleted, 1);
-  //       this.farms$.next([...data]);
-  //     }
-  //   });
-  // }
+  getFarmById(id: number): Observable<IFarm> {
+    return this.http.get<IFarm>(environment.webApiUrl + 'Farms/' + id)
+      .pipe(catchError(this.errorHandler.bind(this)))
+  }
 
+  createFarm(newFarmData: any) {
+    this.http.post<IFarm>(environment.webApiUrl + 'Farms/', newFarmData)
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe({
+        next: (newFarm) => {
+          this.farmerFarms.push(newFarm);
+          this.farmerFarms$.next([...this.farmerFarms]);
+        }
+      });
+  }
 
+  deleteFarm(id: number) {
+    this.http.delete<boolean>(environment.webApiUrl + 'Farms/' + id)
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe({
+        next: () => {
+          const index = this.farmerFarms.findIndex((farm) => farm.id === id);
+          this.farmerFarms.splice(index, 1);
+          this.farmerFarms$.next([...this.farmerFarms]);
+        }
+      });
+  }
+
+  updateFarm(id: number, updatedFarmData: IFarm) {
+    this.http.put<IFarm>(environment.webApiUrl + 'Farms/' + id, updatedFarmData)
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe({
+        next: (updatedFarm) => {
+          const index = this.farmerFarms.findIndex((farm) => farm.id === id);
+          this.farmerFarms[index] = updatedFarm;
+          this.farmerFarms$.next([...this.farmerFarms]);
+        }
+      });
+  }
+
+  private getUserId() {
+    return localStorage.getItem('userId');
+  }
+
+  private errorHandler(error: HttpErrorResponse) {
+    this.errorService.handle(error.error.errors.id)
+    return throwError(() => error.error.errors.id)
+  }
 }
