@@ -21,5 +21,5 @@ steps:
       git config --global user.email "emil.garipov@gmail.com"
       git config --global user.name "egaripov"
       git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
-      git remote add vsts https://xxx.visualstudio.com/xxx/_git/xxxx
+      git remote add vsts https://github.com/emilgaripov/LocalGoods-front.git
       git branch -r | grep -v '\->' | while read remote; do git -c http.extraheader="AUTHORIZATION: bearer $(system_accesstoken)" push -u vsts "${remote#origin/}"; done
