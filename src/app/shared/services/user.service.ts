@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../interfaces/user.interface';
 import { editUserFormData } from '../types/types';
@@ -28,6 +28,8 @@ export class UserService {
   }
 
   editUser(data: editUserFormData) {
+    console.log(data);
+    
     return this.http.put<IUser>(environment.webApiUrl + 'Users/' + this.userId, data)
       .pipe(
         tap(()=> this.successService.handle('User updated successfully')),

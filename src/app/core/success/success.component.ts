@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { delay, timeout } from 'rxjs';
 import { SuccessService } from 'src/app/shared/services/success.service';
 
 @Component({
@@ -13,9 +14,13 @@ export class SuccessComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.successService.success$
-      .subscribe((s) => console.log('s', s)
-      );
+    this.successService.success$.pipe(
+      delay(2000)
+    ).subscribe(
+      () => {
+        this.successService.success$.next('')
+      }
+    )    
   }
 
 }

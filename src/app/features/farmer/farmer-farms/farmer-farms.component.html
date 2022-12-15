@@ -98,15 +98,18 @@
 
       <div class="form-group">
         <label for="telephone">Phone number</label>
-        <input type="text" id="telephone" name="telephone" ngModel #telephone="ngModel" pattern="[- +()0-9]{10,12}">
+        <input type="tel" id="telephone" name="telephone" ngModel #telephone="ngModel" pattern="\+?[0-9]{10,12}">
+        <div class="form-tip">
+          <span>Add phone number according to international format: +001234567890</span>
+        </div>
         <div *ngIf="telephone.touched" class="form-validator">
-          <span *ngIf="telephone.errors?.['pattern']">Phone number should correspond international country index format!</span>
+          <span *ngIf="telephone.errors?.['pattern']">Phone format incorrect!</span>
         </div>
       </div>
 
       <div class="form-group">
         <label for="email">Farm email address</label>
-        <input type="text" id="email" name="email" ngModel #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+        <input type="text" id="email" name="email" ngModel #email="ngModel" pattern="+ [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
         <div *ngIf="email.touched" class="form-validator">
           <span *ngIf="email.errors?.['required']">Email is a required field!</span>
           <span *ngIf="email.errors?.['pattern']">This is not a valid Email!</span>

@@ -8,9 +8,9 @@
       <p>
         Looking for the best local food in the region? Try out Farmers Goods to find the best fresh and organic products near you. Browse farms, search for organic food and purchase it from the nearest farmer.
         <span>
-          <a href="#" routerLink="/auth/register" class="redirect-link">Join as a Farmer</a>
-          to be able to find new customers over the Globe or 
-          <a href="#" routerLink="/auth/login" class="redirect-link">Sign in/up</a>
+          <a href="#" [routerLink]="['/auth/register']" [queryParams]="{farmer: true}" class="redirect-link">Join as a Farmer</a>
+          and find new customers over the Globe, buy fresh food from farmers. 
+          <a href="#" routerLink="/auth/login" class="redirect-link">Sign up as a User</a>
           and enjoy all the great features which are available for registered users.
         </span>
       </p>

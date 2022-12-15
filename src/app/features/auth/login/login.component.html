@@ -13,7 +13,7 @@
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       required
       >
-      <div *ngIf="!emailAddress.touched" class="form-tip">
+      <div class="form-tip">
         <span>Enter your account email</span>
       </div>
       <div *ngIf="emailAddress.touched" class="form-validator">
@@ -25,7 +25,7 @@
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" id="password" name="password" ngModel #pass="ngModel" required minlength="8" maxlength="10" >
-      <div *ngIf="!pass.touched" class="form-tip">
+      <div class="form-tip">
         <span>Enter your account password</span>
       </div>
       <div *ngIf="pass.touched" class="form-validator">
