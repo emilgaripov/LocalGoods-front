@@ -33,8 +33,8 @@ export class GridComponent implements OnInit, OnDestroy {
     this.filterOpened = window.innerWidth >= 1024;
     if (this.itemsType === 'Farms') return;
 
-    this.getFiltersData();
     this.categoriesList = this.categoriesService.categories;
+    this.getFiltersData();
     this.allFarms$ = this.farmsService.getAllFarms();
   }
 
@@ -45,14 +45,14 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   private getFiltersData() {
-    this.subscription.add(this.route.queryParams.subscribe({
+    this.subscription = this.route.queryParams.subscribe({
       next: (params) => {
         const filterParams = params as { categories: string };
         this.filtersData = ('categories' in filterParams)
           ? this.getCategoriesIdFromNames(filterParams.categories)
           : [];
       }
-    }));
+    });
   }
 
   private getCategoriesIdFromNames(categoriesNames: string) {
