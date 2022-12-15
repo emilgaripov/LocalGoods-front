@@ -19,18 +19,18 @@ export class UserService {
   ) {}
 
   getUserById() {
-    return this.http.get<IUser>(environment.webApiUrl + 'Users/' + this.userId)
+    return this.http.get<IUser>(environment.webApiUrl + 'Users/' + this.userLocalStorage?.id)
       .pipe(catchError(this.errorHandler.bind(this)))
   }
 
-  get userId() {
-    return localStorage.getItem('userId')
+  get userLocalStorage() {
+    const user = localStorage.getItem('user');
+    if (!user) return null;
+    return JSON.parse(user) as IUser;
   }
 
   editUser(data: editUserFormData) {
-    console.log(data);
-    
-    return this.http.put<IUser>(environment.webApiUrl + 'Users/' + this.userId, data)
+    return this.http.put<IUser>(environment.webApiUrl + 'Users', data)
       .pipe(
         tap(()=> this.successService.handle('User updated successfully')),
         catchError(this.errorHandler.bind(this))

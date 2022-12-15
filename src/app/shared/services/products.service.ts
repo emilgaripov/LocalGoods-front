@@ -73,7 +73,6 @@ export class ProductsService {
         )
       .subscribe({
         next: (updatedProd) => {
-          console.log(updatedProd)
           const index = this.farmerFarmProducts.findIndex((prod) => prod.id === id);
           this.farmerFarmProducts[index] = updatedProd;
           this.farmerFarmProducts$.next([...this.farmerFarmProducts]);

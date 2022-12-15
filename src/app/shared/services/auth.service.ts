@@ -67,7 +67,7 @@ export class AuthService {
     localStorage.setItem('token', res.token);
   }
 
-  private setUser(user: IUser) {
+  setUser(user: IUser) {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
@@ -79,7 +79,7 @@ export class AuthService {
 
   private errorHandler(error: HttpErrorResponse) {
     console.log('auth haldler', error);
-    
+
     this.errorService.handle(error.error)
     return throwError(() => error.error)
   }

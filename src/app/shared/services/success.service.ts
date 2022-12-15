@@ -5,12 +5,11 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SuccessService {
-
   success$ = new Subject<string>()
 
   handle(message: string) {
     this.success$.next(message)
-  } 
+  }
 
   close() {
     this.success$.next('')
