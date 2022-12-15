@@ -1,9 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsType, SortData } from "../../types/types";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { CategoriesService } from "../../services/categories.service";
 import { ICategory } from "../../interfaces/category.interface";
+import { IFarm } from "../../interfaces/farm.interface";
+import { FarmsService } from "../../services/farms.service";
 
 @Component({
   selector: 'app-grid',
@@ -12,38 +14,45 @@ import { ICategory } from "../../interfaces/category.interface";
 })
 export class GridComponent implements OnInit, OnDestroy {
   @Input() items: any  = [];
-  @Input() itemsType: ItemsType = 'Farms';
+  @Input() itemsType!: ItemsType;
 
   filterOpened = false;
   sortData: SortData = null;
   categoriesList: ICategory[] = [];
   filtersData: number[] = [];
-  private subscription!: Subscription;
+  allFarms$!: Observable<IFarm[]>;
+  private subscription = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private farmsService: FarmsService
   ) {}
 
   ngOnInit(): void {
-    if (window.innerWidth >= 1024) {
-      this.filterOpened = true
-    }
+    this.filterOpened = window.innerWidth >= 1024;
+    if (this.itemsType === 'Farms') return;
 
+    this.getFiltersData();
     this.categoriesList = this.categoriesService.categories;
+    this.allFarms$ = this.farmsService.getAllFarms();
+  }
 
-    this.subscription = this.route.queryParams.subscribe({
+  ngOnDestroy(): void {
+    if (this.itemsType === 'Products') {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  private getFiltersData() {
+    this.subscription.add(this.route.queryParams.subscribe({
       next: (params) => {
-        const filterParams = params as {categories: string};
+        const filterParams = params as { categories: string };
         this.filtersData = ('categories' in filterParams)
           ? this.getCategoriesIdFromNames(filterParams.categories)
           : [];
       }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    }));
   }
 
   private getCategoriesIdFromNames(categoriesNames: string) {

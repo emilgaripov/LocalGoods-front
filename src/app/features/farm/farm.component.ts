@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 
 import { IFarm } from 'src/app/shared/interfaces/farm.interface';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
@@ -27,15 +27,16 @@ export class FarmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.farmProducts$ = this.productsService.farmerFarmProducts$;
     this.farm$ = this.route.params.pipe(
       switchMap((param) => {
         this.isLoading = false;
         this.farmId = +param['id'];
-        this.productsService.getProductsByFarmId(this.farmId);
-        return this.farmsService.getFarmById(this.farmId);
+        return this.farmsService.getFarmById(this.farmId).pipe(
+          tap(() => this.productsService.getProductsByFarmId(this.farmId))
+        );
       })
     );
-    this.farmProducts$ = this.productsService.farmerFarmProducts$;
   }
 
 }

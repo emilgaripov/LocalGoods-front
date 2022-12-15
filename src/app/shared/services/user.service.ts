@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../interfaces/user.interface';
 import { editUserFormData } from '../types/types';
@@ -19,16 +19,18 @@ export class UserService {
   ) {}
 
   getUserById() {
-    return this.http.get<IUser>(environment.webApiUrl + 'Users/' + this.userId)
+    return this.http.get<IUser>(environment.webApiUrl + 'Users/' + this.userLocalStorage?.id)
       .pipe(catchError(this.errorHandler.bind(this)))
   }
 
-  get userId() {
-    return localStorage.getItem('userId')
+  get userLocalStorage() {
+    const user = localStorage.getItem('user');
+    if (!user) return null;
+    return JSON.parse(user) as IUser;
   }
 
   editUser(data: editUserFormData) {
-    return this.http.put<IUser>(environment.webApiUrl + 'Users/' + this.userId, data)
+    return this.http.put<IUser>(environment.webApiUrl + 'Users', data)
       .pipe(
         tap(()=> this.successService.handle('User updated successfully')),
         catchError(this.errorHandler.bind(this))

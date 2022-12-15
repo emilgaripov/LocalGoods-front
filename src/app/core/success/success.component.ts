@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SuccessService } from 'src/app/shared/services/success.service';
+import { Observable, tap } from "rxjs";
 
 @Component({
   selector: 'app-success',
@@ -7,15 +8,24 @@ import { SuccessService } from 'src/app/shared/services/success.service';
   styleUrls: ['./success.component.scss']
 })
 export class SuccessComponent implements OnInit {
+  success$!: Observable<string>;
 
-  constructor(
-    public successService: SuccessService
-  ) { }
+  constructor(private successService: SuccessService) {}
 
   ngOnInit() {
-    this.successService.success$
-      .subscribe((s) => console.log('s', s)
-      );
+    this.success$ = this.successService.success$.pipe(
+      tap((value) => {
+        if (value) {
+          setTimeout(() => {
+            this.onClose();
+          }, 2000);
+        }
+      })
+    );
+  }
+
+  onClose() {
+    this.successService.close();
   }
 
 }
