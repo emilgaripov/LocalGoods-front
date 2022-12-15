@@ -24,10 +24,8 @@ export class FarmsService {
   }
 
   getFarmerFarms() {
-    this.http.get<IFarm[]>('https://localgoodsback.azurewebsites.net/api/Farmers/MyFarms')
-      .pipe(
-        catchError(this.errorHandler.bind(this))
-        )
+    this.http.get<IFarm[]>(environment.webApiUrl + 'Farmers/MyFarms')
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe({
         next: (farms) => {
           this.farmerFarms = farms;

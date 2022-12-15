@@ -1,5 +1,5 @@
 <div class="grid-container" [ngClass]="itemsType === 'Products' ? 'products': 'farms'">
-  <h2 class="grid-title">{{itemsType === 'Products' ? 'Products' : 'Farms'}}</h2>
+  <h2 class="grid-title">{{ itemsType === 'Products' ? 'Products' : 'Farms' }}</h2>
 
   <div class="grid-filters" *ngIf="itemsType === 'Products'">
     <button (click)="openFilters()" class="open-filters-button">Filters</button>
@@ -24,7 +24,7 @@
 
   <div class="grid-items">
     <app-grid-item *ngFor="let item of items | filter: filtersData | sort: sortData"
-                   [item]="item">
+                   [item]="item" [farms]="(allFarms$ | async) ?? []" [itemsType]="itemsType">
     </app-grid-item>
   </div>
 </div>

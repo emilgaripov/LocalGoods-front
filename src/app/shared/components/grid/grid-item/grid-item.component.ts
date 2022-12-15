@@ -1,26 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { first, Observable } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { IFarm } from 'src/app/shared/interfaces/farm.interface';
-import { FarmsService } from 'src/app/shared/services/farms.service';
+import { ItemsType } from "../../../types/types";
 
 @Component({
   selector: 'app-grid-item',
   templateUrl: './grid-item.component.html',
   styleUrls: ['./grid-item.component.scss']
 })
-export class GridItemComponent implements OnInit {
+export class GridItemComponent {
   @Input() item!: any;
-  farm$!: Observable<IFarm>
-
-  constructor(
-    private farmsService: FarmsService,
-  ){
-  }
-
-  ngOnInit(){
-    if(this.item.farmId){
-      this.farm$! = this.farmsService.getFarmById(this.item.farmId)
+  @Input() itemsType!: ItemsType;
+  @Input() set farms(farms: IFarm[]) {
+    if (farms && this.itemsType === 'Products') {
+      this.productFarm = farms.find((farm) => farm.id === this.item.farmId)!;
     }
   }
-  
+  productFarm!: IFarm;
+
 }

@@ -1,48 +1,55 @@
 <div class="item">
   <div class="item-image">
     <img *ngIf="item.imagePath"
-      [src]="'https://localgoodsback.azurewebsites.net/Images/'+ (item.farmId ? 'Products/': 'Farms/') + item.imagePath"
+      [src]="'https://localgoodsback.azurewebsites.net/Images/'+ itemsType + '/' + item.imagePath"
       alt="product image"
       class="object-fit_cover">
     <ng-template #noImage>No image yet ...</ng-template>
   </div>
 
   <div class="item-content">
-    <h3 class="item-name" [routerLink]="!item.farmId ? ('/farm/'+item.id) : null " [ngClass]="item.userId ? 'farm' : 'product' ">{{ item.name }}</h3>
+    <h3 class="item-name" [routerLink]="itemsType === 'Farms' ? ('/farm/' + item.id) : null ">{{ item.name }}</h3>
+
     <div class="item-description">
       {{ item.description | slice:0:100 }}...
     </div>
-    <div class="item-price" *ngIf="item.price">
+
+    <div class="item-price" *ngIf="itemsType === 'Products'">
       {{ item.price | currency: 'EUR' }}
     </div>
-    <div class="farm-info" *ngIf="item.farmId">
+
+    <div class="farm-info" *ngIf="itemsType === 'Products' && productFarm">
       <div class="item-farm-name">
-        <a [routerLink]="'/farm/'+ item.farmId" *ngIf="farm$ | async as farm">{{ farm.name }}</a>
+        <a [routerLink]="'/farm/'+ item.farmId">{{ productFarm.name }}</a>
       </div>
-      <div class="item-location" >
-        <a  *ngIf="farm$ | async as farm" [href]="'https://www.google.com/maps/dir/?api=1&query'+ farm.latitude + '-' + farm.longitude" >{{ farm.country + ', ' + farm.city + ', ' + farm.address }}</a>
+
+      <div class="item-location">
+        <a [href]="'https://www.google.com/maps/dir/?api=1&query'+ productFarm.latitude + '-' + productFarm.longitude" >{{ productFarm.country + ', ' + productFarm.city + ', ' + productFarm.address }}</a>
       </div>
+
       <div class="item-phone">
-        <a  *ngIf="farm$ | async as farm" [href]="'tel:'+ farm.telephone" >+{{ farm.telephone }}</a>
+        <a [href]="'tel:'+ productFarm.telephone" >+{{ productFarm.telephone }}</a>
       </div>
-      <div class="item-social" *ngIf="farm$ | async as farm">
-        <a class="item-social-icon fb" [href]="farm.faceBook">Facebook</a>
-        <a class="item-social-icon insta" [href]="farm.instagram">Instagram</a>
+
+      <div class="item-social">
+        <a class="item-social-icon fb" [href]="productFarm.faceBook">Facebook</a>
+        <a class="item-social-icon insta" [href]="productFarm.instagram">Instagram</a>
       </div>
     </div>
-    <div class="farm-info" *ngIf="item.userId">
+
+    <div class="farm-info" *ngIf="itemsType === 'Farms'">
       <div class="item-location" >
         <a  [href]="'https://www.google.com/maps/dir/?api=1&query'+ item.latitude + '-' + item.longitude" >{{ item.country + ', ' + item.city + ', ' + item.address }}</a>
       </div>
+
       <div class="item-phone">
         <a [href]="'tel:'+ item.telephone" >+{{ item.telephone }}</a>
       </div>
+
       <div class="item-social">
         <a class="item-social-icon fb" [href]="item.faceBook">Facebook</a>
         <a class="item-social-icon insta" [href]="item.instagram">Instagram</a>
       </div>
     </div>
-
-
   </div>
 </div>
